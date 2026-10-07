@@ -1,0 +1,80 @@
+<!-- templates/tabs/tab_models.html - Ollama Local Models & Vision Module -->
+<div id="tabModelsContent" class="hidden space-y-4">
+
+  <!-- Module Banner Header -->
+  <div class="rounded-xl bg-surface-container-low border border-[#262a35] p-4 flex items-center justify-between shadow-lg">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-purple-600/10 border border-purple-500/20 flex items-center justify-center text-primary">
+        <span class="material-symbols-outlined text-[24px]">neurology</span>
+      </div>
+      <div>
+        <div class="flex items-center gap-2">
+          <h2 class="font-bold text-sm text-on-surface">Motor de Inferencia Local Ollama & Visión</h2>
+          <span class="badge-label px-2 py-0.5 rounded bg-primary/10 text-primary border border-primary/30">OLLAMA DAEMON</span>
+        </div>
+        <p class="text-[11px] text-on-surface-variant font-mono">Gestión de pesos multimodales locales (Llama 3.2 Vision, Llava, Moondream, Qwen) y enrutamiento semántico.</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-2">
+      <button id="btnScanModels" onclick="scanLocalModels(true)" class="px-3 py-1.5 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface text-xs font-mono font-semibold flex items-center gap-1.5 transition">
+        <span id="scanModelsIcon" class="material-symbols-outlined text-[14px] text-primary">sync</span>
+        <span>Escanear Modelos</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Active Model Selection Control -->
+  <div class="rounded-xl bg-surface-container-low border border-[#262a35] p-4 space-y-3.5 shadow-lg">
+    <div class="flex items-center justify-between border-b border-[#262a35] pb-2.5">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary text-[18px]">tune</span>
+        <h3 class="font-bold text-xs text-on-surface uppercase tracking-wider">Configuración de Modelos Activos</h3>
+      </div>
+      <div class="text-[11px] font-mono text-on-surface-variant">
+        <span id="modelScanCount">Escaneando...</span> • <span id="modelScanTimestamp">--:--:--</span>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div>
+        <label class="block text-xs font-mono text-on-surface mb-1">Modelo de Visión Multimodal (OCR & Screen Analysis):</label>
+        <select id="selectVisionModel" class="w-full px-3 py-2 rounded-lg bg-surface-container border border-[#262a35] text-on-surface font-mono text-xs focus:border-primary focus:outline-none">
+          <option value="">Cargando modelos...</option>
+        </select>
+        <span class="text-[10px] text-on-surface-variant font-mono mt-1 block">Modelo activo: <strong id="labelActiveVisionModel" class="text-secondary font-bold">--</strong></span>
+      </div>
+
+      <div>
+        <label class="block text-xs font-mono text-on-surface mb-1">Modelo de Texto / Redacción de Comentarios:</label>
+        <select id="selectTextModel" class="w-full px-3 py-2 rounded-lg bg-surface-container border border-[#262a35] text-on-surface font-mono text-xs focus:border-primary focus:outline-none">
+          <option value="">Cargando modelos...</option>
+        </select>
+        <span class="text-[10px] text-on-surface-variant font-mono mt-1 block">Modelo activo: <strong id="labelActiveTextModel" class="text-primary font-bold">--</strong></span>
+      </div>
+    </div>
+
+    <div class="flex justify-end pt-1">
+      <button id="btnApplyModels" onclick="applyModelSelection()" class="px-5 py-2 rounded bg-primary text-on-primary hover:bg-primary-container text-xs font-mono font-bold transition flex items-center gap-1.5 shadow">
+        <span class="material-symbols-outlined text-[16px]">save</span>
+        <span>Guardar & Aplicar Modelos</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Models in Local Storage Grid -->
+  <div class="rounded-xl bg-surface-container-low border border-[#262a35] p-4 space-y-3.5 shadow-lg">
+    <div class="flex items-center justify-between border-b border-[#262a35] pb-2.5">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary text-[18px]">inventory_2</span>
+        <h3 class="font-bold text-xs text-on-surface uppercase tracking-wider">Modelos en Almacenamiento Local (Ollama)</h3>
+      </div>
+      <span class="badge-label text-[10px] text-on-surface-variant font-mono">localhost:11434</span>
+    </div>
+
+    <!-- Models Cards Container -->
+    <div id="localModelsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+      <!-- Injected by renderLocalModelCards() -->
+    </div>
+  </div>
+
+</div>

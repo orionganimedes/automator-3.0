@@ -1,0 +1,133 @@
+<!-- templates/components/navbar.html - Cybernetic Top Navigation Header -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-[#0f131d]/90 backdrop-blur-xl border-b border-[#262a35] shadow-[0_1px_8px_rgba(0,0,0,0.5)]">
+  <div class="h-28 w-full px-6 flex flex-col justify-between pt-2.5 pb-2">
+    <!-- Top Row: Branding, Status Badges & Global Actions -->
+    <div class="flex items-center justify-between gap-4">
+      
+      <!-- Brand & Version -->
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary shadow-[0_0_15px_-3px_rgba(192,193,255,0.3)]">
+          <span class="material-symbols-outlined text-[20px]">smart_toy</span>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-bold text-sm tracking-tight text-[#dfe2f1]">Android AI Automator</span>
+            <span class="badge-label px-1.5 py-0.5 rounded bg-surface-container text-primary text-[10px]">v3.4-CORE</span>
+          </div>
+          <p class="text-[11px] text-on-surface-variant font-mono">Local Vision & Sentiment Pipeline</p>
+        </div>
+      </div>
+
+      <!-- Live Telemetry Badges -->
+      <div class="flex items-center gap-3">
+        <!-- ADB Status -->
+        <div id="deviceBadge" class="flex items-center gap-2 px-3 py-1 rounded-lg bg-surface-container-low border border-[#262a35]">
+          <span id="deviceDot" class="w-2 h-2 rounded-full bg-secondary shadow-[0_0_8px_rgba(78,222,163,0.5)]"></span>
+          <div class="flex flex-col">
+            <div class="flex items-center gap-1.5">
+              <span id="deviceText" class="badge-label text-secondary">ADB CONNECTED</span>
+              <span id="topDeviceSerial" class="font-mono text-[11px] text-on-surface">SM-S918B</span>
+            </div>
+            <span id="topDeviceStats" class="font-mono text-[10px] text-on-surface-variant">98% • 12ms</span>
+          </div>
+        </div>
+
+        <!-- Ollama Status -->
+        <div id="ollamaBadge" class="flex items-center gap-2 px-3 py-1 rounded-lg bg-surface-container-low border border-[#262a35]">
+          <span id="ollamaDot" class="w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_rgba(192,193,255,0.5)]"></span>
+          <div class="flex flex-col">
+            <div class="flex items-center gap-1.5">
+              <span id="ollamaText" class="badge-label text-primary">OLLAMA ACTIVE</span>
+            </div>
+            <span id="topOllamaModel" class="font-mono text-[10px] text-on-surface truncate max-w-[120px]">Llama-3-Vision</span>
+          </div>
+        </div>
+
+        <!-- Automation State -->
+        <div id="stateBadge" class="flex items-center gap-2 px-3 py-1 rounded-lg bg-surface-container-low border border-[#262a35]">
+          <span id="stateDot" class="w-2 h-2 rounded-full bg-on-surface-variant"></span>
+          <div class="flex flex-col">
+            <span class="badge-label text-tertiary">ESTADO</span>
+            <span id="stateText" class="font-mono text-[11px] font-bold text-on-surface">IDLE</span>
+          </div>
+          <button id="topAbortBtn" onclick="stopMultiAccountCycle()" class="hidden ml-1 px-2 py-0.5 rounded bg-error-container text-on-error hover:bg-error transition font-mono text-[10px] uppercase font-bold flex items-center gap-1">
+            <span class="material-symbols-outlined text-[13px]">cancel</span> Abort
+          </button>
+        </div>
+        <button onclick="restartCache()" class="px-2.5 py-1 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface text-xs font-mono flex items-center gap-1 transition" title="Reinicia llm_cache, localizadores y estado en memoria">
+          <span class="material-symbols-outlined text-[14px] text-tertiary">cleaning_services</span>
+          <span>Reiniciar Caché</span>
+        </button>
+        <button onclick="restartProgram()" class="px-2.5 py-1 rounded bg-error-container text-on-error hover:bg-error text-xs font-mono flex items-center gap-1 transition" title="Reinicia por completo el programa (relanza el servidor)">
+          <span class="material-symbols-outlined text-[14px]">restart_alt</span>
+          <span>Reiniciar Programa</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Bottom Row: Navigation Tabs & Fast Control Buttons -->
+    <div class="flex items-center justify-between gap-4 pt-1 border-t border-[#262a35]/60">
+      
+      <!-- Primary Tabs -->
+      <nav class="flex items-center gap-1 bg-[#0a0e18] p-1 rounded-lg border border-[#262a35]">
+        <button id="tabInstaBtn" onclick="switchTab('insta')" class="px-3 py-1 rounded text-xs transition flex items-center gap-1.5 cursor-pointer bg-surface-container text-on-surface font-semibold shadow">
+          <span class="material-symbols-outlined text-[16px]">photo_camera</span>
+          <span>Instagram Bot</span>
+        </button>
+
+        <button id="tabFacebookBtn" onclick="switchTab('facebook')" class="px-3 py-1 rounded text-xs transition flex items-center gap-1.5 cursor-pointer text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high">
+          <span class="material-symbols-outlined text-[16px]">public</span>
+          <span>Facebook Bot</span>
+        </button>
+
+        <button id="tabHateReportBtn" onclick="switchTab('hate/report')" class="px-3 py-1 rounded text-xs transition flex items-center gap-1.5 cursor-pointer text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high" title="Comentarios de crítica o denuncias automatizadas">
+          <span class="material-symbols-outlined text-[16px]">shield_with_heart</span>
+          <span>Hate & Report</span>
+        </button>
+
+        <button id="tabCommentsBtn" onclick="switchTab('comments')" class="px-3 py-1 rounded text-xs transition flex items-center gap-1.5 cursor-pointer text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high" title="Generador y Simulador de Comentarios con IA">
+          <span class="material-symbols-outlined text-[16px]">psychology</span>
+          <span>Generador IA</span>
+        </button>
+
+        <button id="tabModelsBtn" onclick="switchTab('models')" class="px-3 py-1 rounded text-xs transition flex items-center gap-1.5 cursor-pointer text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high">
+          <span class="material-symbols-outlined text-[16px]">neurology</span>
+          <span>Modelos IA (Ollama)</span>
+        </button>
+
+        <button id="tabIconsBtn" onclick="switchTab('icons')" class="px-3 py-1 rounded text-xs transition flex items-center gap-1.5 cursor-pointer text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high">
+          <span class="material-symbols-outlined text-[16px]">crop_free</span>
+          <span>Gestor de Iconos</span>
+        </button>
+
+        <button id="tabTerminalBtn" onclick="switchTab('terminal')" class="px-3 py-1 rounded text-xs transition flex items-center gap-1.5 cursor-pointer text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high">
+          <span class="material-symbols-outlined text-[16px]">terminal</span>
+          <span>Terminal & Logs</span>
+        </button>
+
+        <button id="tabScrcpyBtn" onclick="switchTab('scrcpy')" class="px-3 py-1 rounded text-xs transition flex items-center gap-1.5 cursor-pointer text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high">
+          <span class="material-symbols-outlined text-[16px]">devices</span>
+          <span>Multi-Scrcpy</span>
+          <span id="scrcpyCountBadge" class="px-1 py-0.2 rounded-full bg-secondary/20 text-secondary text-[9px] font-mono">0</span>
+        </button>
+      </nav>
+
+      <!-- Fast Actions -->
+      <div class="flex items-center gap-1.5">
+        <button onclick="takeManualCapture()" class="px-2.5 py-1 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface text-xs font-mono flex items-center gap-1 transition">
+          <span class="material-symbols-outlined text-[14px] text-primary">screenshot_region</span>
+          <span>Capturar</span>
+        </button>
+        <button onclick="clearDeviceRecentApps()" class="px-2.5 py-1 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface text-xs font-mono flex items-center gap-1 transition">
+          <span class="material-symbols-outlined text-[14px] text-secondary">restart_alt</span>
+          <span>Reiniciar ADB</span>
+        </button>
+        <button onclick="clearDeviceRecentApps()" class="px-2.5 py-1 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface text-xs font-mono flex items-center gap-1 transition">
+          <span class="material-symbols-outlined text-[14px] text-tertiary">memory</span>
+          <span>Liberar RAM</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</header>

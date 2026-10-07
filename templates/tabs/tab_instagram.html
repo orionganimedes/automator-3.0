@@ -1,0 +1,407 @@
+<!-- templates/tabs/tab_instagram.html - Instagram Lite Bot Module -->
+{% from 'widgets/account_switcher.html' import account_switcher %}
+<div id="tabInstaContent" class="space-y-4">
+  
+  <!-- Module Banner Header -->
+  <div class="rounded-xl bg-surface-container-low border border-[#262a35] p-4 flex items-center justify-between shadow-lg">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
+        <span class="material-symbols-outlined text-[24px]">smart_toy</span>
+      </div>
+      <div>
+        <div class="flex items-center gap-2">
+          <h2 class="font-bold text-sm text-on-surface">Módulo: Instagram Lite Bot</h2>
+          <span class="badge-label px-2 py-0.5 rounded bg-secondary/10 text-secondary border border-secondary/30">MOTOR V3 ACTIVO</span>
+        </div>
+        <p class="text-[11px] text-on-surface-variant font-mono">Rotación de cuentas anti-baneo, análisis multimodal de publicaciones y comentarios adaptativos.</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-2">
+      <span class="text-[11px] font-mono text-on-surface-variant">com.instagram.lite</span>
+    </div>
+  </div>
+
+  <!-- STEP 1: Account Management & Anti-Ban Memory -->
+  <div class="rounded-xl bg-surface-container-low border border-[#262a35] p-4 space-y-3.5 shadow-lg">
+    <div class="flex items-center justify-between border-b border-[#262a35] pb-2.5">
+      <div class="flex items-center gap-2">
+        <span class="w-5 h-5 rounded-full bg-primary text-on-primary font-mono text-xs font-bold flex items-center justify-center">1</span>
+        <h3 class="font-bold text-xs text-on-surface uppercase tracking-wider">Gestión de Cuentas & Rotación Anti-Baneo</h3>
+      </div>
+      <button onclick="showMemoryModal()" class="px-2.5 py-1 rounded bg-surface-container hover:bg-surface-container-high border border-[#262a35] text-primary text-[11px] font-mono font-medium flex items-center gap-1 transition">
+        <span class="material-symbols-outlined text-[14px]">database</span>
+        <span>Memoria de Cuentas</span>
+      </button>
+    </div>
+
+    <!-- Anti-Ban Memory Info Bar -->
+    <div class="flex items-center justify-between text-xs font-mono p-2 rounded bg-surface-container border border-[#262a35]">
+      <span class="text-on-surface-variant flex items-center gap-1.5">
+        <span class="material-symbols-outlined text-[15px] text-primary">security</span>
+        <span>Memoria de Cuentas:</span>
+      </span>
+      <span id="accountsMemoryBadge" class="text-[10px] px-2 py-0.5 rounded bg-primary/10 text-primary border border-primary/20 font-mono">
+        Evita repetir cuenta por URL (Rotación inteligente)
+      </span>
+    </div>
+
+    <!-- Widget reutilizable de cambio de cuenta -->
+    {{ account_switcher('instagram', 'Cambio de Cuenta (Widget)') }}
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-3.5 items-stretch">
+      <!-- Columna 1: Detección de Perfiles (5 cols) -->
+      <div class="lg:col-span-5 p-3.5 rounded-xl bg-surface-container border border-[#262a35] flex flex-col justify-between space-y-2.5">
+        <div class="flex items-center justify-between">
+          <span class="text-xs text-on-surface font-semibold flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-[16px] text-primary">group_search</span>
+            <span>1. Cuentas en Instagram Lite:</span>
+          </span>
+          <span id="igAccountsFoundBadge" class="text-[11px] font-mono px-2 py-0.5 rounded bg-surface-container-high text-secondary font-semibold">11 perfiles listos</span>
+        </div>
+        
+        <p class="text-[11px] text-on-surface-variant font-mono leading-relaxed">
+          Verifica las cuentas activas sin incluir opciones de sistema (Añadir cuenta / Centro de cuentas).
+        </p>
+
+        <button id="btnScanAccounts" onclick="scanDeviceAccounts()" class="w-full py-2 px-3 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface text-xs font-mono font-bold flex items-center justify-center gap-1.5 transition cursor-pointer border border-[#262a35]">
+          <span class="material-symbols-outlined text-[15px] text-primary">sync</span>
+          <span>Saber cuántas cuentas hay en Instagram Lite</span>
+        </button>
+      </div>
+
+      <!-- Columna 2: Decidir cuántas veces hacer la automatización (7 cols) -->
+      <div class="lg:col-span-7 p-3.5 rounded-xl bg-surface-container border border-[#262a35] flex flex-col justify-between space-y-2.5">
+        <div class="flex items-center justify-between">
+          <span class="text-xs text-on-surface font-semibold flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-[16px] text-emerald-400">tune</span>
+            <span>2. ¿Cuántas veces ejecutar la automatización?</span>
+          </span>
+          <span id="accountsLimitLabel" class="text-[10px] font-mono text-on-surface-variant">Máx: 11 cuentas</span>
+        </div>
+
+        <!-- Botones rápidos (Chips) -->
+        <div class="flex flex-wrap items-center gap-1.5">
+          <span class="text-[11px] font-mono text-on-surface-variant mr-1">Rápido:</span>
+          <button type="button" id="chipTimes1" onclick="setAutomationTimes(1)" class="px-2.5 py-1 rounded-md text-xs font-mono font-bold transition bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 cursor-pointer">
+            1 vez
+          </button>
+          <button type="button" id="chipTimes3" onclick="setAutomationTimes(3)" class="px-2.5 py-1 rounded-md text-xs font-mono font-medium transition bg-surface-container-high hover:bg-surface-container-highest text-on-surface border border-[#262a35] cursor-pointer">
+            3 veces
+          </button>
+          <button type="button" id="chipTimes5" onclick="setAutomationTimes(5)" class="px-2.5 py-1 rounded-md text-xs font-mono font-medium transition bg-surface-container-high hover:bg-surface-container-highest text-on-surface border border-[#262a35] cursor-pointer">
+            5 veces
+          </button>
+          <button type="button" id="chipTimesAll" onclick="setAutomationTimes('all')" class="px-2.5 py-1 rounded-md text-xs font-mono font-medium transition bg-surface-container-high hover:bg-surface-container-highest text-on-surface border border-[#262a35] cursor-pointer">
+            Todas (11)
+          </button>
+        </div>
+
+        <!-- Stepper manual y contador -->
+        <div class="flex items-center justify-between gap-2 pt-0.5">
+          <div class="flex items-center gap-2">
+            <div class="flex items-center rounded-lg bg-surface-container-lowest border border-[#262a35] overflow-hidden">
+              <button type="button" onclick="adjustAutomationTimes(-1)" class="px-2.5 py-1 bg-surface-container hover:bg-surface-container-high text-on-surface text-sm font-bold transition select-none cursor-pointer">
+                -
+              </button>
+              <input type="number" id="accountsToUseInput" value="1" min="1" max="11" oninput="onAutomationTimesInputChange(this.value)" class="w-12 text-center py-1 bg-transparent text-emerald-400 font-mono text-xs font-bold focus:outline-none">
+              <button type="button" onclick="adjustAutomationTimes(1)" class="px-2.5 py-1 bg-surface-container hover:bg-surface-container-high text-on-surface text-sm font-bold transition select-none cursor-pointer">
+                +
+              </button>
+            </div>
+            <span class="text-xs font-mono text-on-surface">cuentas / repeticiones</span>
+          </div>
+
+          <input type="hidden" id="cycleCountInput" value="1">
+        </div>
+
+        <!-- Explicación en tiempo real -->
+        <div class="px-2.5 py-1.5 rounded-lg bg-surface-container-lowest border border-[#262a35] flex items-center gap-2 text-[11px] font-mono text-on-surface-variant">
+          <span class="material-symbols-outlined text-[15px] text-emerald-400">check_circle</span>
+          <span id="automationExecutionSummary">Se ejecutará en <strong>1</strong> cuenta y al terminar se detendrá automáticamente.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Anti-ban fine-tuning row -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 pt-1 border-t border-[#262a35] text-xs font-mono">
+      <label class="flex items-center gap-2 cursor-pointer select-none">
+        <input type="checkbox" id="feedBrowsingCheck" onchange="this.dataset.userManuallySet='true'" class="rounded bg-surface-container-lowest border-[#262a35] text-primary focus:ring-0">
+        <span class="text-[11px] text-on-surface">Navegar feed (30-35s)</span>
+      </label>
+      <label class="flex items-center gap-2 cursor-pointer select-none">
+        <input type="checkbox" id="autoRestartCycleCheck" onchange="this.dataset.userManuallySet='true'" class="rounded bg-surface-container-lowest border-[#262a35] text-primary focus:ring-0">
+        <span class="text-[11px] text-on-surface">Reanudar tras error</span>
+      </label>
+      <label class="flex items-center gap-2 cursor-pointer select-none">
+        <input type="checkbox" id="clearRamCheck" checked class="rounded bg-surface-container-lowest border-[#262a35] text-primary focus:ring-0">
+        <span class="text-[11px] text-on-surface">Liberar RAM en ciclo</span>
+      </label>
+      <div class="flex items-center gap-1.5">
+        <span class="text-[10px] text-on-surface-variant">Espera:</span>
+        <select id="cooldownSecondsSelect" class="flex-1 px-1.5 py-0.5 rounded bg-surface-container border border-[#262a35] text-on-surface text-[10px] focus:outline-none">
+          <option value="0">Sin espera (0s)</option>
+          <option value="30">30 seg</option>
+          <option value="60">60 seg</option>
+          <option value="120">120 seg</option>
+          <option value="180">180 seg</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2: Destination App & Link Setup -->
+  <div class="rounded-xl bg-surface-container-low border border-[#262a35] p-4 space-y-3.5 shadow-lg">
+    <div class="flex items-center justify-between border-b border-[#262a35] pb-2.5">
+      <div class="flex items-center gap-2">
+        <span class="w-5 h-5 rounded-full bg-primary text-on-primary font-mono text-xs font-bold flex items-center justify-center">2</span>
+        <h3 class="font-bold text-xs text-on-surface uppercase tracking-wider">Configuración de Destino & Enlace</h3>
+      </div>
+      <span class="badge-label text-[10px] text-on-surface-variant font-mono">Deep-linking ADB</span>
+    </div>
+
+    <!-- Package preset -->
+    <div class="flex flex-wrap items-center gap-2">
+      <button type="button" onclick="setAppPackage('com.instagram.lite')" class="px-3 py-1 rounded bg-primary/10 text-primary border border-primary/30 text-xs font-mono font-semibold flex items-center gap-1">
+        <span>⚡ IG Lite</span>
+      </button>
+      <input type="text" id="packageNameInput" value="com.instagram.lite" class="flex-1 min-w-[200px] px-3 py-1.5 rounded bg-surface-container border border-[#262a35] text-on-surface font-mono text-xs focus:border-primary focus:outline-none">
+      <button type="button" onclick="launchTargetApp()" class="px-3 py-1.5 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface text-xs font-mono font-semibold flex items-center gap-1 transition">
+        <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+        <span>Abrir App</span>
+      </button>
+    </div>
+
+    <!-- Target URL & Format -->
+    <div class="space-y-2">
+      <div class="flex gap-2">
+        <div class="relative flex-1">
+          <span class="material-symbols-outlined absolute left-3 top-2.5 text-[16px] text-on-surface-variant">link</span>
+          <input type="text" id="urlInput" placeholder="https://www.instagram.com/p/... o /reel/..." class="w-full pl-9 pr-3 py-2 rounded bg-surface-container border border-[#262a35] text-on-surface font-mono text-xs focus:border-primary focus:outline-none placeholder:text-on-surface-variant/50">
+        </div>
+        <button type="button" id="openUrlBtn" onclick="openUrlOnDevice()" title="Abre el enlace en el teléfono para previsualizarlo sin iniciar ciclo" class="px-3.5 py-2 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface text-xs font-mono font-semibold flex items-center gap-1 transition">
+          <span class="material-symbols-outlined text-[14px]">launch</span>
+          <span>Abrir Enlace</span>
+        </button>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-between gap-3 pt-1">
+        <!-- Content type -->
+        <div class="flex items-center gap-2">
+          <span class="text-xs text-on-surface-variant font-mono">Tipo:</span>
+          <input type="hidden" id="mediaTypeInput" value="post">
+          <button type="button" id="btnMediaPost" onclick="setMediaType('post')" class="px-3 py-1.5 rounded bg-primary text-on-primary font-semibold text-xs flex items-center gap-1.5 shadow">
+            <span class="material-symbols-outlined text-[14px]">image</span>
+            <span>Post / Foto</span>
+          </button>
+          <button type="button" id="btnMediaReel" onclick="setMediaType('reel')" class="px-3 py-1.5 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface-variant font-medium text-xs flex items-center gap-1.5 transition">
+            <span class="material-symbols-outlined text-[14px]">movie</span>
+            <span>Reel / Video</span>
+          </button>
+        </div>
+
+        <!-- Use Current Screen Checkbox -->
+        <label class="flex items-center gap-2 cursor-pointer text-xs text-on-surface font-mono">
+          <input type="checkbox" id="cycleUseCurrentScreen" class="rounded bg-surface-container border-[#262a35] text-primary focus:ring-0">
+          <span>Usar pantalla actual del teléfono (sin navegar)</span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3: AI Comments & Vision Inference -->
+  <div id="commentsSection" class="rounded-xl bg-surface-container-low border border-[#262a35] p-4 space-y-4 shadow-lg">
+    <div class="flex items-center justify-between border-b border-[#262a35] pb-2.5">
+      <div class="flex items-center gap-2">
+        <span class="w-5 h-5 rounded-full bg-primary text-on-primary font-mono text-xs font-bold flex items-center justify-center">3</span>
+        <h3 class="font-bold text-xs text-on-surface uppercase tracking-wider">Modo de Comentarios & Visión IA</h3>
+      </div>
+      <button type="button" onclick="switchTab('comments')" class="px-2.5 py-1 rounded bg-primary/10 hover:bg-primary/20 text-primary border border-primary/30 text-[11px] font-mono font-bold flex items-center gap-1 transition cursor-pointer">
+        <span class="material-symbols-outlined text-[14px]">psychology</span>
+        <span>Abrir Generador IA</span>
+      </button>
+    </div>
+
+    <!-- Hidden Mode Input -->
+    <input type="hidden" id="selectedCommentMode" value="auto">
+
+    <!-- SELECTOR DE 2 MODOS DE COMENTARIOS -->
+    <div class="space-y-2">
+      <div class="flex items-center justify-between text-xs font-mono">
+        <span class="text-on-surface font-semibold flex items-center gap-1.5">
+          <span class="material-symbols-outlined text-[16px] text-tertiary">tune</span>
+          <span>Elige cómo comentará cada cuenta en Instagram:</span>
+        </span>
+        <span id="currentCommentModeBadge" class="text-[10px] px-2 py-0.5 rounded bg-primary/10 text-primary border border-primary/20">
+          Modo Autónomo IA
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <!-- Opción 1: Modo Autónomo (IA & Memoria) -->
+        <div id="commentModeAutoCard" onclick="selectCommentMode('auto')" class="cursor-pointer rounded-xl border-2 border-primary bg-primary/10 p-3.5 space-y-2 transition-all shadow-md select-none">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="w-4 h-4 rounded-full border-2 border-primary flex items-center justify-center bg-primary">
+                <span id="radioDotAuto" class="w-1.5 h-1.5 rounded-full bg-surface-container-lowest"></span>
+              </span>
+              <span class="text-xs font-bold text-primary">🤖 Opción 1: Modo Autónomo IA</span>
+            </div>
+            <span class="text-[9px] px-1.5 py-0.5 rounded bg-secondary/20 text-secondary border border-secondary/30 font-mono">Recomendado</span>
+          </div>
+          <p class="text-[11px] text-on-surface-variant leading-relaxed font-mono">
+            Ollama analiza la captura en vivo del post con visión multimodal y genera comentarios únicos y contextuales (0 emojis, máx 3 líneas, sin repetir).
+          </p>
+        </div>
+
+        <!-- Opción 2: Lista Predefinida (Banco Rotativo) -->
+        <div id="commentModePresetCard" onclick="selectCommentMode('preset_list')" class="cursor-pointer rounded-xl border-2 border-[#262a35] bg-surface-container p-3.5 space-y-2 transition-all hover:border-[#353944] select-none">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="w-4 h-4 rounded-full border-2 border-[#464554] flex items-center justify-center bg-transparent">
+                <span id="radioDotPreset" class="w-1.5 h-1.5 rounded-full bg-transparent"></span>
+              </span>
+              <span class="text-xs font-bold text-on-surface">📝 Opción 2: Banco Rotativo</span>
+            </div>
+            <span class="text-[9px] px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface-variant border border-[#262a35] font-mono">Secuencial</span>
+          </div>
+          <p class="text-[11px] text-on-surface-variant leading-relaxed font-mono">
+            Rota secuencialmente por la lista pegada abajo: <span class="text-primary font-bold">Cuenta 1 ➔ Comentario 1, Cuenta 2 ➔ Comentario 2</span>, liberando RAM entre cuentas.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- BANCO DE COMENTARIOS ROTATIVOS (TEXTAREA) -->
+    <div id="pastedCommentsContainer" class="p-3.5 rounded-xl bg-surface-container border border-[#262a35] space-y-2.5">
+      <div class="flex items-center justify-between">
+        <label class="text-xs font-semibold text-on-surface flex items-center gap-1.5">
+          <span class="material-symbols-outlined text-[16px] text-secondary">playlist_add_check</span>
+          <span>Banco de Comentarios Rotativos (1 por línea):</span>
+        </label>
+        <div class="flex items-center gap-2">
+          <span id="pastedCommentsBadge" class="text-[10px] px-2 py-0.5 rounded-full font-mono bg-surface-container-high text-secondary border border-secondary/30">
+            0 comentarios listos
+          </span>
+          <button type="button" id="btnLoadSamples" onclick="loadSampleInstagramComments()" title="Cargar 5 ejemplos de prueba predefinidos" class="px-2 py-0.5 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface text-[10px] font-mono transition cursor-pointer flex items-center gap-1">
+            <span class="material-symbols-outlined text-[12px]">playlist_add</span>
+            <span>Ejemplos de prueba</span>
+          </button>
+          <button type="button" onclick="clearInstagramComments()" class="px-2 py-0.5 rounded bg-surface-container-high hover:bg-error hover:text-on-error text-error text-[10px] font-mono transition cursor-pointer">
+            Limpiar
+          </button>
+        </div>
+      </div>
+      <div>
+        <textarea id="pastedCommentsTextarea" rows="4" oninput="updatePastedCommentsCount()" placeholder="Pega aquí tu lista de comentarios específicos (un comentario por línea):&#10;Comentario para cuenta 1&#10;Comentario para cuenta 2&#10;Comentario para cuenta 3" class="w-full p-3 rounded-lg bg-surface-container-lowest border border-[#262a35] text-on-surface font-mono text-xs focus:border-primary focus:outline-none placeholder:text-on-surface-variant/40 leading-relaxed"></textarea>
+      </div>
+      <div class="text-[10px] font-mono text-on-surface-variant flex items-center justify-between">
+        <span>💡 En Modo Autónomo IA, estos comentarios se usan como apoyo de estilo. En Modo Banco Rotativo, se usan de forma estricta.</span>
+      </div>
+    </div>
+
+    <!-- IA Settings (Narrative & Tone) -->
+    <div id="iaSettingsBox" class="grid grid-cols-1 md:grid-cols-2 gap-3">
+      <div>
+        <label class="block text-[11px] text-on-surface-variant font-mono mb-1">Enfoque / Tonalidad IA:</label>
+        <select id="cycleNarrativeSelect" class="w-full px-3 py-1.5 rounded bg-surface-container border border-[#262a35] text-on-surface font-mono text-xs focus:border-primary focus:outline-none">
+          <option value="a_favor">A Favor / Apoyo entusiasta</option>
+          <option value="curioso">Curioso / Pregunta para engagement</option>
+          <option value="tecnico">Técnico / Observación experta</option>
+          <option value="divertido">Casual / Humorístico empático</option>
+          <option value="critico">Contraste / Pensamiento crítico</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="block text-[11px] text-on-surface-variant font-mono mb-1">Personalidad IA:</label>
+        <select id="cycleToneSelect" class="w-full px-3 py-1.5 rounded bg-surface-container border border-[#262a35] text-on-surface font-mono text-xs focus:border-primary focus:outline-none">
+          <option value="auto">Auto-detectado por Visión Multimodal</option>
+          <option value="entusiasta">Entusiasta tech</option>
+          <option value="informal">Hablado informal latino</option>
+          <option value="formal">Profesional formal</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Manual Context & Contest Info (Optional Accordion) -->
+    <details class="rounded-xl bg-surface-container border border-[#262a35] p-3 text-xs font-mono">
+      <summary class="cursor-pointer font-bold text-on-surface flex items-center justify-between select-none">
+        <span class="flex items-center gap-1.5">
+          <span class="material-symbols-outlined text-[15px] text-tertiary">description</span>
+          <span>Contexto Manual del Post & Dinámica / Sorteo (Opcional)</span>
+        </span>
+        <span class="text-[10px] text-on-surface-variant">Clic para desplegar</span>
+      </summary>
+      <div class="space-y-3 pt-3 mt-2 border-t border-[#262a35]">
+        <div>
+          <label class="block text-[11px] text-on-surface-variant mb-1">Texto o descripción del post (si no deseas esperar OCR):</label>
+          <input type="text" id="manualContextPostText" placeholder="Texto resumen de la publicación..." class="w-full px-3 py-1.5 rounded bg-surface-container-lowest border border-[#262a35] text-on-surface font-mono text-xs focus:border-primary focus:outline-none">
+        </div>
+        <div class="flex items-center gap-2">
+          <label class="flex items-center gap-2 cursor-pointer select-none">
+            <input type="checkbox" id="manualContextIsContest" class="rounded bg-surface-container-lowest border-[#262a35] text-tertiary focus:ring-0">
+            <span class="text-tertiary font-semibold">Es concurso / dinámica / pronóstico</span>
+          </label>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <input type="text" id="manualContextContestReq" placeholder="Requisito: Ej. Comentar pronóstico" class="w-full px-3 py-1 rounded bg-surface-container-lowest border border-[#262a35] text-on-surface font-mono text-xs focus:border-primary focus:outline-none">
+          <input type="text" id="manualContextContestTopic" placeholder="Consigna: Ej. Clásico Regio" class="w-full px-3 py-1 rounded bg-surface-container-lowest border border-[#262a35] text-on-surface font-mono text-xs focus:border-primary focus:outline-none">
+        </div>
+      </div>
+    </details>
+
+    <!-- Custom Fixed Comment Input (Single override) -->
+    <div>
+      <label class="block text-[11px] text-on-surface-variant font-mono mb-1">Comentario fijado manual (Opcional - anula todo si se especifica):</label>
+      <input type="text" id="cycleCustomComment" placeholder="Escribe un comentario específico para forzar en todas las cuentas..." class="w-full px-3 py-2 rounded bg-surface-container border border-[#262a35] text-on-surface font-mono text-xs focus:border-primary focus:outline-none placeholder:text-on-surface-variant/40">
+    </div>
+
+    <!-- Preview Container -->
+    <div id="commentsPreviewContainer" class="space-y-1.5 pt-1"></div>
+
+    <!-- Automation Options Checkboxes -->
+    <div class="p-3 rounded-lg bg-surface-container border border-[#262a35] flex flex-wrap items-center gap-4 text-xs font-mono">
+      <label class="flex items-center gap-2 cursor-pointer">
+        <input type="checkbox" id="cycleDoLike" checked class="rounded bg-surface-container-lowest border-[#262a35] text-primary focus:ring-0">
+        <span>Dar Like al Post</span>
+      </label>
+      <label class="flex items-center gap-2 cursor-pointer">
+        <input type="checkbox" id="cycleDoComment" checked class="rounded bg-surface-container-lowest border-[#262a35] text-primary focus:ring-0">
+        <span>Publicar Comentario</span>
+      </label>
+      <label class="flex items-center gap-2 cursor-pointer">
+        <input type="checkbox" id="cycleRepeat" class="rounded bg-surface-container-lowest border-[#262a35] text-primary focus:ring-0">
+        <span>Repetir Ciclo Continuamente</span>
+      </label>
+    </div>
+  </div>
+
+  <!-- STEP 4: Execution Triggers (AUTOMATIZACIONES SEPARADAS) -->
+  <div class="rounded-xl bg-surface-container-low border border-[#262a35] p-4 flex flex-wrap items-center justify-between gap-3 shadow-xl">
+    <div class="flex items-center gap-2 text-xs font-mono text-on-surface-variant">
+      <span class="material-symbols-outlined text-[18px] text-tertiary">swap_calls</span>
+      <span>Dos modos separados: <strong>Lista Predefinida</strong> (rotación estricta sin IA) o <strong>Con IA</strong> (generación Ollama).</span>
+    </div>
+
+    <div class="flex items-center gap-2.5">
+      <button type="button" id="btnStopCycle" onclick="stopMultiAccountCycle()" disabled class="px-4 py-2.5 rounded bg-surface-container-high text-error border border-error/30 opacity-40 cursor-not-allowed text-xs font-mono font-bold flex items-center gap-1.5 transition">
+        <span class="material-symbols-outlined text-[18px]">stop</span>
+        <span>Detener Ciclo</span>
+      </button>
+
+      <button type="button" id="btnStartPreset" onclick="startPresetAutomation()" title="Ejecuta la automatización rotando exclusivamente los comentarios de la lista predefinida sin usar IA" class="px-5 py-2.5 rounded bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold font-mono shadow-[0_0_15px_-3px_rgba(16,185,129,0.35)] flex items-center gap-2 transition cursor-pointer">
+        <span class="material-symbols-outlined text-[18px]">playlist_play</span>
+        <span>Iniciar con Lista Predefinida</span>
+      </button>
+
+      <button type="button" id="btnStartAi" onclick="startAiAutomation()" title="Analiza la publicación y genera comentarios humanos únicos con IA Ollama" class="px-5 py-2.5 rounded bg-primary text-on-primary hover:bg-primary-container text-xs font-bold font-mono shadow-[0_0_15px_-3px_rgba(99,102,241,0.35)] flex items-center gap-2 transition cursor-pointer">
+        <span class="material-symbols-outlined text-[18px]">auto_awesome</span>
+        <span>Iniciar con IA (Ollama)</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Context Analysis Sidecard (if screen analyzed) -->
+  <div id="rightAnalysisContainer" class="hidden"></div>
+
+</div>

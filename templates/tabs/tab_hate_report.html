@@ -1,0 +1,429 @@
+<!-- templates/tabs/tab_hate_report.html - Hate Comments & Auto-Denuncias Module -->
+<div id="tabHateReportContent" class="hidden space-y-4">
+
+  <!-- Module Banner Header -->
+  <div class="rounded-xl bg-surface-container-low border border-[#262a35] p-4 flex items-center justify-between shadow-lg">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-red-600/10 border border-red-500/20 flex items-center justify-center text-error">
+        <span class="material-symbols-outlined text-[24px]">shield_with_heart</span>
+      </div>
+      <div>
+        <div class="flex items-center gap-2">
+          <h2 class="font-bold text-sm text-on-surface">Módulo: Hate & Auto-Denuncias</h2>
+          <span class="badge-label px-2 py-0.5 rounded bg-error/10 text-error border border-error/30">PROTECCIÓN & MODERACIÓN</span>
+        </div>
+        <p class="text-[11px] text-on-surface-variant font-mono">Comentarios de debate/contraste y secuencia automatizada de reporte de perfiles en 8 pasos.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Submode Selection Tabs -->
+  <div class="flex items-center gap-2 bg-[#0a0e18] p-1.5 rounded-xl border border-[#262a35]">
+    <button id="btnHateSubModeComments" onclick="switchHateSubMode('comments')" class="px-4 py-2 rounded bg-primary text-on-primary font-semibold text-xs transition shadow flex items-center gap-1.5 cursor-pointer">
+      <span class="material-symbols-outlined text-[16px]">chat</span>
+      <span>1. Comentarios de Contraste / Crítica</span>
+    </button>
+    <button id="btnHateSubModeReport" onclick="switchHateSubMode('report')" class="px-4 py-2 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface-variant font-medium text-xs transition flex items-center gap-1.5 cursor-pointer">
+      <span class="material-symbols-outlined text-[16px]">report</span>
+      <span>2. Auto-Denuncias en 8 Pasos (FB / IG)</span>
+    </button>
+  </div>
+
+  <!-- SUBMODE 1: Contrast / Hate Comments -->
+  <div id="hateSubModeCommentsContainer" class="space-y-4">
+
+    <!-- 1. Destination App & Accounts Detection -->
+    <div class="rounded-xl bg-surface-container-low border border-[#262a35] p-4 space-y-3.5 shadow-lg">
+      <div class="flex items-center justify-between border-b border-[#262a35] pb-2.5">
+        <div class="flex items-center gap-2">
+          <span class="w-5 h-5 rounded-full bg-error text-on-error font-mono text-xs font-bold flex items-center justify-center">1</span>
+          <h3 class="font-bold text-xs text-on-surface uppercase tracking-wider">Aplicación Destino & Detección de Cuentas</h3>
+        </div>
+        <button type="button" onclick="scanHateReportAccounts()" class="px-3 py-1.5 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-primary text-xs font-mono font-semibold flex items-center gap-1.5 transition cursor-pointer">
+          <span class="material-symbols-outlined text-[15px]">search</span>
+          <span>Saber cuántas cuentas hay</span>
+        </button>
+      </div>
+
+      <!-- Platform choice -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <label id="hrPlatformInstaCard" class="flex items-center gap-3 p-3 rounded-xl border border-primary bg-primary/10 cursor-pointer transition select-none">
+          <input type="radio" name="hrPlatformChoice" value="com.instagram.lite" checked onchange="onHateReportPlatformChange('com.instagram.lite')" class="text-primary focus:ring-0">
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-[20px] text-primary">smart_toy</span>
+            <div>
+              <span class="text-xs font-bold text-on-surface block">Instagram Lite</span>
+              <span class="text-[10px] text-on-surface-variant font-mono">com.instagram.lite</span>
+            </div>
+          </div>
+        </label>
+        <label id="hrPlatformFbCard" class="flex items-center gap-3 p-3 rounded-xl border border-[#262a35] bg-surface-container cursor-pointer transition select-none">
+          <input type="radio" name="hrPlatformChoice" value="com.facebook.lite" onchange="onHateReportPlatformChange('com.facebook.lite')" class="text-primary focus:ring-0">
+          <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-[20px] text-blue-400">public</span>
+            <div>
+              <span class="text-xs font-bold text-on-surface block">Facebook Lite</span>
+              <span class="text-[10px] text-on-surface-variant font-mono">com.facebook.lite</span>
+            </div>
+          </div>
+        </label>
+      </div>
+
+      <!-- Accounts and Cycles Config -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1 border-t border-[#262a35] text-xs font-mono">
+        <div class="flex items-center justify-between bg-surface-container border border-[#262a35] rounded-xl px-3 py-2">
+          <span class="text-on-surface text-[11px] font-medium">Cuentas que deseas usar:</span>
+          <div class="flex items-center gap-2">
+            <input type="number" id="hrAccountsToUseInput" min="1" max="100" value="1" oninput="syncAccountsInput(this.value)" class="w-16 bg-surface-container-lowest border border-error/50 text-center text-xs text-error font-bold rounded-lg px-2 py-1 focus:outline-none">
+            <span class="text-[10px] text-on-surface-variant" id="hrAccountsLimitLabel">cuentas</span>
+          </div>
+        </div>
+        <div class="flex items-center justify-between bg-surface-container border border-[#262a35] rounded-xl px-3 py-2">
+          <span class="text-on-surface text-[11px] font-medium flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-[15px] text-secondary">cached</span>
+            <span>Veces a ejecutar (Ciclos):</span>
+          </span>
+          <div class="flex items-center gap-2">
+            <input type="number" id="hrCycleCountInput" min="1" max="100" value="1" class="w-16 bg-surface-container-lowest border border-secondary/50 text-center text-xs text-secondary font-bold rounded-lg px-2 py-1 focus:outline-none">
+            <span class="text-[10px] text-on-surface-variant">vuelta(s)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Target Post URL -->
+    <div class="rounded-xl bg-surface-container-low border border-[#262a35] p-4 space-y-3 shadow-lg">
+      <div class="flex items-center justify-between border-b border-[#262a35] pb-2">
+        <div class="flex items-center gap-2">
+          <span class="w-5 h-5 rounded-full bg-error text-on-error font-mono text-xs font-bold flex items-center justify-center">2</span>
+          <h3 class="font-bold text-xs text-on-surface uppercase tracking-wider">Enlace a la Publicación o Reel</h3>
+        </div>
+        <label class="flex items-center gap-2 cursor-pointer text-[11px] text-on-surface-variant font-mono">
+          <input type="checkbox" id="hrUseCurrentScreen" class="rounded bg-surface-container border-[#262a35] text-primary focus:ring-0">
+          <span>Usar pantalla actual en el teléfono</span>
+        </label>
+      </div>
+
+      <div class="flex gap-2">
+        <div class="relative flex-1">
+          <span class="material-symbols-outlined absolute left-3 top-2.5 text-[16px] text-on-surface-variant">link</span>
+          <input type="text" id="hrUrlInput" placeholder="https://www.instagram.com/p/... o https://www.facebook.com/..." class="w-full pl-9 pr-3 py-2 rounded bg-surface-container border border-[#262a35] text-on-surface font-mono text-xs focus:border-primary focus:outline-none placeholder:text-on-surface-variant/40">
+        </div>
+        <button onclick="hrOpenPostLink()" class="px-4 py-2 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface text-xs font-mono font-semibold transition flex items-center gap-1.5 cursor-pointer">
+          <span class="material-symbols-outlined text-[14px]">launch</span>
+          <span>Abrir Enlace</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 3. Predefined Comments Bank -->
+    <div class="rounded-xl bg-surface-container-low border border-[#262a35] p-4 space-y-3 shadow-lg">
+      <div class="flex items-center justify-between border-b border-[#262a35] pb-2.5">
+        <div class="flex items-center gap-2">
+          <span class="w-5 h-5 rounded-full bg-error text-on-error font-mono text-xs font-bold flex items-center justify-center">3</span>
+          <h3 class="font-bold text-xs text-on-surface uppercase tracking-wider">Banco de Comentarios de Contraste (Sin IA)</h3>
+        </div>
+        <span id="hrCommentCountBadge" class="text-xs font-mono text-secondary px-2 py-0.5 rounded bg-secondary/10 border border-secondary/20">0 comentarios</span>
+      </div>
+
+      <div class="flex items-center justify-between">
+        <p class="text-[11px] text-on-surface-variant font-mono">Pega tus comentarios específicos (uno por línea). Cada cuenta tomará secuencialmente el comentario correspondiente.</p>
+        <div class="flex items-center gap-2">
+          <button onclick="loadHateReportSampleComments()" class="px-3 py-1 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface text-xs font-mono font-medium transition cursor-pointer">
+            Cargar Muestras
+          </button>
+          <button onclick="clearHateReportComments()" class="px-3 py-1 rounded bg-surface-container-high hover:bg-error hover:text-on-error text-error text-xs font-mono font-medium transition cursor-pointer">
+            Limpiar
+          </button>
+        </div>
+      </div>
+
+      <div>
+        <textarea id="hrPastedCommentsTextarea" rows="4" oninput="updateHateReportCommentCount()" placeholder="Escribe o pega tus comentarios aquí, uno por línea:&#10;Comentario crítico para cuenta 1&#10;Comentario de desacuerdo para cuenta 2&#10;Comentario de contraste para cuenta 3" class="w-full p-3 rounded-lg bg-surface-container border border-[#262a35] text-on-surface font-mono text-xs focus:border-primary focus:outline-none placeholder:text-on-surface-variant/40 leading-relaxed"></textarea>
+      </div>
+      <div class="text-[10px] font-mono text-on-surface-variant">Rotación: Cuenta 1 ➔ Línea 1 | Cuenta 2 ➔ Línea 2 | Cuenta N ➔ Línea N</div>
+    </div>
+
+    <!-- 4. Options: Actions, Cooldown & RAM -->
+    <div class="rounded-xl bg-surface-container-low border border-[#262a35] p-4 space-y-3 shadow-lg">
+      <div class="flex items-center justify-between border-b border-[#262a35] pb-2">
+        <div class="flex items-center gap-2">
+          <span class="w-5 h-5 rounded-full bg-error text-on-error font-mono text-xs font-bold flex items-center justify-center">4</span>
+          <h3 class="font-bold text-xs text-on-surface uppercase tracking-wider">Acciones & Ajustes Anti-Baneo</h3>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-mono">
+        <label class="flex items-start gap-2.5 p-2.5 rounded-xl border border-error/30 bg-error/5 cursor-pointer select-none">
+          <input type="checkbox" id="hrDoComment" checked class="rounded bg-surface-container border-[#262a35] text-error focus:ring-0 mt-0.5">
+          <div>
+            <span class="font-bold text-on-surface block">Inyectar Comentario de Lista</span>
+            <span class="text-[10px] text-on-surface-variant">Escribe el comentario predeterminado de forma natural y lo publica.</span>
+          </div>
+        </label>
+        <label class="flex items-start gap-2.5 p-2.5 rounded-xl border border-[#262a35] bg-surface-container cursor-pointer select-none">
+          <input type="checkbox" id="hrDoLike" class="rounded bg-surface-container border-[#262a35] text-primary focus:ring-0 mt-0.5">
+          <div>
+            <span class="font-bold text-on-surface block">Dar Like (Opcional)</span>
+            <span class="text-[10px] text-on-surface-variant">Desmarcado por defecto para publicaciones objeto de crítica o reporte.</span>
+          </div>
+        </label>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 p-2.5 bg-surface-container border border-[#262a35] rounded-xl text-xs font-mono">
+        <div class="flex items-center justify-between">
+          <span class="text-[11px] text-on-surface flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-[15px] text-secondary">schedule</span>
+            <span>Tiempo de Reposo:</span>
+          </span>
+          <select id="hrCooldownSelect" class="bg-surface-container-lowest border border-secondary/50 text-secondary text-xs rounded-lg px-2 py-1 font-bold focus:outline-none">
+            <option value="0">0s (Sin pausa)</option>
+            <option value="15" selected>15s (Recomendado)</option>
+            <option value="30">30s (Pausado)</option>
+            <option value="60">60s (Seguro 1m)</option>
+          </select>
+        </div>
+        <div class="flex items-center justify-between">
+          <label class="flex items-center gap-1.5 text-[11px] text-on-surface cursor-pointer select-none">
+            <input type="checkbox" id="hrClearRamCheck" checked class="rounded bg-surface-container-lowest border-[#262a35] text-secondary focus:ring-0">
+            <span>Liberar RAM entre cuentas</span>
+          </label>
+          <button type="button" onclick="clearDeviceRecentApps()" class="px-2 py-0.5 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface-variant text-[10px] font-mono transition">
+            Limpiar Ya
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Automation Launcher -->
+    <div class="rounded-xl bg-surface-container-low border border-error/40 p-4 space-y-3 shadow-lg">
+      <div class="flex items-center gap-2 border-b border-[#262a35] pb-2">
+        <span class="w-5 h-5 rounded-full bg-error text-on-error font-mono text-xs font-bold flex items-center justify-center">5</span>
+        <h3 class="font-bold text-xs text-on-surface uppercase tracking-wider">Lanzar Automatización Hate/Report</h3>
+      </div>
+      <div class="flex gap-2">
+        <button id="btnStartHateReport" onclick="startHateReportAutomation()" class="flex-1 py-3 px-4 rounded-xl bg-error text-on-error hover:opacity-90 active:scale-98 font-mono font-bold text-xs shadow-lg flex items-center justify-center gap-2 transition cursor-pointer">
+          <span class="material-symbols-outlined text-[18px]">play_arrow</span>
+          <span>Iniciar Automatización Hate/Report</span>
+        </button>
+        <button id="btnStopHateReport" onclick="stopMultiAccountCycle()" disabled class="py-3 px-4 rounded-xl bg-surface-container-high text-error border border-error/30 opacity-50 cursor-not-allowed font-mono font-semibold text-xs flex items-center gap-1.5 transition">
+          <span class="material-symbols-outlined text-[16px]">stop</span>
+          <span>Detener</span>
+        </button>
+      </div>
+      <p class="text-[11px] text-on-surface-variant font-mono text-center">
+        Ejecutará directamente la apertura del enlace con cada cuenta, inyectará tu comentario predeterminado y cambiará a la siguiente cuenta liberando RAM.
+      </p>
+    </div>
+
+  </div>
+
+  <!-- SUBMODE 2: Auto-Report 8 Steps Flow -->
+  <div id="hateSubModeReportContainer" class="hidden rounded-xl bg-surface-container-low border border-[#262a35] p-4 space-y-4 shadow-lg">
+    
+    <!-- Presets Header -->
+    <div class="flex items-center justify-between border-b border-[#262a35] pb-2.5">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-error text-[18px]">security</span>
+        <h3 class="font-bold text-xs text-on-surface uppercase tracking-wider">Flujo de Denuncia Automática (8 Pasos)</h3>
+      </div>
+      <div class="flex items-center gap-1.5 text-xs font-mono">
+        <span class="text-on-surface-variant mr-1">Presets:</span>
+        <button onclick="applySleepPreset('fast')" class="px-2 py-0.5 rounded bg-surface-container hover:bg-surface-container-high text-secondary border border-[#262a35]">Rápido</button>
+        <button onclick="applySleepPreset('normal')" class="px-2 py-0.5 rounded bg-surface-container hover:bg-surface-container-high text-primary border border-[#262a35]">Normal</button>
+        <button onclick="applySleepPreset('safe')" class="px-2 py-0.5 rounded bg-surface-container hover:bg-surface-container-high text-tertiary border border-[#262a35]">Humano</button>
+      </div>
+    </div>
+
+    <!-- App Choice -->
+    <div class="flex items-center gap-4 text-xs font-mono p-2.5 rounded-lg bg-surface-container border border-[#262a35]">
+      <span class="text-on-surface-variant">Plataforma:</span>
+      <label class="flex items-center gap-1.5 cursor-pointer">
+        <input type="radio" name="autoReportAppChoice" value="com.facebook.lite" checked class="text-primary focus:ring-0">
+        <span>Facebook Lite</span>
+      </label>
+      <label class="flex items-center gap-1.5 cursor-pointer">
+        <input type="radio" name="autoReportAppChoice" value="com.instagram.lite" class="text-primary focus:ring-0">
+        <span>Instagram Lite</span>
+      </label>
+    </div>
+
+    <!-- 8 Individual Steps Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
+      
+      <!-- Paso 1 -->
+      <div class="p-2.5 rounded-lg bg-surface-container border border-[#262a35] space-y-1.5 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between">
+            <span class="text-primary font-mono font-bold text-xs">Paso 1</span>
+            <span class="text-[10px] text-on-surface-variant font-mono">Menú 3 puntos</span>
+          </div>
+          <p class="text-[11px] text-on-surface font-mono mt-1">Abre el menú contextual</p>
+        </div>
+        <div class="space-y-1.5 pt-2 border-t border-[#262a35]">
+          <div class="grid grid-cols-2 gap-1 text-[10px] font-mono">
+            <input type="number" id="sleepStep1Before" value="1.0" step="0.5" class="px-1.5 py-0.5 rounded bg-surface-container-lowest border border-[#262a35] text-center" title="Espera antes (s)">
+            <input type="number" id="sleepStep1After" value="2.0" step="0.5" class="px-1.5 py-0.5 rounded bg-surface-container-lowest border border-[#262a35] text-center" title="Espera después (s)">
+          </div>
+          <button onclick="runAutoReportStep1OnlyTouch()" class="w-full py-1 rounded bg-surface-container-high hover:bg-primary hover:text-on-primary text-[11px] font-mono font-semibold transition">
+            Ejecutar Paso 1
+          </button>
+        </div>
+      </div>
+
+      <!-- Paso 2 -->
+      <div class="p-2.5 rounded-lg bg-surface-container border border-[#262a35] space-y-1.5 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between">
+            <span class="text-primary font-mono font-bold text-xs">Paso 2</span>
+            <span class="text-[10px] text-on-surface-variant font-mono">Denunciar</span>
+          </div>
+          <p class="text-[11px] text-on-surface font-mono mt-1">Tap en 'Denunciar'</p>
+        </div>
+        <div class="space-y-1.5 pt-2 border-t border-[#262a35]">
+          <div class="grid grid-cols-2 gap-1 text-[10px] font-mono">
+            <input type="number" id="sleepStep2Before" value="1.0" step="0.5" class="px-1.5 py-0.5 rounded bg-surface-container-lowest border border-[#262a35] text-center">
+            <input type="number" id="sleepStep2After" value="2.0" step="0.5" class="px-1.5 py-0.5 rounded bg-surface-container-lowest border border-[#262a35] text-center">
+          </div>
+          <button onclick="runAutoReportStep2OnlyTouch()" class="w-full py-1 rounded bg-surface-container-high hover:bg-primary hover:text-on-primary text-[11px] font-mono font-semibold transition">
+            Ejecutar Paso 2
+          </button>
+        </div>
+      </div>
+
+      <!-- Paso 3 -->
+      <div class="p-2.5 rounded-lg bg-surface-container border border-[#262a35] space-y-1.5 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between">
+            <span class="text-primary font-mono font-bold text-xs">Paso 3</span>
+            <span class="text-[10px] text-on-surface-variant font-mono">Motivo Odio</span>
+          </div>
+          <p class="text-[11px] text-on-surface font-mono mt-1">Selecciona 'Odio'</p>
+        </div>
+        <div class="space-y-1.5 pt-2 border-t border-[#262a35]">
+          <div class="grid grid-cols-2 gap-1 text-[10px] font-mono">
+            <input type="number" id="sleepStep3Before" value="1.0" step="0.5" class="px-1.5 py-0.5 rounded bg-surface-container-lowest border border-[#262a35] text-center">
+            <input type="number" id="sleepStep3After" value="2.0" step="0.5" class="px-1.5 py-0.5 rounded bg-surface-container-lowest border border-[#262a35] text-center">
+          </div>
+          <button onclick="runAutoReportStep3OnlyTouch()" class="w-full py-1 rounded bg-surface-container-high hover:bg-primary hover:text-on-primary text-[11px] font-mono font-semibold transition">
+            Ejecutar Paso 3
+          </button>
+        </div>
+      </div>
+
+      <!-- Paso 4 -->
+      <div class="p-2.5 rounded-lg bg-surface-container border border-[#262a35] space-y-1.5 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between">
+            <span class="text-primary font-mono font-bold text-xs">Paso 4</span>
+            <span class="text-[10px] text-on-surface-variant font-mono">Sub-motivo</span>
+          </div>
+          <p class="text-[11px] text-on-surface font-mono mt-1">Promueve el odio</p>
+        </div>
+        <div class="space-y-1.5 pt-2 border-t border-[#262a35]">
+          <div class="grid grid-cols-2 gap-1 text-[10px] font-mono">
+            <input type="number" id="sleepStep4Before" value="1.0" step="0.5" class="px-1.5 py-0.5 rounded bg-surface-container-lowest border border-[#262a35] text-center">
+            <input type="number" id="sleepStep4After" value="2.0" step="0.5" class="px-1.5 py-0.5 rounded bg-surface-container-lowest border border-[#262a35] text-center">
+          </div>
+          <button onclick="runAutoReportStep4OnlyTouch()" class="w-full py-1 rounded bg-surface-container-high hover:bg-primary hover:text-on-primary text-[11px] font-mono font-semibold transition">
+            Ejecutar Paso 4
+          </button>
+        </div>
+      </div>
+
+      <!-- Paso 5 -->
+      <div class="p-2.5 rounded-lg bg-surface-container border border-[#262a35] space-y-1.5 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between">
+            <span class="text-primary font-mono font-bold text-xs">Paso 5</span>
+            <span class="text-[10px] text-on-surface-variant font-mono">Categoría</span>
+          </div>
+          <p class="text-[11px] text-on-surface font-mono mt-1">Lenguaje de odio</p>
+        </div>
+        <div class="space-y-1.5 pt-2 border-t border-[#262a35]">
+          <div class="grid grid-cols-2 gap-1 text-[10px] font-mono">
+            <input type="number" id="sleepStep5Before" value="1.0" step="0.5" class="px-1.5 py-0.5 rounded bg-surface-container-lowest border border-[#262a35] text-center">
+            <input type="number" id="sleepStep5After" value="2.0" step="0.5" class="px-1.5 py-0.5 rounded bg-surface-container-lowest border border-[#262a35] text-center">
+          </div>
+          <button onclick="runAutoReportStep5OnlyTouch()" class="w-full py-1 rounded bg-surface-container-high hover:bg-primary hover:text-on-primary text-[11px] font-mono font-semibold transition">
+            Ejecutar Paso 5
+          </button>
+        </div>
+      </div>
+
+      <!-- Paso 6 -->
+      <div class="p-2.5 rounded-lg bg-surface-container border border-[#262a35] space-y-1.5 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between">
+            <span class="text-primary font-mono font-bold text-xs">Paso 6</span>
+            <span class="text-[10px] text-on-surface-variant font-mono">Enviar</span>
+          </div>
+          <p class="text-[11px] text-on-surface font-mono mt-1">Confirmar envío</p>
+        </div>
+        <div class="space-y-1.5 pt-2 border-t border-[#262a35]">
+          <div class="grid grid-cols-2 gap-1 text-[10px] font-mono">
+            <input type="number" id="sleepStep6Before" value="1.0" step="0.5" class="px-1.5 py-0.5 rounded bg-surface-container-lowest border border-[#262a35] text-center">
+            <input type="number" id="sleepStep6After" value="2.0" step="0.5" class="px-1.5 py-0.5 rounded bg-surface-container-lowest border border-[#262a35] text-center">
+          </div>
+          <button onclick="runAutoReportStep6OnlyTouch()" class="w-full py-1 rounded bg-surface-container-high hover:bg-primary hover:text-on-primary text-[11px] font-mono font-semibold transition">
+            Ejecutar Paso 6
+          </button>
+        </div>
+      </div>
+
+      <!-- Paso 7 -->
+      <div class="p-2.5 rounded-lg bg-surface-container border border-[#262a35] space-y-1.5 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between">
+            <span class="text-primary font-mono font-bold text-xs">Paso 7</span>
+            <span class="text-[10px] text-on-surface-variant font-mono">Siguiente</span>
+          </div>
+          <p class="text-[11px] text-on-surface font-mono mt-1">Avanzar pantalla</p>
+        </div>
+        <div class="space-y-1.5 pt-2 border-t border-[#262a35]">
+          <div class="grid grid-cols-2 gap-1 text-[10px] font-mono">
+            <input type="number" id="sleepStep7Before" value="1.0" step="0.5" class="px-1.5 py-0.5 rounded bg-surface-container-lowest border border-[#262a35] text-center">
+            <input type="number" id="sleepStep7After" value="2.0" step="0.5" class="px-1.5 py-0.5 rounded bg-surface-container-lowest border border-[#262a35] text-center">
+          </div>
+          <button onclick="runAutoReportStep7OnlyTouch()" class="w-full py-1 rounded bg-surface-container-high hover:bg-primary hover:text-on-primary text-[11px] font-mono font-semibold transition">
+            Ejecutar Paso 7
+          </button>
+        </div>
+      </div>
+
+      <!-- Paso 8 -->
+      <div class="p-2.5 rounded-lg bg-surface-container border border-[#262a35] space-y-1.5 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between">
+            <span class="text-primary font-mono font-bold text-xs">Paso 8</span>
+            <span class="text-[10px] text-on-surface-variant font-mono">Listo</span>
+          </div>
+          <p class="text-[11px] text-on-surface font-mono mt-1">Finalizar reporte</p>
+        </div>
+        <div class="space-y-1.5 pt-2 border-t border-[#262a35]">
+          <div class="grid grid-cols-2 gap-1 text-[10px] font-mono">
+            <input type="number" id="sleepStep8Before" value="1.0" step="0.5" class="px-1.5 py-0.5 rounded bg-surface-container-lowest border border-[#262a35] text-center">
+            <input type="number" id="sleepStep8After" value="2.0" step="0.5" class="px-1.5 py-0.5 rounded bg-surface-container-lowest border border-[#262a35] text-center">
+          </div>
+          <button onclick="runAutoReportStep8OnlyTouch()" class="w-full py-1 rounded bg-surface-container-high hover:bg-primary hover:text-on-primary text-[11px] font-mono font-semibold transition">
+            Ejecutar Paso 8
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Combined Execution Triggers -->
+    <div class="flex flex-wrap items-center justify-end gap-3 pt-2">
+      <button onclick="runAutoReportSteps1And2()" class="px-4 py-2 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface text-xs font-mono font-semibold transition">
+        Ejecutar Pasos 1 y 2
+      </button>
+      <button onclick="runAutoReportFullFlow()" class="px-6 py-2.5 rounded bg-error text-on-error hover:opacity-90 text-xs font-mono font-bold shadow flex items-center gap-2 transition cursor-pointer">
+        <span class="material-symbols-outlined text-[18px]">play_arrow</span>
+        <span>Ejecutar Flujo Completo Automatizado (1 al 8)</span>
+      </button>
+    </div>
+
+  </div>
+
+</div>

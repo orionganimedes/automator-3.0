@@ -1,0 +1,82 @@
+/* Cybernetic Console - Theme Styles */
+@layer base {
+  body {
+    background-color: #0b0f19;
+    color: #dfe2f1;
+    font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+}
+
+/* Custom Cybernetic Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0e18;
+}
+::-webkit-scrollbar-thumb {
+  background: #262a35;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #374151;
+}
+
+/* Monospace text */
+.font-mono, code, pre, .terminal-text {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Material Symbols Adjustments */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+  vertical-align: middle;
+  line-height: 1;
+}
+
+/* Glow effects */
+.glow-primary {
+  box-shadow: 0 0 15px -3px rgba(99, 102, 241, 0.35);
+}
+.glow-secondary {
+  box-shadow: 0 0 15px -3px rgba(78, 222, 163, 0.35);
+}
+.glow-amber {
+  box-shadow: 0 0 15px -3px rgba(245, 158, 11, 0.35);
+}
+.glow-error {
+  box-shadow: 0 0 15px -3px rgba(244, 63, 94, 0.35);
+}
+
+/* Phone Mockup Frame */
+.phone-mockup-body {
+  border-radius: 36px;
+  background: #171b26;
+  border: 4px solid #262a35;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.phone-screen-inner {
+  border-radius: 28px;
+  background: #000000;
+  overflow: hidden;
+}
+
+/* Badges */
+.badge-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Toast animation */
+#toastContainer {
+  pointer-events: none;
+}
+#toastContainer > div {
+  pointer-events: auto;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}

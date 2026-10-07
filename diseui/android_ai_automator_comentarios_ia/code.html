@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"outline":"#908fa0","tertiary-fixed":"#ffddb8","on-tertiary-container":"#3e2400","secondary":"#4edea3","error":"#ffb4ab","secondary-container":"#00a572","on-secondary":"#003824","on-tertiary":"#472a00","primary-fixed-dim":"#c0c1ff","on-primary":"#1000a9","tertiary-container":"#ca8100","outline-variant":"#464554","on-tertiary-fixed":"#2a1700","on-error":"#690005","on-tertiary-fixed-variant":"#653e00","surface-container-highest":"#313540","on-primary-fixed":"#07006c","surface-container-lowest":"#0a0e18","surface-container-low":"#171b26","secondary-fixed":"#6ffbbe","on-secondary-fixed":"#002113","tertiary-fixed-dim":"#ffb95f","tertiary":"#ffb95f","on-surface-variant":"#c7c4d7","error-container":"#93000a","primary-container":"#8083ff","surface-bright":"#353944","on-error-container":"#ffdad6","on-primary-fixed-variant":"#2f2ebe","surface-tint":"#c0c1ff","surface-container-high":"#262a35","on-surface":"#dfe2f1","primary":"#c0c1ff","on-primary-container":"#0d0096","secondary-fixed-dim":"#4edea3","inverse-on-surface":"#2c303b","inverse-primary":"#494bd6","on-background":"#dfe2f1","surface":"#0f131d","on-secondary-container":"#00311f","background":"#0f131d","surface-container":"#1c1f2a","inverse-surface":"#dfe2f1","surface-dim":"#0f131d","on-secondary-fixed-variant":"#005236","primary-fixed":"#e1e0ff","surface-variant":"#313540"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"space-xs":"0.25rem","space-md":"0.75rem","margin-lg":"2rem","space-xl":"1.5rem","space-lg":"1rem","space-sm":"0.5rem","gutter":"1rem","gutter-lg":"1.5rem","margin":"1.25rem"},"fontFamily":{"body-lg":["Geist"],"code-sm":["JetBrains Mono"],"headline-sm":["Geist"],"badge-label":["JetBrains Mono"],"headline-lg":["Geist"],"body-sm":["Geist"],"code-md":["JetBrains Mono"],"headline-md":["Geist"],"body-md":["Geist"]},"fontSize":{"body-lg":["1rem",{"lineHeight":"1.5rem","fontWeight":"400"}],"code-sm":["0.6875rem",{"lineHeight":"0.875rem","fontWeight":"500"}],"headline-sm":["1rem",{"lineHeight":"1.5rem","letterSpacing":"-0.01em","fontWeight":"600"}],"badge-label":["0.6875rem",{"lineHeight":"0.75rem","letterSpacing":"0.05em","fontWeight":"600"}],"headline-lg":["1.75rem",{"lineHeight":"2.25rem","letterSpacing":"-0.025em","fontWeight":"600"}],"body-sm":["0.75rem",{"lineHeight":"1rem","fontWeight":"400"}],"code-md":["0.8125rem",{"lineHeight":"1.25rem","fontWeight":"400"}],"headline-md":["1.25rem",{"lineHeight":"1.75rem","letterSpacing":"-0.015em","fontWeight":"600"}],"body-md":["0.875rem",{"lineHeight":"1.25rem","fontWeight":"400"}]}}}}</script></head><body class="bg-surface font-body-md text-on-surface antialiased min-h-screen flex flex-col"><header class="fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.35)]"><div class="h-28 w-full px-gutter-lg flex flex-col justify-between pt-space-sm pb-space-xs"><div class="flex items-center justify-between gap-space-lg"><div class="flex items-center gap-space-md"><div class="w-9 h-9 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary shadow-[0_0_15px_-3px_rgba(192,193,255,0.25)]"><span class="material-symbols-outlined text-[20px]">smart_toy</span></div><div><div class="flex items-center gap-space-sm"><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight">Android AI Automator</span><span class="font-badge-label text-badge-label px-space-xs py-0.5 rounded bg-surface-container text-primary font-code-sm">v3.4-CORE</span></div><p class="font-body-sm text-body-sm text-on-surface-variant">Local Vision &amp; Sentiment Pipeline</p></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-sm px-space-md py-1 rounded bg-surface-container-low"><span class="w-2 h-2 rounded-full bg-secondary shadow-[0_0_8px_rgba(78,222,163,0.5)]"></span><div class="flex flex-col"><div class="flex items-center gap-space-xs"><span class="font-badge-label text-badge-label text-secondary uppercase">ADB Connected</span><span class="font-code-sm text-code-sm text-on-surface">SM-S918B</span></div><span class="font-code-sm text-code-sm text-on-surface-variant">98% • 12ms</span></div></div><div class="flex items-center gap-space-sm px-space-md py-1 rounded bg-surface-container-low"><span class="w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_rgba(192,193,255,0.5)]"></span><div class="flex flex-col"><div class="flex items-center gap-space-xs"><span class="font-badge-label text-badge-label text-primary uppercase">Ollama Active</span><span class="font-code-sm text-code-sm text-on-surface-variant">11.4k t/s</span></div><span class="font-code-sm text-code-sm text-on-surface">Llama-3-Vision:8b</span></div></div><div class="flex items-center gap-space-sm px-space-md py-1 rounded bg-surface-container-low"><div class="flex flex-col"><span class="font-badge-label text-badge-label text-tertiary uppercase">Automation</span><span class="font-code-sm text-code-sm text-on-surface font-semibold">IDLE</span></div><button class="px-space-sm py-1 rounded bg-error-container text-on-error-container hover:bg-error hover:text-on-error transition-colors font-badge-label text-badge-label uppercase flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">cancel</span>Abort</button></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div><div class="flex items-center justify-between gap-space-md pt-space-xs"><nav class="flex items-center gap-space-xs bg-surface-container-lowest p-0.5 rounded overflow-x-auto" data-active-classes="bg-surface-container text-on-surface font-semibold shadow-[0_1px_4px_rgba(0,0,0,0.2)]"><a class="px-space-md py-1 rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors whitespace-nowrap" data-path="instagram-bot" href="#">Instagram Bot</a><a class="px-space-md py-1 rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors whitespace-nowrap" data-path="facebook" href="#">Facebook</a><a class="px-space-md py-1 rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors whitespace-nowrap" data-path="tiktok-reels" href="#">TikTok / Reels</a><a class="px-space-md py-1 rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors whitespace-nowrap" data-path="comentarios-ia" href="#">Comentarios IA</a><a class="px-space-md py-1 rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors whitespace-nowrap" data-path="modelos-ia-ollama" href="#">Modelos IA (Ollama)</a><a class="px-space-md py-1 rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors whitespace-nowrap" data-path="terminal-logs" href="#">Terminal &amp; Logs</a><a class="px-space-md py-1 rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors whitespace-nowrap" data-path="multi-scrcpy-dispositivos" href="#">Multi-Scrcpy (Dispositivos)</a><a class="px-space-md py-1 rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors whitespace-nowrap" data-path="configuracion" href="#">Configuración</a></nav><div class="flex items-center gap-space-xs shrink-0"><button class="px-space-sm py-1 rounded bg-surface-container-high text-on-surface hover:bg-surface-container-highest hover:text-on-surface transition-colors font-code-sm text-code-sm flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">screenshot_region</span>Capturar Pantalla</button><button class="px-space-sm py-1 rounded bg-surface-container-high text-on-surface hover:bg-surface-container-highest hover:text-on-surface transition-colors font-code-sm text-code-sm flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">restart_alt</span>Reiniciar ADB</button><button class="px-space-sm py-1 rounded bg-surface-container-high text-on-surface hover:bg-surface-container-highest hover:text-on-surface transition-colors font-code-sm text-code-sm flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">memory</span>Liberar RAM</button></div></div></div></header><main class="w-full pt-28 bg-surface flex-1 px-gutter-lg"><div class="flex flex-col w-full pb-space-xl">
+<!-- Top Bar / Sub-Header Context Strip -->
+<div class="w-full flex flex-wrap items-center justify-between gap-space-md py-space-sm mb-space-md">
+<div class="flex items-center gap-space-md">
+<div class="flex items-center gap-space-xs px-space-md py-1 rounded-lg bg-surface-container-high text-primary">
+<span class="material-symbols-outlined text-[18px]">forum</span>
+<span class="font-headline-sm text-headline-sm uppercase tracking-wider text-on-surface">Generador de Comentarios con IA Local</span>
+</div>
+<span class="font-code-sm text-code-sm text-secondary bg-surface-container-lowest px-space-sm py-0.5 rounded flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+        PIPELINE ACTIVE • OCR + RO-BERTA + OLLAMA
+      </span>
+</div>
+<!-- Active Hardware Stats Pill -->
+<div class="flex items-center gap-space-sm">
+<div class="flex items-center gap-space-xs px-space-md py-1 rounded bg-surface-container-lowest font-code-sm text-code-sm text-on-surface-variant">
+<span class="text-tertiary">GPU VRAM:</span>
+<span class="text-on-surface font-semibold">6.2 / 24 GB</span>
+<span class="text-outline-variant">|</span>
+<span class="text-secondary">LATENCIA:</span>
+<span class="text-on-surface font-semibold">142ms</span>
+</div>
+<button class="px-space-md py-1 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-code-sm text-code-sm flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[15px]">tune</span>
+        Presets Rápidos
+      </button>
+</div>
+</div>
+<!-- Main 2-Column Cockpit Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg w-full items-start">
+<!-- ==================== LEFT COLUMN: Contexto & Visor (approx 42%) ==================== -->
+<div class="lg:col-span-5 flex flex-col gap-space-md">
+<!-- Target Platform & Dispatch Target -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-md flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-badge-label text-badge-label uppercase text-on-surface-variant tracking-wider flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-primary">cell_tower</span>
+            1. Plataforma Destino
+          </span>
+<span class="font-code-sm text-code-sm text-secondary">ADB Protocol Ready</span>
+</div>
+<div class="grid grid-cols-2 gap-space-sm">
+<!-- Instagram Toggle -->
+<button class="relative flex items-center justify-between p-space-sm rounded-lg bg-surface-container-high text-on-surface shadow-[0_0_12px_-2px_rgba(202,129,0,0.35)] transition-all" id="btn-target-ig" onclick="setTargetPlatform('ig')">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-amber-500 via-rose-500 to-purple-600 flex items-center justify-center text-white shadow-sm">
+<span class="material-symbols-outlined text-[18px]">photo_camera</span>
+</div>
+<div class="text-left">
+<div class="font-headline-sm text-headline-sm text-on-surface leading-tight">Instagram</div>
+<div class="font-code-sm text-code-sm text-on-surface-variant">Reels &amp; Feed</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-secondary text-[20px]" id="ig-check">check_circle</span>
+</button>
+<!-- Facebook Toggle -->
+<button class="relative flex items-center justify-between p-space-sm rounded-lg bg-surface-container-lowest text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all" id="btn-target-fb" onclick="setTargetPlatform('fb')">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white shadow-sm">
+<span class="material-symbols-outlined text-[18px]">public</span>
+</div>
+<div class="text-left">
+<div class="font-headline-sm text-headline-sm leading-tight">Facebook</div>
+<div class="font-code-sm text-code-sm">Groups &amp; Pages</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant text-[20px] hidden" id="fb-check">check_circle</span>
+</button>
+</div>
+<!-- Target Phone ADB & Profile Selector -->
+<div class="mt-space-xs grid grid-cols-2 gap-space-sm pt-space-xs">
+<div class="flex flex-col gap-0.5">
+<label class="font-badge-label text-badge-label uppercase text-on-surface-variant">Dispositivo Físico</label>
+<div class="flex items-center justify-between px-space-sm py-1.5 rounded bg-surface-container-lowest text-on-surface font-code-sm text-code-sm">
+<div class="flex items-center gap-1.5 truncate">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="truncate">SM-S918B (S23 Ultra)</span>
+</div>
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">expand_more</span>
+</div>
+</div>
+<div class="flex flex-col gap-0.5">
+<label class="font-badge-label text-badge-label uppercase text-on-surface-variant">Cuenta Local Activa</label>
+<div class="flex items-center justify-between px-space-sm py-1.5 rounded bg-surface-container-lowest text-on-surface font-code-sm text-code-sm">
+<div class="flex items-center gap-1.5 truncate">
+<span class="material-symbols-outlined text-[14px] text-primary">account_circle</span>
+<span class="truncate">@ai_hardware_lab</span>
+</div>
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">expand_more</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Input Extractor Card -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-md flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-badge-label text-badge-label uppercase text-on-surface-variant tracking-wider flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-primary">document_scanner</span>
+            2. Ingesta de Contenido
+          </span>
+<span class="font-code-sm text-code-sm text-tertiary">PaddleOCR 2.7 Loaded</span>
+</div>
+<!-- URL Input & Extract Button -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-xs">
+<div class="flex-1 flex items-center gap-space-xs px-space-md py-1.5 rounded bg-surface-container-lowest">
+<span class="material-symbols-outlined text-outline text-[16px]">link</span>
+<input class="w-full bg-transparent font-code-sm text-code-sm text-on-surface focus:outline-none placeholder-outline" placeholder="Pegar URL o intent link..." type="text" value="https://instagram.com/p/C7x92_AIhardware_quant/"/>
+</div>
+<button class="px-space-md py-1.5 rounded bg-primary text-on-primary font-headline-sm text-body-sm hover:brightness-110 flex items-center gap-1 shadow-sm shrink-0 transition-transform active:scale-95">
+<span class="material-symbols-outlined text-[16px]">search_insights</span>
+              Extraer Post
+            </button>
+</div>
+<div class="flex items-center justify-center my-0.5 relative">
+<span class="font-badge-label text-badge-label uppercase text-outline-variant bg-surface-container-low px-space-sm z-10">O Captura Directa</span>
+<div class="absolute w-full h-[1px] bg-surface-container-high top-1/2"></div>
+</div>
+<!-- Capture Scrcpy Button -->
+<button class="w-full py-2 px-space-md rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-headline-sm text-body-sm flex items-center justify-center gap-space-sm transition-all group">
+<span class="material-symbols-outlined text-[18px] text-secondary group-hover:rotate-12 transition-transform">screenshot_region</span>
+<span>Capturar Pantalla Scrcpy Actual (Viewport del Teléfono)</span>
+<span class="font-code-sm text-code-sm px-1.5 py-0.5 rounded bg-surface-container-lowest text-primary">1080x2340</span>
+</button>
+</div>
+</div>
+<!-- Live Post Preview Card (Detected Post) -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-md flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="font-badge-label text-badge-label uppercase text-on-surface-variant tracking-wider">3. Análisis Multimodal de Entrada</span>
+<span class="px-space-xs py-0.5 rounded bg-secondary/10 text-secondary font-code-sm text-code-sm">OCR Validado</span>
+</div>
+<span class="font-code-sm text-code-sm text-on-surface-variant">Frame: #08291</span>
+</div>
+<!-- Post Content Preview Container -->
+<div class="bg-surface-container-lowest rounded-lg p-space-sm flex flex-col gap-space-sm">
+<!-- Post Author Header -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-7 h-7 rounded-full bg-surface-container-highest flex items-center justify-center text-primary font-headline-sm text-body-sm">
+                TI
+              </div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-body-sm text-on-surface font-semibold leading-none">@tech_innovators</span>
+<span class="font-code-sm text-code-sm text-on-surface-variant">Instagram Post • Hace 42m</span>
+</div>
+</div>
+<div class="flex items-center gap-1 px-space-xs py-0.5 rounded bg-surface-container-high font-code-sm text-code-sm text-secondary">
+<span class="material-symbols-outlined text-[13px]">verified</span>
+<span>12.4k Likes</span>
+</div>
+</div>
+<!-- Mock Visual Content Frame with OCR Bounding Box overlay hint -->
+<div class="relative w-full h-44 rounded bg-surface-container-high overflow-hidden group">
+<img class="w-full h-full object-cover opacity-80" data-alt="High-tech smartphone workstation running a quantized local AI vision model with live command-line diagnostics on a secondary screen in a nocturnal dark cyberpunk laboratory, illuminated by indigo neon lights and green data visualizations." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0DNa0jln80tpZjVl7KLlRZlJgVEeRL6s9exOw-cPg3Ld1pMFMP-6YhLA41yVBSsPjyiFLCKs0c1u-bCNz6884mVKCINfiKEl6WkW_f67OR63pB-I1Lqy4y-fMF4jfDpBBvl2GBvzWa4u0aQJs4ofFHGJaoWazn6xyLhadZs0M3epCbn5lo3mZd553Qml2C0AQGO3ea167EwPJHuuZ-zkRQrnz1kS7ocQrrzn8c5KWvmWKSDqrWCRs"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent"></div>
+<!-- Vision Tag Badges -->
+<div class="absolute top-2 left-2 flex gap-1">
+<span class="font-code-sm text-code-sm bg-surface-container-lowest/90 backdrop-blur px-2 py-0.5 rounded text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">visibility</span>
+                GPU Rig + Snapdragon 8 Gen 2
+              </span>
+<span class="font-code-sm text-code-sm bg-surface-container-lowest/90 backdrop-blur px-2 py-0.5 rounded text-secondary">
+                Confidence 98.4%
+              </span>
+</div>
+<!-- OCR Highlight Box (Simulated CV Detection) -->
+<div class="absolute bottom-2 left-2 right-2 p-2 rounded bg-surface-container-lowest/95 backdrop-blur shadow-sm">
+<div class="flex items-center justify-between mb-1">
+<span class="font-badge-label text-badge-label uppercase text-primary">Texto Extraído (OCR Local)</span>
+<span class="font-code-sm text-code-sm text-tertiary">RoBERTa ONNX</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface line-clamp-2 italic">
+                "¿Qué opinan de los modelos locales cuantizados corriendo a 18 tok/s directo en chips móviles? ¿Vale la pena INT4 para agentes autónomos?"
+              </p>
+</div>
+</div>
+<!-- Extracted Meta & Sentiment Matrix -->
+<div class="grid grid-cols-2 gap-space-xs pt-1">
+<div class="flex flex-col p-space-xs rounded bg-surface-container-high">
+<span class="font-badge-label text-badge-label uppercase text-on-surface-variant">Sentimiento Post</span>
+<div class="flex items-center gap-1 mt-0.5">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-headline-sm text-body-sm text-secondary font-semibold">+0.92 Altamente Positivo</span>
+</div>
+</div>
+<div class="flex flex-col p-space-xs rounded bg-surface-container-high">
+<span class="font-badge-label text-badge-label uppercase text-on-surface-variant">Top Keywords Detectadas</span>
+<div class="flex items-center gap-1 mt-0.5 truncate font-code-sm text-code-sm text-on-surface">
+<span class="text-primary font-semibold">#Ollama</span>
+<span>#EdgeAI</span>
+<span>#INT4</span>
+</div>
+</div>
+</div>
+<!-- Hashtags Extraction Strip -->
+<div class="flex flex-wrap gap-1 mt-0.5">
+<span class="font-code-sm text-code-sm px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface-variant">#LocalAI</span>
+<span class="font-code-sm text-code-sm px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface-variant">#Quantization</span>
+<span class="font-code-sm text-code-sm px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface-variant">#AndroidDev</span>
+<span class="font-code-sm text-code-sm px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface-variant">#Tech2025</span>
+</div>
+</div>
+</div>
+</div>
+<!-- ==================== RIGHT COLUMN: Ollama Generator & Dispatch (approx 58%) ==================== -->
+<div class="lg:col-span-7 flex flex-col gap-space-md">
+<!-- Ollama Inference Engine Control Hub -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-md flex flex-col gap-space-md">
+<!-- Engine Header Bar -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm pb-space-xs">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-primary-container text-on-primary-container flex items-center justify-center font-bold">
+<span class="material-symbols-outlined text-[18px]">psychology</span>
+</div>
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-on-surface">Motor Ollama Local</span>
+<span class="px-space-xs py-0.5 rounded bg-primary/20 text-primary font-code-sm text-code-sm">qwen2.5:7b-instruct</span>
+</div>
+<span class="font-code-sm text-code-sm text-secondary flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                Inferencia Lista • 11.8 tokens/segundo • VRAM: 4.8 GB
+              </span>
+</div>
+</div>
+<!-- Model Switcher Dropdown (Quick) -->
+<div class="flex items-center gap-1 px-space-sm py-1 rounded bg-surface-container-lowest text-on-surface font-code-sm text-code-sm cursor-pointer hover:bg-surface-container-high">
+<span>llama3.2-vision:11b</span>
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">swap_vert</span>
+</div>
+</div>
+<!-- Tone & Style Selector Chips -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-badge-label text-badge-label uppercase text-on-surface-variant">Estilo &amp; Tonalidad del Comentario</label>
+<div class="flex flex-wrap gap-1.5">
+<button class="px-space-md py-1 rounded-full bg-surface-container-high text-on-surface font-body-sm text-body-sm hover:bg-surface-container-highest flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[14px] text-tertiary">sentiment_satisfied</span>
+              Empático y Cercano
+            </button>
+<button class="px-space-md py-1 rounded-full bg-primary text-on-primary font-body-sm text-body-sm flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[14px]">terminal</span>
+              Técnico / Experto
+            </button>
+<button class="px-space-md py-1 rounded-full bg-surface-container-high text-on-surface font-body-sm text-body-sm hover:bg-surface-container-highest flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[14px] text-secondary">help</span>
+              Pregunta para Engagement
+            </button>
+<button class="px-space-md py-1 rounded-full bg-surface-container-high text-on-surface font-body-sm text-body-sm hover:bg-surface-container-highest flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[14px] text-tertiary">mood</span>
+              Humorístico / Casual
+            </button>
+<button class="px-space-md py-1 rounded-full bg-surface-container-high text-on-surface font-body-sm text-body-sm hover:bg-surface-container-highest flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[14px] text-outline">campaign</span>
+              Comercial / Sutil
+            </button>
+</div>
+</div>
+<!-- Hyperparameters Sliders -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md pt-space-xs">
+<!-- Temperature Slider -->
+<div class="flex flex-col gap-1 bg-surface-container-lowest p-space-sm rounded">
+<div class="flex items-center justify-between font-code-sm text-code-sm">
+<span class="text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-tertiary">device_thermostat</span>
+                Temperatura de Muestreo
+              </span>
+<span class="text-primary font-semibold" id="temp-val">0.72</span>
+</div>
+<input class="w-full accent-primary h-1 bg-surface-container-high rounded cursor-pointer" max="1.4" min="0.1" oninput="document.getElementById('temp-val').innerText = this.value" step="0.05" type="range" value="0.72"/>
+<div class="flex justify-between font-code-sm text-code-sm text-outline-variant text-[10px]">
+<span>0.1 (Determinista)</span>
+<span>1.4 (Creativo)</span>
+</div>
+</div>
+<!-- Length Constraint Slider -->
+<div class="flex flex-col gap-1 bg-surface-container-lowest p-space-sm rounded">
+<div class="flex items-center justify-between font-code-sm text-code-sm">
+<span class="text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-secondary">short_text</span>
+                Longitud Máxima
+              </span>
+<span class="text-secondary font-semibold" id="len-val">32 palabras</span>
+</div>
+<input class="w-full accent-secondary h-1 bg-surface-container-high rounded cursor-pointer" max="80" min="10" oninput="document.getElementById('len-val').innerText = this.value + ' palabras'" step="2" type="range" value="32"/>
+<div class="flex justify-between font-code-sm text-code-sm text-outline-variant text-[10px]">
+<span>10 (Conciso)</span>
+<span>80 (Desarrollado)</span>
+</div>
+</div>
+</div>
+<!-- System Prompt Instruction Directive -->
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between font-badge-label text-badge-label uppercase text-on-surface-variant">
+<span>Directiva de Enfoque / System Prompt Adicional</span>
+<span class="text-primary font-code-sm lowercase">opcional</span>
+</div>
+<div class="flex items-center gap-space-xs px-space-md py-2 rounded bg-surface-container-lowest">
+<span class="material-symbols-outlined text-outline text-[16px]">edit_note</span>
+<input class="w-full bg-transparent font-body-sm text-body-sm text-on-surface focus:outline-none placeholder-outline" placeholder="Ej: Felicitar el proyecto y preguntar por el benchmark térmico..." type="text" value="Enfocarse en la eficiencia energética de los chips Snapdragon y felicitar la estabilidad de los 18 tok/s."/>
+</div>
+</div>
+<!-- Big Primary Generation Action -->
+<button class="w-full py-2.5 px-space-lg rounded-xl bg-gradient-to-r from-primary via-primary-container to-secondary text-on-primary font-headline-sm text-headline-sm flex items-center justify-center gap-space-sm shadow-[0_0_20px_-3px_rgba(192,193,255,0.3)] hover:brightness-110 active:scale-[0.99] transition-all" id="btn-generate" onclick="triggerRegen()">
+<span class="material-symbols-outlined text-[20px] animate-spin hidden" id="spinner-ollama">autorenew</span>
+<span class="material-symbols-outlined text-[20px]" id="sparkle-icon">auto_awesome</span>
+<span>Generar 3 Variantes con IA Local (Ollama)</span>
+<span class="font-code-sm text-code-sm bg-surface-container-lowest/40 px-2 py-0.5 rounded text-white ml-2">Alt + G</span>
+</button>
+</div>
+<!-- Generated Comment Variants Cards Section -->
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between px-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-on-surface">Variantes Generadas</span>
+<span class="font-code-sm text-code-sm px-2 py-0.2 rounded-full bg-surface-container-high text-secondary">3 Disponibles</span>
+</div>
+<button class="font-code-sm text-code-sm text-primary hover:text-on-surface flex items-center gap-1" onclick="triggerRegen()">
+<span class="material-symbols-outlined text-[14px]">refresh</span>
+            Regenerar con otra semilla
+          </button>
+</div>
+<!-- Option 1: Técnico / Experto (Recommended) -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-md flex flex-col gap-space-sm transition-all hover:bg-surface-container">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="px-space-sm py-0.5 rounded bg-primary text-on-primary font-badge-label text-badge-label uppercase">
+                Opción 1 • Recomendada (Técnica)
+              </span>
+<span class="font-code-sm text-code-sm text-on-surface-variant">Temp: 0.72 • 94 tokens</span>
+</div>
+<div class="flex items-center gap-2 font-code-sm text-code-sm">
+<span class="text-secondary flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[13px]">sentiment_very_satisfied</span>
+                Sentimiento: 0.96
+              </span>
+<span class="text-tertiary">Jitter: +3.2s</span>
+</div>
+</div>
+<!-- Comment Text -->
+<div class="p-space-sm rounded bg-surface-container-lowest font-body-md text-body-md text-on-surface leading-relaxed">
+            "¡Impresionante optimización! Bajar a INT4 sin perder coherencia sintáctica en Llama 3 local es un hito clave para correrlo en edge. Gran trabajo con la estabilidad de tokens."
+          </div>
+<!-- Action & Dispatch Strip -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm pt-space-xs">
+<div class="flex items-center gap-space-xs">
+<button class="px-space-md py-1.5 rounded-lg bg-gradient-to-r from-amber-600 via-rose-600 to-purple-700 hover:brightness-110 text-white font-headline-sm text-body-sm flex items-center gap-1.5 shadow-sm active:scale-95 transition-all" onclick="dispatchADB('Instagram', '¡Impresionante optimización! Bajar a INT4 sin perder coherencia sintáctica en Llama 3 local es un hito clave para correrlo en edge. Gran trabajo con la estabilidad de tokens.')">
+<span class="material-symbols-outlined text-[16px]">send</span>
+                Inyectar en Instagram
+              </button>
+<button class="px-space-md py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-headline-sm text-body-sm flex items-center gap-1.5 shadow-sm active:scale-95 transition-all" onclick="dispatchADB('Facebook', '¡Impresionante optimización! Bajar a INT4 sin perder coherencia sintáctica en Llama 3 local es un hito clave para correrlo en edge. Gran trabajo con la estabilidad de tokens.')">
+<span class="material-symbols-outlined text-[16px]">send</span>
+                Inyectar en Facebook
+              </button>
+</div>
+<div class="flex items-center gap-1">
+<button class="p-1.5 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface transition-colors flex items-center" title="Copiar al portapapeles">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+</button>
+<button class="p-1.5 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface transition-colors flex items-center" title="Editar texto">
+<span class="material-symbols-outlined text-[16px]">edit</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Option 2: Pregunta de Engagement -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-md flex flex-col gap-space-sm transition-all hover:bg-surface-container">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="px-space-sm py-0.5 rounded bg-surface-container-high text-secondary font-badge-label text-badge-label uppercase">
+                Opción 2 • Engagement Directo
+              </span>
+<span class="font-code-sm text-code-sm text-on-surface-variant">Temp: 0.72 • 88 tokens</span>
+</div>
+<div class="flex items-center gap-2 font-code-sm text-code-sm">
+<span class="text-secondary flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[13px]">sentiment_satisfied</span>
+                Sentimiento: 0.91
+              </span>
+<span class="text-tertiary">Jitter: +2.8s</span>
+</div>
+</div>
+<!-- Comment Text -->
+<div class="p-space-sm rounded bg-surface-container-lowest font-body-md text-body-md text-on-surface leading-relaxed">
+            "¿Han medido la temperatura térmica sostenida en sesiones de más de 30 minutos? Me interesa bastante replicar este benchmark en Snapdragon."
+          </div>
+<!-- Action & Dispatch Strip -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm pt-space-xs">
+<div class="flex items-center gap-space-xs">
+<button class="px-space-md py-1.5 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-headline-sm text-body-sm flex items-center gap-1.5 transition-all" onclick="dispatchADB('Instagram', '¿Han medido la temperatura térmica sostenida en sesiones de más de 30 minutos? Me interesa bastante replicar este benchmark en Snapdragon.')">
+<span class="material-symbols-outlined text-[16px] text-rose-400">send</span>
+                Inyectar en Instagram
+              </button>
+<button class="px-space-md py-1.5 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-headline-sm text-body-sm flex items-center gap-1.5 transition-all" onclick="dispatchADB('Facebook', '¿Han medido la temperatura térmica sostenida en sesiones de más de 30 minutos? Me interesa bastante replicar este benchmark en Snapdragon.')">
+<span class="material-symbols-outlined text-[16px] text-blue-400">send</span>
+                Inyectar en Facebook
+              </button>
+</div>
+<div class="flex items-center gap-1">
+<button class="p-1.5 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface transition-colors flex items-center" title="Copiar al portapapeles">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+</button>
+<button class="p-1.5 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface transition-colors flex items-center" title="Editar texto">
+<span class="material-symbols-outlined text-[16px]">edit</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Option 3: Casual / Comunidad -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-md flex flex-col gap-space-sm transition-all hover:bg-surface-container">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="px-space-sm py-0.5 rounded bg-surface-container-high text-tertiary font-badge-label text-badge-label uppercase">
+                Opción 3 • Casual &amp; Comunidad
+              </span>
+<span class="font-code-sm text-code-sm text-on-surface-variant">Temp: 0.72 • 72 tokens</span>
+</div>
+<div class="flex items-center gap-2 font-code-sm text-code-sm">
+<span class="text-secondary flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[13px]">mood</span>
+                Sentimiento: 0.94
+              </span>
+<span class="text-tertiary">Jitter: +1.9s</span>
+</div>
+</div>
+<!-- Comment Text -->
+<div class="p-space-sm rounded bg-surface-container-lowest font-body-md text-body-md text-on-surface leading-relaxed">
+            "Qué locura de setup, justo lo que necesitaba ver hoy para motivarme a montar mi rig local 🙌 El futuro sin nube se siente muy real."
+          </div>
+<!-- Action & Dispatch Strip -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm pt-space-xs">
+<div class="flex items-center gap-space-xs">
+<button class="px-space-md py-1.5 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-headline-sm text-body-sm flex items-center gap-1.5 transition-all" onclick="dispatchADB('Instagram', 'Qué locura de setup, justo lo que necesitaba ver hoy para motivarme a montar mi rig local 🙌 El futuro sin nube se siente muy real.')">
+<span class="material-symbols-outlined text-[16px] text-rose-400">send</span>
+                Inyectar en Instagram
+              </button>
+<button class="px-space-md py-1.5 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-headline-sm text-body-sm flex items-center gap-1.5 transition-all" onclick="dispatchADB('Facebook', 'Qué locura de setup, justo lo que necesitaba ver hoy para motivarme a montar mi rig local 🙌 El futuro sin nube se siente muy real.')">
+<span class="material-symbols-outlined text-[16px] text-blue-400">send</span>
+                Inyectar en Facebook
+              </button>
+</div>
+<div class="flex items-center gap-1">
+<button class="p-1.5 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface transition-colors flex items-center" title="Copiar al portapapeles">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+</button>
+<button class="p-1.5 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface transition-colors flex items-center" title="Editar texto">
+<span class="material-symbols-outlined text-[16px]">edit</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Human Evasion & Injection Switches -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-md flex flex-col gap-space-sm">
+<span class="font-badge-label text-badge-label uppercase text-on-surface-variant tracking-wider">
+          Mecanismo Anti-Detección y Automatización de Teclado
+        </span>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-sm">
+<!-- Toggle 1: Typing Bezier Jitter -->
+<label class="flex items-center justify-between p-space-sm rounded bg-surface-container-lowest cursor-pointer select-none">
+<div class="flex flex-col">
+<span class="font-headline-sm text-body-sm text-on-surface">Escritura Humana con Jitter</span>
+<span class="font-code-sm text-code-sm text-on-surface-variant">Delays aleatorios 40-120ms por glifo</span>
+</div>
+<input checked="" class="w-4 h-4 accent-secondary rounded cursor-pointer" type="checkbox"/>
+</label>
+<!-- Toggle 2: Auto-like before comment -->
+<label class="flex items-center justify-between p-space-sm rounded bg-surface-container-lowest cursor-pointer select-none">
+<div class="flex flex-col">
+<span class="font-headline-sm text-body-sm text-on-surface">Auto-Like Previo al Comentario</span>
+<span class="font-code-sm text-code-sm text-on-surface-variant">Tap en coordenada de corazón previo</span>
+</div>
+<input checked="" class="w-4 h-4 accent-secondary rounded cursor-pointer" type="checkbox"/>
+</label>
+</div>
+</div>
+<!-- Real-time ADB Injection Terminal Log -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-md flex flex-col gap-space-xs font-code-sm text-code-sm">
+<div class="flex items-center justify-between text-on-surface-variant pb-1">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[14px] text-secondary">terminal</span>
+<span class="font-badge-label text-badge-label uppercase text-on-surface">ADB Input Stream Monitor</span>
+</div>
+<span class="text-outline">scrcpy-server:port 5555</span>
+</div>
+<div class="flex flex-col gap-1 text-on-surface-variant h-24 overflow-y-auto pr-1" id="terminal-lines">
+<div><span class="text-outline-variant">[17:02:11]</span> <span class="text-primary">DEVICE</span>: SM-S918B display awakened via keyevent 224</div>
+<div><span class="text-outline-variant">[17:02:14]</span> <span class="text-secondary">OCR</span>: Extracted 38 words from active viewport bounding boxes</div>
+<div><span class="text-outline-variant">[17:02:15]</span> <span class="text-tertiary">OLLAMA</span>: Inference completed for 3 styles in 410ms (11.8 t/s)</div>
+<div class="text-secondary"><span class="text-outline-variant">[17:02:18]</span> <span class="text-secondary">READY</span>: Inyección preparada con Bézier Typing Activo</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  function setTargetPlatform(platform) {
+    const btnIg = document.getElementById('btn-target-ig');
+    const btnFb = document.getElementById('btn-target-fb');
+    const igCheck = document.getElementById('ig-check');
+    const fbCheck = document.getElementById('fb-check');
+
+    if (platform === 'ig') {
+      btnIg.classList.remove('bg-surface-container-lowest', 'text-on-surface-variant');
+      btnIg.classList.add('bg-surface-container-high', 'text-on-surface');
+      igCheck.classList.remove('hidden');
+
+      btnFb.classList.remove('bg-surface-container-high', 'text-on-surface');
+      btnFb.classList.add('bg-surface-container-lowest', 'text-on-surface-variant');
+      fbCheck.classList.add('hidden');
+    } else {
+      btnFb.classList.remove('bg-surface-container-lowest', 'text-on-surface-variant');
+      btnFb.classList.add('bg-surface-container-high', 'text-on-surface');
+      fbCheck.classList.remove('hidden');
+
+      btnIg.classList.remove('bg-surface-container-high', 'text-on-surface');
+      btnIg.classList.add('bg-surface-container-lowest', 'text-on-surface-variant');
+      igCheck.classList.add('hidden');
+    }
+  }
+
+  function triggerRegen() {
+    const spinner = document.getElementById('spinner-ollama');
+    const icon = document.getElementById('sparkle-icon');
+    const btn = document.getElementById('btn-generate');
+    const term = document.getElementById('terminal-lines');
+
+    spinner.classList.remove('hidden');
+    icon.classList.add('hidden');
+    btn.classList.add('opacity-80', 'pointer-events-none');
+
+    const now = new Date().toTimeString().split(' ')[0];
+    const newLog = document.createElement('div');
+    newLog.innerHTML = `<span class="text-outline-variant">[${now}]</span> <span class="text-primary">OLLAMA</span>: Recomputing prompt embeddings with local seed...`;
+    term.appendChild(newLog);
+    term.scrollTop = term.scrollHeight;
+
+    setTimeout(() => {
+      spinner.classList.add('hidden');
+      icon.classList.remove('hidden');
+      btn.classList.remove('opacity-80', 'pointer-events-none');
+
+      const finishLog = document.createElement('div');
+      finishLog.className = 'text-secondary';
+      finishLog.innerHTML = `<span class="text-outline-variant">[${new Date().toTimeString().split(' ')[0]}]</span> <span class="text-secondary">OLLAMA</span>: 3 nuevas variantes sintetizadas en 320ms`;
+      term.appendChild(finishLog);
+      term.scrollTop = term.scrollHeight;
+    }, 700);
+  }
+
+  function dispatchADB(platform, text) {
+    const term = document.getElementById('terminal-lines');
+    const now = new Date().toTimeString().split(' ')[0];
+    const appPkg = platform === 'Instagram' ? 'com.instagram.android' : 'com.facebook.katana';
+
+    const l1 = document.createElement('div');
+    l1.innerHTML = `<span class="text-outline-variant">[${now}]</span> <span class="text-tertiary">ADB</span>: Focus tapped on input node in ${appPkg}`;
+    term.appendChild(l1);
+
+    const l2 = document.createElement('div');
+    l2.className = 'text-secondary';
+    l2.innerHTML = `<span class="text-outline-variant">[${now}]</span> <span class="text-secondary">DISPATCH</span>: Jitter typing dispatched ("${text.substring(0, 28)}...")`;
+    term.appendChild(l2);
+    term.scrollTop = term.scrollHeight;
+  }
+</script></main><footer class="w-full bg-surface-container-lowest py-space-sm px-gutter-lg mt-auto shadow-[0_-1px_6px_rgba(0,0,0,0.25)]"><div class="w-full flex items-center justify-between text-on-surface-variant font-code-sm text-code-sm"><div><span>CORE ENGINE: FLASK REST DAEMON</span> • <span class="text-secondary">SCRCPY HIGH-THROUGHPUT FEED ON</span></div><div><span>MEM: 1.4GB / 32GB</span> • <span>GPU 34% (RTX 4090 LOCAL)</span> • <span>SENTIMENT MODEL: RO-BERTA LOCAL</span></div></div></footer></body></html>

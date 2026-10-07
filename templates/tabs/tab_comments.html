@@ -1,0 +1,168 @@
+<!-- templates/tabs/tab_comments.html - AI Comments Generator & Narratives Simulator -->
+<div id="tabCommentsContent" class="hidden space-y-4">
+
+  <!-- Module Banner Header -->
+  <div class="rounded-xl bg-surface-container-low border border-[#262a35] p-4 flex items-center justify-between shadow-lg">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary shadow-[0_0_15px_-3px_rgba(192,193,255,0.3)]">
+        <span class="material-symbols-outlined text-[24px]">psychology</span>
+      </div>
+      <div>
+        <div class="flex items-center gap-2">
+          <h2 class="font-bold text-sm text-on-surface">Generador & Simulador de Comentarios IA</h2>
+          <span class="badge-label px-2 py-0.5 rounded bg-primary/10 text-primary border border-primary/30">OLLAMA 3.4 ACTIVE</span>
+        </div>
+        <p class="text-[11px] text-on-surface-variant font-mono">Genera y prueba respuestas contextuales con los 5 Arquetipos Humanos y 6 Regionales antes de enviar a los bots.</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-2">
+      <span class="text-[10px] px-2.5 py-1 rounded-full bg-secondary/10 text-secondary border border-secondary/30 font-mono">0 Emojis · Máx 3 Líneas · Sin Yo</span>
+    </div>
+  </div>
+
+  <!-- Main Generation Configuration Card -->
+  <div class="rounded-xl bg-surface-container-low border border-[#262a35] p-4 space-y-4 shadow-lg">
+    
+    <!-- Step Header -->
+    <div class="flex items-center justify-between border-b border-[#262a35] pb-2.5">
+      <div class="flex items-center gap-2">
+        <span class="w-5 h-5 rounded-full bg-primary text-on-primary font-mono text-xs font-bold flex items-center justify-center">1</span>
+        <h3 class="font-bold text-xs text-on-surface uppercase tracking-wider">Texto de la Publicación / Entrada</h3>
+      </div>
+      <div class="flex items-center gap-2">
+        <button type="button" onclick="captureAndReadForSimulator()" class="px-2.5 py-1 rounded bg-surface-container-high hover:bg-surface-container-highest text-secondary border border-secondary/30 text-[11px] font-mono font-medium flex items-center gap-1 transition cursor-pointer">
+          <span class="material-symbols-outlined text-[14px]">photo_camera</span>
+          <span>Capturar del Teléfono (OCR)</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Textarea input -->
+    <div>
+      <textarea id="simPostText" rows="3" placeholder="Ejemplo: 'Terminando el entrenamiento matutino en Chipinque con toda la actitud. ¿Cuál es su rutina favorita para empezar el fin de semana?'" class="w-full p-3 rounded-lg bg-surface-container border border-[#262a35] text-on-surface font-mono text-xs focus:border-primary focus:outline-none placeholder:text-on-surface-variant/40 leading-relaxed"></textarea>
+    </div>
+
+    <!-- Dynamic Contest / Giveaway Toggle -->
+    <div class="p-3 rounded-lg bg-surface-container border border-[#262a35] space-y-2.5">
+      <div class="flex items-center justify-between">
+        <label class="flex items-center gap-2 cursor-pointer select-none">
+          <input type="checkbox" id="simIsContest" onchange="toggleSimContestFields(this.checked)" class="rounded bg-surface-container-lowest border-[#262a35] text-primary focus:ring-0">
+          <span class="text-xs font-semibold text-on-surface flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-[16px] text-tertiary">emoji_events</span>
+            <span>Modo Dinámica / Concurso / Sorteo (Pronóstico Deportivo o Consigna)</span>
+          </span>
+        </label>
+        <span class="text-[10px] text-on-surface-variant font-mono">Ej. Tigres vs Rayados</span>
+      </div>
+
+      <div id="simContestFields" class="hidden grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-[#262a35]">
+        <div>
+          <label class="block text-[10px] text-on-surface-variant font-mono mb-1">Requisito a cumplir / Desafío:</label>
+          <input type="text" id="simContestReq" placeholder="Comenta tu pronóstico para el Clásico Regio" value="Comenta tu pronóstico para el partido" class="w-full px-3 py-1.5 rounded bg-surface-container-lowest border border-[#262a35] text-xs font-mono text-tertiary focus:border-tertiary focus:outline-none">
+        </div>
+        <div>
+          <label class="block text-[10px] text-on-surface-variant font-mono mb-1">Tema / Partido / Consigna:</label>
+          <input type="text" id="simContestTopic" placeholder="Tigres vs Rayados (Clásico)" value="Clásico Tigres vs Rayados" class="w-full px-3 py-1.5 rounded bg-surface-container-lowest border border-[#262a35] text-xs font-mono text-on-surface focus:border-primary focus:outline-none">
+        </div>
+      </div>
+    </div>
+
+    <!-- Generator Parameters Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 pt-1">
+      <div>
+        <label class="block text-[11px] text-on-surface-variant font-mono mb-1 flex items-center gap-1">
+          <span class="material-symbols-outlined text-[14px] text-primary">target</span>
+          <span>Narrativa / Postura:</span>
+        </label>
+        <select id="simNarrativeSelect" class="w-full px-3 py-2 rounded bg-surface-container border border-[#262a35] text-on-surface font-mono text-xs focus:border-primary focus:outline-none">
+          <option value="a_favor" selected>👍 A favor / Apoyo entusiasta</option>
+          <option value="participacion">💬 De participación / Pregunta</option>
+          <option value="hate">⚡ Crítico / Hate / Desacuerdo</option>
+          <option value="neutro">⚖️ Neutro / Observación objetiva</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="block text-[11px] text-on-surface-variant font-mono mb-1 flex items-center gap-1">
+          <span class="material-symbols-outlined text-[14px] text-secondary">groups</span>
+          <span>Arquetipo a probar:</span>
+        </label>
+        <select id="simArchetypeSelect" class="w-full px-3 py-2 rounded bg-surface-container border border-[#262a35] text-on-surface font-mono text-xs focus:border-primary focus:outline-none">
+          <optgroup label="✨ 5 Arquetipos Humanos (agents.md)">
+            <option value="human_all" selected>✨ Los 5 Arquetipos Humanos (Rotación)</option>
+            <option value="Testigo Silencioso">👁️ Testigo Silencioso</option>
+            <option value="Buscador">🔍 Buscador</option>
+            <option value="Guerrero Interior">⚔️ Guerrero Interior</option>
+            <option value="Caminante">🚶 Caminante</option>
+            <option value="Heredero">🏛️ Heredero</option>
+          </optgroup>
+          <optgroup label="🤠 Arquetipos Regionales Regiomontanos">
+            <option value="all">🎲 Todos los Regiomontanos (1 al 6)</option>
+            <option value="1">1. El Escéptico ("Chale")</option>
+            <option value="2">2. El Animador ("Fierro")</option>
+            <option value="3">3. El Consejero ("Morro")</option>
+            <option value="4">4. El Entusiasta ("Jalo")</option>
+            <option value="5">5. El Regionalista ("Tigres/Rayados")</option>
+            <option value="6">6. El Analítico ("La neta")</option>
+          </optgroup>
+        </select>
+      </div>
+
+      <div class="flex items-end">
+        <button id="btnRunPreview" onclick="previewComments()" class="w-full py-2 px-4 rounded-xl bg-primary text-on-primary hover:bg-primary-container font-mono font-bold text-xs shadow flex items-center justify-center gap-2 transition cursor-pointer">
+          <span id="simBtnIcon" class="material-symbols-outlined text-[16px]">auto_awesome</span>
+          <span id="simBtnText">Generar Comentarios con IA Local</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Personaje personalizado: escribe un personaje y obtén 3 opciones -->
+    <div class="p-3 rounded-lg bg-surface-container border border-[#262a35] space-y-2.5">
+      <div class="flex items-center justify-between flex-wrap gap-2">
+        <label class="flex items-center gap-2 select-none">
+          <span class="material-symbols-outlined text-[16px] text-secondary">person</span>
+          <span class="text-xs font-semibold text-on-surface">Personaje personalizado</span>
+        </label>
+        <span class="text-[10px] text-on-surface-variant font-mono">3 opciones, una por arquetipo</span>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-[1fr_auto] gap-2 items-center">
+        <input type="text" id="simPersonaInput" placeholder="Ej: un abuelo que habla con nostalgia de sus recuerdos" class="w-full px-3 py-2 rounded bg-surface-container-lowest border border-[#262a35] text-xs font-mono text-on-surface focus:border-secondary focus:outline-none">
+        <button type="button" id="btnRunPersona" onclick="previewPersonaComments()" class="px-3 py-2 rounded-lg bg-secondary text-on-secondary hover:opacity-90 font-mono font-bold text-xs flex items-center justify-center gap-1.5 transition cursor-pointer whitespace-nowrap">
+          <span class="material-symbols-outlined text-[15px]">person_search</span>
+          <span>Generar 3 opciones</span>
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Results Section -->
+  <div class="rounded-xl bg-surface-container-low border border-[#262a35] p-4 space-y-3.5 shadow-lg">
+    <div class="flex items-center justify-between border-b border-[#262a35] pb-2.5">
+      <div class="flex items-center gap-2">
+        <span class="w-5 h-5 rounded-full bg-secondary text-on-secondary font-mono text-xs font-bold flex items-center justify-center">2</span>
+        <h3 class="font-bold text-xs text-on-surface uppercase tracking-wider">Resultados de Inferencia (Listos para enviar)</h3>
+      </div>
+      <div class="flex items-center gap-2">
+        <button onclick="copyAllGeneratedCommentsToInstagram()" class="px-2.5 py-1 rounded bg-surface-container-high hover:bg-surface-container-highest text-primary border border-primary/30 text-[11px] font-mono font-semibold flex items-center gap-1 transition cursor-pointer">
+          <span class="material-symbols-outlined text-[14px]">photo_camera</span>
+          <span>Enviar Todos a Instagram</span>
+        </button>
+        <button onclick="copyAllGeneratedCommentsToFacebook()" class="px-2.5 py-1 rounded bg-surface-container-high hover:bg-surface-container-highest text-blue-400 border border-blue-400/30 text-[11px] font-mono font-semibold flex items-center gap-1 transition cursor-pointer">
+          <span class="material-symbols-outlined text-[14px]">public</span>
+          <span>Enviar Todos a Facebook</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Cards container -->
+    <div id="simResultsContainer" class="space-y-3">
+      <div class="p-8 border border-dashed border-[#262a35] rounded-xl flex flex-col items-center justify-center text-center">
+        <span class="material-symbols-outlined text-[36px] text-on-surface-variant/40 mb-2">forum</span>
+        <p class="text-xs text-on-surface font-medium">Aún no has generado comentarios</p>
+        <p class="text-[11px] text-on-surface-variant font-mono mt-0.5">Escribe el texto de un post arriba o pulsa "Capturar del Teléfono" y luego haz clic en "Generar Comentarios con IA Local".</p>
+      </div>
+    </div>
+  </div>
+
+</div>

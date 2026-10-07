@@ -1,0 +1,54 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Entornos virtuales
+venv/
+.venv/
+env/
+ENV/
+
+# Base de datos SQLite y temporales WAL
+*.db
+*.db-wal
+*.db-shm
+*.db-journal
+
+# Datos en tiempo de ejecución (memoria de cuentas, logs, resultados)
+data/
+accounts_memory.json
+analysis_results.json
+*.log
+
+# Capturas de pantalla y volcados en la raíz (artefactos de ejecución)
+/*.png
+/*.jpg
+/*.jpeg
+/*.xml
+debug/
+debug_*.png
+crop_*.png
+test_*.png
+live_*.png
+temp_*.png
+
+# Artefactos generados / respaldo empaquetado del repositorio
+repomix/
+repomix-output.xml
+
+# Respaldos de plantillas
+*.bak
+*.bak_*
+
+# Directorios heredados (duplicados de planes)
+planimplementation/
+implentationmd/
+implementationmd
+
+# Editores y SO
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

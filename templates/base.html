@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html class="dark" lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Android AI Automator - Cybernetic Console</title>
+  
+  <!-- Fonts: Geist, JetBrains Mono & Google Material Symbols -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            canvas: "#0b0f19",
+            surface: "#0f131d",
+            "surface-dim": "#0f131d",
+            "surface-bright": "#353944",
+            "surface-container-lowest": "#0a0e18",
+            "surface-container-low": "#171b26",
+            "surface-container": "#1c1f2a",
+            "surface-container-high": "#262a35",
+            "surface-container-highest": "#313540",
+            "on-surface": "#dfe2f1",
+            "on-surface-variant": "#c7c4d7",
+            outline: "#908fa0",
+            "outline-variant": "#464554",
+            primary: "#c0c1ff",
+            "on-primary": "#1000a9",
+            "primary-container": "#6366f1",
+            secondary: "#4edea3",
+            "on-secondary": "#003824",
+            tertiary: "#ffb95f",
+            "on-tertiary": "#472a00",
+            error: "#ffb4ab",
+            "on-error": "#690005",
+            "error-container": "#93000a",
+          },
+          fontFamily: {
+            sans: ["Geist", "sans-serif"],
+            mono: ["JetBrains Mono", "monospace"],
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Cybernetic Stylesheet -->
+  <link rel="stylesheet" href="/static/css/cybernetic.css">
+</head>
+<body class="bg-[#0b0f19] text-[#dfe2f1] font-sans antialiased min-h-screen flex flex-col selection:bg-primary selection:text-on-primary">
+
+  {% block content %}{% endblock %}
+
+  <!-- Modals Container -->
+  {% include 'components/modals.html' %}
+
+  <!-- Scripts Modularizados -->
+  <script src="/static/js/core.js?v=20260928_v6"></script>
+  <script src="/static/js/device_stream.js?v=20260928_v6"></script>
+  <script src="/static/js/instagram.js?v=20260928_v6"></script>
+  <script src="/static/js/facebook.js?v=20260928_v6"></script>
+  <script src="/static/js/hate_report.js?v=20260928_v6"></script>
+  <script src="/static/js/models.js?v=20260928_v6"></script>
+  <script src="/static/js/icons.js?v=20260928_v6"></script>
+  <script src="/static/js/terminal.js?v=20260928_v6"></script>
+  <script src="/static/js/comments.js?v=20260928_v6"></script>
+  <script src="/static/js/multi_scrcpy.js?v=20260928_v6"></script>
+  <script src="/static/js/widgets/account_switcher.js?v=20261001_v1"></script>
+  <script src="/static/js/main.js?v=20260928_v2"></script>
+</body>
+</html>

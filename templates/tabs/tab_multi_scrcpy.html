@@ -1,0 +1,70 @@
+<!-- templates/tabs/tab_multi_scrcpy.html - Multi-Scrcpy Fleet Automator Module -->
+<div id="tabScrcpyContent" class="hidden space-y-4">
+
+  <!-- Module Banner Header -->
+  <div class="rounded-xl bg-surface-container-low border border-[#262a35] p-4 flex items-center justify-between shadow-lg">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-emerald-600/10 border border-emerald-500/20 flex items-center justify-center text-secondary">
+        <span class="material-symbols-outlined text-[24px]">devices</span>
+      </div>
+      <div>
+        <div class="flex items-center gap-2">
+          <h2 class="font-bold text-sm text-on-surface">Multi-Scrcpy Device Farm & Fleet Automator</h2>
+          <span class="badge-label px-2 py-0.5 rounded bg-secondary/10 text-secondary border border-secondary/30">ORQUESTACIÓN PARALELA</span>
+        </div>
+        <p class="text-[11px] text-on-surface-variant font-mono">Control y visualización simultánea de múltiples teléfonos físicos conectados por USB o Wi-Fi con decodificación Scrcpy.</p>
+      </div>
+    </div>
+
+    <!-- Fleet Actions -->
+    <div class="flex items-center gap-2">
+      <button onclick="loadScrcpyDevices(true)" class="px-3 py-1.5 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface text-xs font-mono font-semibold flex items-center gap-1.5 transition">
+        <span class="material-symbols-outlined text-[14px] text-primary">sync</span>
+        <span>Escanear Flota</span>
+      </button>
+      <button onclick="launchAllScrcpy()" class="px-3 py-1.5 rounded bg-secondary text-on-secondary hover:bg-secondary-container text-xs font-mono font-bold flex items-center gap-1.5 transition shadow">
+        <span class="material-symbols-outlined text-[14px]">play_arrow</span>
+        <span>Iniciar Todos</span>
+      </button>
+      <button onclick="stopAllScrcpy()" class="px-3 py-1.5 rounded bg-surface-container-high hover:bg-error hover:text-on-error text-error text-xs font-mono font-bold flex items-center gap-1.5 transition">
+        <span class="material-symbols-outlined text-[14px]">stop</span>
+        <span>Detener Todos</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Telemetry & Settings Bar -->
+  <div class="rounded-xl bg-surface-container-low border border-[#262a35] p-3 flex items-center justify-between gap-4 flex-wrap">
+    <!-- Telemetry numbers -->
+    <div class="flex items-center gap-4 text-xs font-mono">
+      <div>
+        <span class="text-on-surface-variant">Dispositivos:</span>
+        <strong id="scrcpyStatTotal" class="text-on-surface ml-1 font-bold">0</strong>
+      </div>
+      <div class="h-3 w-px bg-[#262a35]"></div>
+      <div>
+        <span class="text-on-surface-variant">Scrcpy Activos:</span>
+        <strong id="scrcpyStatActive" class="text-secondary ml-1 font-bold">0</strong>
+      </div>
+      <div class="h-3 w-px bg-[#262a35]"></div>
+      <div>
+        <span class="text-on-surface-variant">Batería Promedio:</span>
+        <strong id="scrcpyStatBattery" class="text-tertiary ml-1 font-bold">--%</strong>
+      </div>
+    </div>
+
+    <!-- Live auto-refresh of thumbnails -->
+    <div class="flex items-center gap-3">
+      <label class="flex items-center gap-1.5 cursor-pointer text-xs font-mono">
+        <input type="checkbox" onchange="toggleAutoThumbnails(this.checked)" class="rounded bg-surface-container border-[#262a35] text-secondary focus:ring-0">
+        <span class="text-on-surface">Auto-refrescar vistas (3s)</span>
+      </label>
+    </div>
+  </div>
+
+  <!-- Devices Grid -->
+  <div id="scrcpyDevicesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+    <!-- Injected by loadScrcpyDevices() -->
+  </div>
+
+</div>

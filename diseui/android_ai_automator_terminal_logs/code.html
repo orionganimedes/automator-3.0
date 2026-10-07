@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400..700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"outline":"#908fa0","tertiary-fixed":"#ffddb8","on-tertiary-container":"#3e2400","secondary":"#4edea3","error":"#ffb4ab","secondary-container":"#00a572","on-secondary":"#003824","on-tertiary":"#472a00","primary-fixed-dim":"#c0c1ff","on-primary":"#1000a9","tertiary-container":"#ca8100","outline-variant":"#464554","on-tertiary-fixed":"#2a1700","on-error":"#690005","on-tertiary-fixed-variant":"#653e00","surface-container-highest":"#313540","on-primary-fixed":"#07006c","surface-container-lowest":"#0a0e18","surface-container-low":"#171b26","secondary-fixed":"#6ffbbe","on-secondary-fixed":"#002113","tertiary-fixed-dim":"#ffb95f","tertiary":"#ffb95f","on-surface-variant":"#c7c4d7","error-container":"#93000a","primary-container":"#8083ff","surface-bright":"#353944","on-error-container":"#ffdad6","on-primary-fixed-variant":"#2f2ebe","surface-tint":"#c0c1ff","surface-container-high":"#262a35","on-surface":"#dfe2f1","primary":"#c0c1ff","on-primary-container":"#0d0096","secondary-fixed-dim":"#4edea3","inverse-on-surface":"#2c303b","inverse-primary":"#494bd6","on-background":"#dfe2f1","surface":"#0f131d","on-secondary-container":"#00311f","background":"#0f131d","surface-container":"#1c1f2a","inverse-surface":"#dfe2f1","surface-dim":"#0f131d","on-secondary-fixed-variant":"#005236","primary-fixed":"#e1e0ff","surface-variant":"#313540"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"space-xs":"0.25rem","space-md":"0.75rem","margin-lg":"2rem","space-xl":"1.5rem","space-lg":"1rem","space-sm":"0.5rem","gutter":"1rem","gutter-lg":"1.5rem","margin":"1.25rem"},"fontFamily":{"body-lg":["Geist"],"code-sm":["JetBrains Mono"],"headline-sm":["Geist"],"badge-label":["JetBrains Mono"],"headline-lg":["Geist"],"body-sm":["Geist"],"code-md":["JetBrains Mono"],"headline-md":["Geist"],"body-md":["Geist"]},"fontSize":{"body-lg":["1rem",{"lineHeight":"1.5rem","fontWeight":"400"}],"code-sm":["0.6875rem",{"lineHeight":"0.875rem","fontWeight":"500"}],"headline-sm":["1rem",{"lineHeight":"1.5rem","letterSpacing":"-0.01em","fontWeight":"600"}],"badge-label":["0.6875rem",{"lineHeight":"0.75rem","letterSpacing":"0.05em","fontWeight":"600"}],"headline-lg":["1.75rem",{"lineHeight":"2.25rem","letterSpacing":"-0.025em","fontWeight":"600"}],"body-sm":["0.75rem",{"lineHeight":"1rem","fontWeight":"400"}],"code-md":["0.8125rem",{"lineHeight":"1.25rem","fontWeight":"400"}],"headline-md":["1.25rem",{"lineHeight":"1.75rem","letterSpacing":"-0.015em","fontWeight":"600"}],"body-md":["0.875rem",{"lineHeight":"1.25rem","fontWeight":"400"}]}}}}</script></head><body class="bg-surface font-body-md text-on-surface antialiased min-h-screen flex flex-col"><header class="fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.35)]"><div class="h-28 w-full px-gutter-lg flex flex-col justify-between pt-space-sm pb-space-xs"><div class="flex items-center justify-between gap-space-lg"><div class="flex items-center gap-space-md"><div class="w-9 h-9 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary shadow-[0_0_15px_-3px_rgba(192,193,255,0.25)]"><span class="material-symbols-outlined text-[20px]">smart_toy</span></div><div><div class="flex items-center gap-space-sm"><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight">Android AI Automator</span><span class="font-badge-label text-badge-label px-space-xs py-0.5 rounded bg-surface-container text-primary font-code-sm">v3.4-CORE</span></div><p class="font-body-sm text-body-sm text-on-surface-variant">Local Vision &amp; Sentiment Pipeline</p></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-sm px-space-md py-1 rounded bg-surface-container-low"><span class="w-2 h-2 rounded-full bg-secondary shadow-[0_0_8px_rgba(78,222,163,0.5)]"></span><div class="flex flex-col"><div class="flex items-center gap-space-xs"><span class="font-badge-label text-badge-label text-secondary uppercase">ADB Connected</span><span class="font-code-sm text-code-sm text-on-surface">SM-S918B</span></div><span class="font-code-sm text-code-sm text-on-surface-variant">98% • 12ms</span></div></div><div class="flex items-center gap-space-sm px-space-md py-1 rounded bg-surface-container-low"><span class="w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_rgba(192,193,255,0.5)]"></span><div class="flex flex-col"><div class="flex items-center gap-space-xs"><span class="font-badge-label text-badge-label text-primary uppercase">Ollama Active</span><span class="font-code-sm text-code-sm text-on-surface-variant">11.4k t/s</span></div><span class="font-code-sm text-code-sm text-on-surface">Llama-3-Vision:8b</span></div></div><div class="flex items-center gap-space-sm px-space-md py-1 rounded bg-surface-container-low"><div class="flex flex-col"><span class="font-badge-label text-badge-label text-tertiary uppercase">Automation</span><span class="font-code-sm text-code-sm text-on-surface font-semibold">IDLE</span></div><button class="px-space-sm py-1 rounded bg-error-container text-on-error-container hover:bg-error hover:text-on-error transition-colors font-badge-label text-badge-label uppercase flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">cancel</span>Abort</button></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div><div class="flex items-center justify-between gap-space-md pt-space-xs"><nav class="flex items-center gap-space-xs bg-surface-container-lowest p-0.5 rounded" data-active-classes="bg-surface-container-high text-primary font-semibold shadow-[0_1px_4px_rgba(0,0,0,0.25)]"><a class="px-space-md py-1 rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" data-path="instagram-bot" href="#">Instagram Bot</a><a class="px-space-md py-1 rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" data-path="facebook" href="#">Facebook</a><a class="px-space-md py-1 rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" data-path="tiktok-reels" href="#">TikTok / Reels</a><a class="px-space-md py-1 rounded font-body-sm text-body-sm bg-surface-container-high text-primary font-semibold shadow-[0_1px_4px_rgba(0,0,0,0.25)] transition-colors" data-path="modelos-ia-ollama" href="#">Modelos IA (Ollama)</a><a class="px-space-md py-1 rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" data-path="terminal-logs" href="#">Terminal &amp; Logs</a><a class="px-space-md py-1 rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" data-path="multi-scrcpy-dispositivos" href="#">Multi-Scrcpy (Dispositivos)</a><a class="px-space-md py-1 rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" data-path="configuracion" href="#">Configuración</a></nav><div class="flex items-center gap-space-xs"><button class="px-space-sm py-1 rounded bg-surface-container-high text-on-surface hover:bg-surface-container-highest hover:text-on-surface transition-colors font-code-sm text-code-sm flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">screenshot_region</span>Capturar Pantalla</button><button class="px-space-sm py-1 rounded bg-surface-container-high text-on-surface hover:bg-surface-container-highest hover:text-on-surface transition-colors font-code-sm text-code-sm flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">restart_alt</span>Reiniciar ADB</button><button class="px-space-sm py-1 rounded bg-surface-container-high text-on-surface hover:bg-surface-container-highest hover:text-on-surface transition-colors font-code-sm text-code-sm flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">memory</span>Liberar RAM</button></div></div></div></header><main class="w-full pt-28 bg-surface flex-1 px-gutter-lg"><div class="flex flex-col w-full">
+<!-- Telemetry & Stream Control Bar -->
+<section class="w-full pb-space-lg">
+<div class="bg-surface-container rounded-xl p-space-md shadow-md flex flex-col xl:flex-row xl:items-center justify-between gap-space-md">
+<!-- Title & Connection Pill -->
+<div class="flex flex-wrap items-center gap-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary shadow-[0_0_15px_-3px_rgba(192,193,255,0.25)]">
+<span class="material-symbols-outlined text-[18px]">terminal</span>
+</div>
+<div>
+<div class="flex items-center gap-space-sm">
+<h1 class="font-headline-sm text-headline-sm text-on-surface tracking-tight">Terminal &amp; Live Daemon Streams</h1>
+<span class="font-badge-label text-badge-label px-space-xs py-0.5 rounded bg-surface-container-high text-primary font-code-sm">DAEMON v3.4</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Real-Time Flask Socket Ingestion Pipeline • Scrcpy STDIO Interceptor</p>
+</div>
+</div>
+<div class="flex items-center gap-space-xs px-space-md py-1 rounded-full bg-surface-container-lowest">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-secondary shadow-[0_0_8px_rgba(78,222,163,0.6)]"></span>
+</span>
+<span class="font-badge-label text-badge-label text-secondary uppercase font-semibold">WEBSOCKET CONECTADO</span>
+<span class="font-code-sm text-code-sm text-on-surface-variant font-mono">ws://localhost:5000/stream</span>
+</div>
+</div>
+<!-- Quick Metrics Cockpit -->
+<div class="flex flex-wrap items-center gap-space-sm">
+<div class="flex items-center gap-space-sm px-space-md py-1 rounded bg-surface-container-low">
+<span class="material-symbols-outlined text-[15px] text-primary">speed</span>
+<div class="flex flex-col">
+<span class="font-badge-label text-badge-label text-on-surface-variant uppercase">Throughput</span>
+<span class="font-code-sm text-code-sm text-on-surface font-semibold">142 logs/s</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm px-space-md py-1 rounded bg-surface-container-low">
+<span class="material-symbols-outlined text-[15px] text-tertiary">memory</span>
+<div class="flex flex-col">
+<span class="font-badge-label text-badge-label text-on-surface-variant uppercase">Buffer Ring</span>
+<span class="font-code-sm text-code-sm text-on-surface font-semibold">12.4 MB / 10k</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm px-space-md py-1 rounded bg-surface-container-low">
+<span class="material-symbols-outlined text-[15px] text-secondary">wifi_tethering</span>
+<div class="flex flex-col">
+<span class="font-badge-label text-badge-label text-on-surface-variant uppercase">Socket Ping</span>
+<span class="font-code-sm text-code-sm text-secondary font-semibold">2ms</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm px-space-md py-1 rounded bg-surface-container-low">
+<span class="material-symbols-outlined text-[15px] text-primary-container">tune</span>
+<div class="flex flex-col">
+<span class="font-badge-label text-badge-label text-on-surface-variant uppercase">Global Level</span>
+<span class="font-code-sm text-code-sm text-primary uppercase font-semibold">DEBUG+</span>
+</div>
+</div>
+</div>
+<!-- Quick Action Controls -->
+<div class="flex items-center gap-space-xs pt-space-xs xl:pt-0">
+<button class="px-space-sm py-1 rounded bg-surface-container-high text-on-surface hover:bg-surface-container-highest transition-colors font-code-sm text-code-sm flex items-center gap-1 shadow-sm" id="toggle-scroll-btn" onclick="toggleAutoScroll()">
+<span class="material-symbols-outlined text-[14px] text-primary" id="scroll-icon">vertical_align_bottom</span>
+<span id="scroll-text">Auto-scroll ON</span>
+</button>
+<button class="px-space-sm py-1 rounded bg-surface-container-high text-on-surface hover:bg-surface-container-highest transition-colors font-code-sm text-code-sm flex items-center gap-1 shadow-sm" onclick="clearConsole()" title="Ctrl + L">
+<span class="material-symbols-outlined text-[14px]">cleaning_services</span>
+<span>Limpiar</span>
+</button>
+<button class="px-space-sm py-1 rounded bg-surface-container-high text-on-surface hover:bg-surface-container-highest transition-colors font-code-sm text-code-sm flex items-center gap-1 shadow-sm" onclick="exportLogs()">
+<span class="material-symbols-outlined text-[14px]">download</span>
+<span>Exportar</span>
+</button>
+<button class="px-space-sm py-1 rounded bg-primary text-on-primary hover:bg-primary-container hover:text-on-primary-container transition-colors font-code-sm text-code-sm flex items-center gap-1 shadow-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">settings_input_component</span>
+<span>Pipes IO</span>
+</button>
+</div>
+</div>
+</section>
+<!-- 2-Column Responsive Cockpit Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg w-full pb-space-xl">
+<!-- LEFT COLUMN: Main Streaming CLI & Daemon Log Viewport (70% on desktop) -->
+<div class="lg:col-span-8 flex flex-col gap-space-md">
+<!-- Stream Channel Selector Chips -->
+<div class="bg-surface-container-low rounded-xl p-space-sm flex items-center gap-space-xs overflow-x-auto shadow-sm">
+<button class="channel-pill px-space-md py-1 rounded-lg text-primary font-headline-sm text-body-sm font-semibold bg-surface-container-highest shadow-sm flex items-center gap-1.5 whitespace-nowrap" onclick="setFilterChannel('all')">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+          Todos los Streams
+          <span class="font-code-sm text-code-sm px-1.5 rounded bg-surface-container-low text-on-surface-variant ml-1">6</span>
+</button>
+<button class="channel-pill px-space-md py-1 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors text-body-sm flex items-center gap-1.5 whitespace-nowrap" onclick="setFilterChannel('flask')">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+          Flask REST Core
+        </button>
+<button class="channel-pill px-space-md py-1 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors text-body-sm flex items-center gap-1.5 whitespace-nowrap" onclick="setFilterChannel('adb')">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+          ADB &amp; Scrcpy Mux
+        </button>
+<button class="channel-pill px-space-md py-1 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors text-body-sm flex items-center gap-1.5 whitespace-nowrap" onclick="setFilterChannel('ollama')">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+          Ollama Vision LLM
+        </button>
+<button class="channel-pill px-space-md py-1 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors text-body-sm flex items-center gap-1.5 whitespace-nowrap" onclick="setFilterChannel('bot')">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-fixed"></span>
+          Bot Queue Worker
+        </button>
+<button class="channel-pill px-space-md py-1 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors text-body-sm flex items-center gap-1.5 whitespace-nowrap" onclick="setFilterChannel('antiban')">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+          Anti-Ban Fingerprint
+        </button>
+</div>
+<!-- Log Filtering & Regex Toolbar -->
+<div class="bg-surface-container rounded-xl p-space-sm flex flex-col md:flex-row items-stretch md:items-center justify-between gap-space-sm shadow-sm">
+<!-- Regex Search Input -->
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-2.5 top-1/2 -translate-y-1/2 text-[16px] text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container-lowest text-on-surface placeholder:text-on-surface-variant font-code-sm text-code-sm pl-8 pr-16 py-1.5 rounded-lg focus:outline-none focus:ring-1 focus:ring-primary" id="log-search-input" onkeyup="filterLogs()" placeholder="grep / regex filter (ej. 'Touch event|error|latency')..." type="text"/>
+<span class="absolute right-2.5 top-1/2 -translate-y-1/2 font-code-sm text-[10px] text-on-surface-variant uppercase px-1 rounded bg-surface-container-high">regex</span>
+</div>
+<!-- Severity Counter Badges -->
+<div class="flex items-center gap-space-xs overflow-x-auto">
+<button class="px-space-xs py-1 rounded bg-surface-container-low hover:bg-surface-container-high transition-colors flex items-center gap-1" onclick="toggleLevel('info')">
+<span class="font-badge-label text-badge-label text-primary font-bold">INFO</span>
+<span class="font-code-sm text-code-sm text-on-surface px-1 rounded bg-surface-container-highest">1,420</span>
+</button>
+<button class="px-space-xs py-1 rounded bg-surface-container-low hover:bg-surface-container-high transition-colors flex items-center gap-1" onclick="toggleLevel('debug')">
+<span class="font-badge-label text-badge-label text-on-surface-variant font-bold">DEBUG</span>
+<span class="font-code-sm text-code-sm text-on-surface px-1 rounded bg-surface-container-highest">834</span>
+</button>
+<button class="px-space-xs py-1 rounded bg-surface-container-low hover:bg-surface-container-high transition-colors flex items-center gap-1" onclick="toggleLevel('warn')">
+<span class="font-badge-label text-badge-label text-tertiary font-bold">WARN</span>
+<span class="font-code-sm text-code-sm text-on-tertiary-container px-1 rounded bg-tertiary-container font-semibold">12</span>
+</button>
+<button class="px-space-xs py-1 rounded bg-surface-container-low hover:bg-surface-container-high transition-colors flex items-center gap-1" onclick="toggleLevel('error')">
+<span class="font-badge-label text-badge-label text-error font-bold">ERR</span>
+<span class="font-code-sm text-code-sm text-on-error px-1 rounded bg-error-container font-semibold">2</span>
+</button>
+<button class="px-space-xs py-1 rounded bg-surface-container-low hover:bg-surface-container-high transition-colors flex items-center gap-1" onclick="toggleLevel('success')">
+<span class="font-badge-label text-badge-label text-secondary font-bold">OK</span>
+<span class="font-code-sm text-code-sm text-on-secondary px-1 rounded bg-secondary-container font-semibold">340</span>
+</button>
+</div>
+<!-- Device Scoped Selector -->
+<div class="flex items-center gap-1">
+<select class="bg-surface-container-lowest text-on-surface font-code-sm text-code-sm px-space-sm py-1.5 rounded-lg focus:outline-none" id="device-select">
+<option value="all">Dispositivo: Todos (4)</option>
+<option value="SM-G991B">Samsung Galaxy S21 [SM-G991B]</option>
+<option value="GVU6C">Pixel 7 Pro [GVU6C]</option>
+<option value="23028RN4DG">Redmi Note 12 [23028RN4DG]</option>
+<option value="SM-S918B">Galaxy S23 Ultra [SM-S918B]</option>
+</select>
+</div>
+</div>
+<!-- Interactive Linux/macOS Style Terminal Window Container -->
+<div class="bg-surface-container-lowest rounded-xl shadow-2xl flex flex-col h-[580px] overflow-hidden relative">
+<!-- Terminal Titlebar -->
+<div class="h-9 bg-surface-container-high px-space-md flex items-center justify-between select-none">
+<div class="flex items-center gap-2">
+<!-- Window Traffic Light Dots -->
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-3 rounded-full bg-error cursor-pointer opacity-80 hover:opacity-100 transition-opacity"></span>
+<span class="w-3 h-3 rounded-full bg-tertiary cursor-pointer opacity-80 hover:opacity-100 transition-opacity"></span>
+<span class="w-3 h-3 rounded-full bg-secondary cursor-pointer opacity-80 hover:opacity-100 transition-opacity"></span>
+</div>
+<div class="flex items-center gap-2 ml-3">
+<span class="material-symbols-outlined text-[14px] text-primary">data_object</span>
+<span class="font-code-sm text-code-sm text-on-surface font-medium">android-automator-daemon.log</span>
+<span class="font-badge-label text-badge-label text-secondary bg-surface-container-lowest px-1 py-0.2 rounded font-mono">[TAIL -F RUNNING]</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="font-code-sm text-[10px] text-on-surface-variant font-mono">ENCODING: UTF-8</span>
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+<span class="font-code-sm text-[10px] text-on-surface-variant font-mono">STREAM BUFFER: 99.8% READY</span>
+</div>
+</div>
+<!-- Terminal Output Stream Body -->
+<div class="flex-1 p-space-md overflow-y-auto font-code-sm text-code-sm leading-relaxed text-on-surface flex flex-col gap-1.5 select-text font-mono" id="terminal-stream">
+<!-- Log 1: INFO Flask -->
+<div class="log-entry flex items-start gap-2 hover:bg-surface-container-low/60 px-1 py-0.5 rounded transition-colors" data-channel="flask" data-level="info">
+<span class="text-on-surface-variant select-none">[15:48:12.304]</span>
+<span class="px-1.5 py-0.2 rounded bg-surface-container-high text-primary font-semibold text-[10px]">INFO</span>
+<span class="px-1.5 py-0.2 rounded bg-surface-container text-secondary font-mono text-[10px]">[FLASK]</span>
+<span class="text-on-surface">POST <span class="text-primary-fixed-dim">/api/v3/dispatch_workflow</span> → <span class="text-secondary font-semibold">200 OK</span> (Device: <span class="text-primary font-mono">SM-G991B</span>, Task: <span class="text-on-surface-variant font-mono">Instagram-Lite-AutoLike</span>)</span>
+</div>
+<!-- Log 2: DEBUG ADB Frame -->
+<div class="log-entry flex items-start gap-2 hover:bg-surface-container-low/60 px-1 py-0.5 rounded transition-colors" data-channel="adb" data-level="debug">
+<span class="text-on-surface-variant select-none">[15:48:12.418]</span>
+<span class="px-1.5 py-0.2 rounded bg-surface-container-high text-on-surface-variant font-semibold text-[10px]">DEBUG</span>
+<span class="px-1.5 py-0.2 rounded bg-surface-container text-primary-container font-mono text-[10px]">[ADB-PIPE]</span>
+<span class="text-on-surface-variant">Frame buffer ingested &amp; decoded via <span class="text-secondary font-mono">NVENC (1080x2400 @ 60fps)</span> latency=<span class="text-secondary font-mono">1.2ms</span> • device_id=<span class="text-primary">SM-G991B</span></span>
+</div>
+<!-- Log 3: INFO Ollama Prompt -->
+<div class="log-entry flex items-start gap-2 hover:bg-surface-container-low/60 px-1 py-0.5 rounded transition-colors" data-channel="ollama" data-level="info">
+<span class="text-on-surface-variant select-none">[15:48:12.592]</span>
+<span class="px-1.5 py-0.2 rounded bg-surface-container-high text-primary font-semibold text-[10px]">INFO</span>
+<span class="px-1.5 py-0.2 rounded bg-surface-container text-tertiary font-mono text-[10px]">[OLLAMA]</span>
+<span class="text-on-surface">Prompt context sent to <span class="text-tertiary-fixed font-semibold">llama3.2-vision:11b</span> (Tokens: <span class="text-primary">218</span>, TTFT: <span class="text-secondary">138ms</span>, ctx_len: 4096)</span>
+</div>
+<!-- Log 4: SUCCESS Vision Bounding Box -->
+<div class="log-entry flex items-start gap-2 hover:bg-surface-container-low/60 px-1 py-0.5 rounded transition-colors" data-channel="ollama" data-level="success">
+<span class="text-on-surface-variant select-none">[15:48:12.784]</span>
+<span class="px-1.5 py-0.2 rounded bg-secondary-container text-on-secondary font-semibold text-[10px]">SUCCESS</span>
+<span class="px-1.5 py-0.2 rounded bg-surface-container text-secondary font-mono text-[10px]">[VISION]</span>
+<span class="text-secondary-fixed">Bounding box detected: <span class="text-on-surface font-semibold">Target Like Button</span> [<span class="text-primary font-mono">x: 884, y: 1540</span>] conf=<span class="text-secondary font-mono font-bold">0.987</span> IoU=0.94</span>
+</div>
+<!-- Log 5: DEBUG Input Emulation -->
+<div class="log-entry flex items-start gap-2 hover:bg-surface-container-low/60 px-1 py-0.5 rounded transition-colors" data-channel="adb" data-level="debug">
+<span class="text-on-surface-variant select-none">[15:48:12.810]</span>
+<span class="px-1.5 py-0.2 rounded bg-surface-container-high text-on-surface-variant font-semibold text-[10px]">DEBUG</span>
+<span class="px-1.5 py-0.2 rounded bg-surface-container text-primary-fixed-dim font-mono text-[10px]">[INPUT-EMUL]</span>
+<span class="text-on-surface-variant">Touch event dispatch: <span class="text-primary font-mono">MotionEvent.ACTION_DOWN</span> (x=884.2, y=1540.8) with Gaussian human jitter (<span class="text-tertiary">+2.1ms</span> curve)</span>
+</div>
+<!-- Log 6: WARN Anti-Ban Trigger -->
+<div class="log-entry flex items-start gap-2 hover:bg-surface-container-low/60 px-1 py-0.5 rounded transition-colors bg-tertiary-container/10" data-channel="antiban" data-level="warn">
+<span class="text-on-surface-variant select-none">[15:48:13.104]</span>
+<span class="px-1.5 py-0.2 rounded bg-tertiary-container text-on-tertiary-container font-semibold text-[10px]">WARN</span>
+<span class="px-1.5 py-0.2 rounded bg-surface-container text-tertiary font-mono text-[10px]">[ANTIBAN]</span>
+<span class="text-tertiary">Instagram connection cooldown threshold nearing <span class="font-bold">180s</span> on slot <span class="text-on-surface font-mono">@brand_alpha</span>. Rotating SOCKS5 proxy to pool <span class="text-primary font-mono font-bold">res-es-04.proxy-node.lan</span>.</span>
+</div>
+<!-- Log 7: INFO RoBERTa Sentiment -->
+<div class="log-entry flex items-start gap-2 hover:bg-surface-container-low/60 px-1 py-0.5 rounded transition-colors" data-channel="bot" data-level="info">
+<span class="text-on-surface-variant select-none">[15:48:13.441]</span>
+<span class="px-1.5 py-0.2 rounded bg-surface-container-high text-primary font-semibold text-[10px]">INFO</span>
+<span class="px-1.5 py-0.2 rounded bg-surface-container text-primary-fixed font-mono text-[10px]">[ROBERTA-ONNX]</span>
+<span class="text-on-surface">Sentiment check passed: <span class="text-secondary font-bold font-mono">+0.94 score</span> (“Gran trabajo con el pipeline...”), safe to post. Toxicity=0.002.</span>
+</div>
+<!-- Log 8: ERROR Captcha Detected on secondary node -->
+<div class="log-entry flex items-start gap-2 hover:bg-surface-container-low/60 px-1 py-0.5 rounded transition-colors bg-error-container/15" data-channel="bot" data-level="error">
+<span class="text-on-surface-variant select-none">[15:48:13.880]</span>
+<span class="px-1.5 py-0.2 rounded bg-error-container text-on-error font-semibold text-[10px]">ERROR</span>
+<span class="px-1.5 py-0.2 rounded bg-surface-container text-error font-mono text-[10px]">[CAPTCHA]</span>
+<span class="text-error">Redirection detected on secondary node (<span class="font-mono text-on-surface">Redmi Note 12</span>): Cloudflare challenge iframe spotted. Triggering acoustic alert &amp; <span class="text-tertiary font-mono">llava:13b OCR fallback</span>.</span>
+</div>
+<!-- Log 9: SUCCESS Dispatch confirmed -->
+<div class="log-entry flex items-start gap-2 hover:bg-surface-container-low/60 px-1 py-0.5 rounded transition-colors" data-channel="bot" data-level="success">
+<span class="text-on-surface-variant select-none">[15:48:14.215]</span>
+<span class="px-1.5 py-0.2 rounded bg-secondary-container text-on-secondary font-semibold text-[10px]">SUCCESS</span>
+<span class="px-1.5 py-0.2 rounded bg-surface-container text-secondary font-mono text-[10px]">[DISPATCH]</span>
+<span class="text-on-surface">Comment published successfully. Transaction ID: <span class="text-primary font-mono font-bold">#TX-984021</span>. Cycle time: <span class="text-secondary font-mono">1.911s</span>.</span>
+</div>
+<!-- Log 10: Live Cursor Indicator -->
+<div class="flex items-center gap-2 pt-1 text-on-surface-variant font-mono" id="terminal-cursor">
+<span class="text-secondary select-none">•</span>
+<span class="text-[11px] text-on-surface-variant">Escuchando socket continuo en /dev/pts/3 [STDOUT / STDERR UNIFIED]</span>
+<span class="w-2 h-4 bg-primary inline-block animate-pulse ml-1"></span>
+</div>
+</div>
+<!-- Terminal CLI Interactive Bottom Injection Prompt -->
+<div class="bg-surface-container-low p-space-sm flex flex-col gap-1.5">
+<form class="flex items-center gap-space-sm" onsubmit="handleCommand(event)">
+<div class="flex items-center gap-1 font-mono text-code-sm text-secondary select-none pl-1">
+<span class="text-primary font-bold">daemon@automator-node1</span><span class="text-on-surface">:</span><span class="text-tertiary">~</span><span class="text-on-surface">$</span>
+</div>
+<input autocomplete="off" class="flex-1 bg-surface-container-lowest text-on-surface font-code-sm text-code-sm px-space-md py-1.5 rounded-lg focus:outline-none focus:ring-1 focus:ring-primary font-mono" id="cli-command-input" placeholder="inyectar comando (ej: adb shell input keyevent 26, restart_stream, ollama run llama3)..." type="text"/>
+<button class="px-space-md py-1.5 rounded bg-primary text-on-primary hover:bg-primary-container hover:text-on-primary-container transition-colors font-code-sm text-code-sm font-semibold flex items-center gap-1 shadow-sm" type="submit">
+<span>Enviar</span>
+<span class="material-symbols-outlined text-[14px]">subdirectory_arrow_left</span>
+</button>
+</form>
+<!-- Quick Command Macro Suggestions -->
+<div class="flex items-center gap-space-xs overflow-x-auto pt-0.5">
+<span class="font-code-sm text-[10px] text-on-surface-variant uppercase select-none">Macros:</span>
+<button class="px-2 py-0.5 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface-variant hover:text-on-surface font-code-sm text-[10px] font-mono transition-colors" onclick="injectMacro('adb devices -l')" type="button">
+              adb devices -l
+            </button>
+<button class="px-2 py-0.5 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface-variant hover:text-on-surface font-code-sm text-[10px] font-mono transition-colors" onclick="injectMacro('systemctl restart ollama')" type="button">
+              restart ollama
+            </button>
+<button class="px-2 py-0.5 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface-variant hover:text-on-surface font-code-sm text-[10px] font-mono transition-colors" onclick="injectMacro('curl -X POST http://localhost:5000/api/v3/kill_proxies')" type="button">
+              rotate proxies
+            </button>
+<button class="px-2 py-0.5 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface-variant hover:text-on-surface font-code-sm text-[10px] font-mono transition-colors" onclick="injectMacro('adb shell dumpsys gfxinfo')" type="button">
+              gfxinfo
+            </button>
+<button class="px-2 py-0.5 rounded bg-surface-container-high hover:bg-surface-container-highest text-error font-code-sm text-[10px] font-mono transition-colors" onclick="injectMacro('pkill -f scrcpy')" type="button">
+              kill scrcpy
+            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- RIGHT COLUMN: Diagnostic Center & System Health Matrix (30% on desktop) -->
+<div class="lg:col-span-4 flex flex-col gap-space-md">
+<!-- CARD 1: Live Services Status Matrix -->
+<div class="bg-surface-container rounded-xl p-space-md shadow-md flex flex-col gap-space-sm">
+<div class="flex items-center justify-between pb-1">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-primary">dns</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Monitor de Servicios en Vivo</h2>
+</div>
+<span class="font-badge-label text-badge-label px-space-xs py-0.5 rounded bg-surface-container-high text-secondary">TODOS OPERATIVOS</span>
+</div>
+<div class="flex flex-col gap-space-xs font-code-sm text-code-sm">
+<!-- Service 1: Flask Core -->
+<div class="p-space-sm rounded-lg bg-surface-container-low flex items-center justify-between hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-space-sm">
+<span class="w-2 h-2 rounded-full bg-secondary shadow-[0_0_6px_rgba(78,222,163,0.5)]"></span>
+<div class="flex flex-col">
+<span class="font-body-sm text-on-surface font-semibold">Flask REST API Core</span>
+<span class="text-on-surface-variant text-[11px] font-mono">Port 5000 • PID: 18492</span>
+</div>
+</div>
+<div class="text-right">
+<span class="text-secondary font-semibold">Uptime 4h 12m</span>
+<div class="text-on-surface-variant text-[10px]">Worker Pools: 8</div>
+</div>
+</div>
+<!-- Service 2: ADB Daemon Multiplexer -->
+<div class="p-space-sm rounded-lg bg-surface-container-low flex items-center justify-between hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-space-sm">
+<span class="w-2 h-2 rounded-full bg-secondary shadow-[0_0_6px_rgba(78,222,163,0.5)]"></span>
+<div class="flex flex-col">
+<span class="font-body-sm text-on-surface font-semibold">ADB Daemon Multiplexer</span>
+<span class="text-on-surface-variant text-[11px] font-mono">Port 5037 • Subsystem v41</span>
+</div>
+</div>
+<div class="text-right">
+<span class="text-primary font-semibold">4 Dispositivos</span>
+<div class="text-secondary text-[10px]">0 Caídas registradas</div>
+</div>
+</div>
+<!-- Service 3: Ollama LLM Service -->
+<div class="p-space-sm rounded-lg bg-surface-container-low flex items-center justify-between hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-space-sm">
+<span class="w-2 h-2 rounded-full bg-primary shadow-[0_0_6px_rgba(192,193,255,0.5)]"></span>
+<div class="flex flex-col">
+<span class="font-body-sm text-on-surface font-semibold">Ollama Vision LLM</span>
+<span class="text-on-surface-variant text-[11px] font-mono">Port 11434 • Keep-Alive ON</span>
+</div>
+</div>
+<div class="text-right">
+<span class="text-primary font-semibold">VRAM 5.8 / 24 GB</span>
+<div class="text-on-surface-variant text-[10px]">Model: llama3.2-vision</div>
+</div>
+</div>
+<!-- Service 4: Redis Task Queue -->
+<div class="p-space-sm rounded-lg bg-surface-container-low flex items-center justify-between hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-space-sm">
+<span class="w-2 h-2 rounded-full bg-secondary shadow-[0_0_6px_rgba(78,222,163,0.5)]"></span>
+<div class="flex flex-col">
+<span class="font-body-sm text-on-surface font-semibold">Redis Task Worker Queue</span>
+<span class="text-on-surface-variant text-[11px] font-mono">Port 6379 • In-Memory</span>
+</div>
+</div>
+<div class="text-right">
+<span class="text-on-surface font-semibold">18 en cola</span>
+<div class="text-secondary text-[10px]">2 en ejecución activa</div>
+</div>
+</div>
+<!-- Service 5: Scrcpy NVENC Encoder -->
+<div class="p-space-sm rounded-lg bg-surface-container-low flex items-center justify-between hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-space-sm">
+<span class="w-2 h-2 rounded-full bg-secondary shadow-[0_0_6px_rgba(78,222,163,0.5)]"></span>
+<div class="flex flex-col">
+<span class="font-body-sm text-on-surface font-semibold">Scrcpy NVENC Streamer</span>
+<span class="text-on-surface-variant text-[11px] font-mono">Hardware Accel H.264</span>
+</div>
+</div>
+<div class="text-right">
+<span class="text-secondary font-semibold">4 Paralelos</span>
+<div class="text-on-surface-variant text-[10px]">Total: 240 fps mux</div>
+</div>
+</div>
+</div>
+</div>
+<!-- CARD 2: Real-time Event Traffic & Inference Rate Histogram -->
+<div class="bg-surface-container rounded-xl p-space-md shadow-md flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-secondary">monitoring</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Actividad &amp; Tasa de Eventos</h2>
+</div>
+<span class="font-code-sm text-[11px] text-on-surface-variant">Últimos 60s</span>
+</div>
+<!-- Inline Sparkline / Histogram SVG (Under 2KB, dynamic theme colors) -->
+<div class="w-full bg-surface-container-lowest p-space-sm rounded-lg flex flex-col gap-2">
+<div class="flex items-center justify-between text-on-surface-variant font-code-sm text-[10px]">
+<span>180 ops/s max</span>
+<span class="text-primary font-mono font-semibold">Avg: 142 ops/s</span>
+<span>0 ops/s</span>
+</div>
+<svg class="w-full h-16 text-primary" fill="none" preserveaspectratio="none" viewbox="0 0 240 60">
+<!-- Sparkline fill gradient -->
+<defs>
+<lineargradient id="chartGradient" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="currentColor" stop-opacity="0.35"></stop>
+<stop offset="100%" stop-color="currentColor" stop-opacity="0.0"></stop>
+</lineargradient>
+</defs>
+<path d="M0,45 L10,42 L20,40 L30,48 L40,30 L50,32 L60,18 L70,25 L80,12 L90,15 L100,28 L110,8 L120,12 L130,22 L140,16 L150,5 L160,14 L170,9 L180,24 L190,18 L200,6 L210,12 L220,10 L230,15 L240,8 L240,60 L0,60 Z" fill="url(#chartGradient)"></path>
+<path d="M0,45 L10,42 L20,40 L30,48 L40,30 L50,32 L60,18 L70,25 L80,12 L90,15 L100,28 L110,8 L120,12 L130,22 L140,16 L150,5 L160,14 L170,9 L180,24 L190,18 L200,6 L210,12 L220,10 L230,15 L240,8" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path>
+</svg>
+<!-- Metrics summary grid -->
+<div class="grid grid-cols-3 gap-2 pt-1">
+<div class="bg-surface-container-low p-1.5 rounded flex flex-col">
+<span class="font-code-sm text-[10px] text-on-surface-variant uppercase">Éxito Ejecución</span>
+<span class="font-code-md text-code-md text-secondary font-bold font-mono">99.8%</span>
+</div>
+<div class="bg-surface-container-low p-1.5 rounded flex flex-col">
+<span class="font-code-sm text-[10px] text-on-surface-variant uppercase">Advertencias</span>
+<span class="font-code-md text-code-md text-tertiary font-bold font-mono">0.2%</span>
+</div>
+<div class="bg-surface-container-low p-1.5 rounded flex flex-col">
+<span class="font-code-sm text-[10px] text-on-surface-variant uppercase">Fallos Críticos</span>
+<span class="font-code-md text-code-md text-on-surface font-bold font-mono">0</span>
+</div>
+</div>
+</div>
+</div>
+<!-- CARD 3: One-Click Debug & Remediation Tools -->
+<div class="bg-surface-container rounded-xl p-space-md shadow-md flex flex-col gap-space-sm">
+<div class="flex items-center gap-space-xs pb-1">
+<span class="material-symbols-outlined text-[18px] text-tertiary">build</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Herramientas de Depuración</h2>
+</div>
+<div class="flex flex-col gap-space-xs">
+<!-- Tool 1: Restart ADB Server -->
+<button class="w-full text-left p-space-sm rounded-lg bg-surface-container-low hover:bg-surface-container-high transition-colors flex items-center justify-between group" onclick="executeQuickDebug('restart-adb')">
+<div class="flex items-center gap-space-sm">
+<div class="w-7 h-7 rounded bg-surface-container-highest flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[16px]">restart_alt</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body-sm text-on-surface font-semibold group-hover:text-primary transition-colors">Reiniciar ADB Server</span>
+<span class="text-on-surface-variant text-[11px] font-mono">kill-server &amp;&amp; start-server</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant group-hover:translate-x-0.5 transition-transform">chevron_right</span>
+</button>
+<!-- Tool 2: Dump Heap & Flush Cache -->
+<button class="w-full text-left p-space-sm rounded-lg bg-surface-container-low hover:bg-surface-container-high transition-colors flex items-center justify-between group" onclick="executeQuickDebug('flush-cache')">
+<div class="flex items-center gap-space-sm">
+<div class="w-7 h-7 rounded bg-surface-container-highest flex items-center justify-center text-tertiary group-hover:bg-tertiary group-hover:text-on-tertiary transition-colors">
+<span class="material-symbols-outlined text-[16px]">cleaning_services</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body-sm text-on-surface font-semibold group-hover:text-tertiary transition-colors">Dump Heap &amp; Vaciar Caché</span>
+<span class="text-on-surface-variant text-[11px] font-mono">gc.collect() • redis.flushdb()</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant group-hover:translate-x-0.5 transition-transform">chevron_right</span>
+</button>
+<!-- Tool 3: Resync Device Timestamps -->
+<button class="w-full text-left p-space-sm rounded-lg bg-surface-container-low hover:bg-surface-container-high transition-colors flex items-center justify-between group" onclick="executeQuickDebug('resync-clock')">
+<div class="flex items-center gap-space-sm">
+<div class="w-7 h-7 rounded bg-surface-container-highest flex items-center justify-center text-secondary group-hover:bg-secondary group-hover:text-on-secondary transition-colors">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body-sm text-on-surface font-semibold group-hover:text-secondary transition-colors">Re-sincronizar Timestamps</span>
+<span class="text-on-surface-variant text-[11px] font-mono">NTP host sync a 4 dispositivos</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant group-hover:translate-x-0.5 transition-transform">chevron_right</span>
+</button>
+<!-- Tool 4: Generate Diagnostic Bug Report -->
+<button class="w-full text-left p-space-sm rounded-lg bg-surface-container-low hover:bg-surface-container-high transition-colors flex items-center justify-between group" onclick="executeQuickDebug('bug-report')">
+<div class="flex items-center gap-space-sm">
+<div class="w-7 h-7 rounded bg-surface-container-highest flex items-center justify-center text-error group-hover:bg-error group-hover:text-on-error transition-colors">
+<span class="material-symbols-outlined text-[16px]">bug_report</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body-sm text-on-surface font-semibold group-hover:text-error transition-colors">Generar Reporte de Incidencias</span>
+<span class="text-on-surface-variant text-[11px] font-mono">Empaquetar stacktrace + .tar.gz</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant group-hover:translate-x-0.5 transition-transform">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  let autoScrollEnabled = true;
+  let currentFilterChannel = 'all';
+  let activeLevelFilter = null;
+
+  // Toggle autoscroll in terminal
+  function toggleAutoScroll() {
+    autoScrollEnabled = !autoScrollEnabled;
+    const scrollText = document.getElementById('scroll-text');
+    const scrollIcon = document.getElementById('scroll-icon');
+    if (autoScrollEnabled) {
+      scrollText.textContent = 'Auto-scroll ON';
+      scrollIcon.textContent = 'vertical_align_bottom';
+      scrollIcon.classList.add('text-primary');
+      scrollToBottom();
+    } else {
+      scrollText.textContent = 'Auto-scroll OFF';
+      scrollIcon.textContent = 'pause';
+      scrollIcon.classList.remove('text-primary');
+    }
+  }
+
+  function scrollToBottom() {
+    const terminal = document.getElementById('terminal-stream');
+    if (terminal && autoScrollEnabled) {
+      terminal.scrollTop = terminal.scrollHeight;
+    }
+  }
+
+  // Clear console lines except cursor
+  function clearConsole() {
+    const terminal = document.getElementById('terminal-stream');
+    const entries = terminal.querySelectorAll('.log-entry');
+    entries.forEach(entry => entry.remove());
+    appendLog('INFO', 'SYS', 'Consola limpiada por el operador. Buffer de visualización reiniciado.', 'text-primary');
+  }
+
+  // Export current logs as JSON/TXT
+  function exportLogs() {
+    const entries = document.querySelectorAll('.log-entry');
+    const logData = Array.from(entries).map(e => e.innerText).join('\n');
+    const blob = new Blob([logData], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `daemon-stream-${Date.now()}.log`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  // Channel pills filtering
+  function setFilterChannel(channel) {
+    currentFilterChannel = channel;
+    const buttons = document.querySelectorAll('.channel-pill');
+    buttons.forEach(btn => {
+      btn.classList.remove('bg-surface-container-highest', 'text-primary', 'font-semibold');
+      btn.classList.add('text-on-surface-variant');
+    });
+    event.currentTarget.classList.add('bg-surface-container-highest', 'text-primary', 'font-semibold');
+    event.currentTarget.classList.remove('text-on-surface-variant');
+    applyFilters();
+  }
+
+  // Level badge toggling
+  function toggleLevel(level) {
+    activeLevelFilter = activeLevelFilter === level ? null : level;
+    applyFilters();
+  }
+
+  // Search input filtering
+  function filterLogs() {
+    applyFilters();
+  }
+
+  function applyFilters() {
+    const query = (document.getElementById('log-search-input').value || '').toLowerCase();
+    const entries = document.querySelectorAll('.log-entry');
+
+    entries.forEach(entry => {
+      const channel = entry.getAttribute('data-channel');
+      const level = entry.getAttribute('data-level');
+      const text = entry.innerText.toLowerCase();
+
+      const channelMatch = (currentFilterChannel === 'all' || channel === currentFilterChannel);
+      const levelMatch = (!activeLevelFilter || level === activeLevelFilter);
+      let queryMatch = true;
+
+      if (query) {
+        try {
+          const regex = new RegExp(query, 'i');
+          queryMatch = regex.test(text);
+        } catch(e) {
+          queryMatch = text.includes(query);
+        }
+      }
+
+      if (channelMatch && levelMatch && queryMatch) {
+        entry.style.display = 'flex';
+      } else {
+        entry.style.display = 'none';
+      }
+    });
+
+    scrollToBottom();
+  }
+
+  // Macro quick injectors
+  function injectMacro(cmd) {
+    const input = document.getElementById('cli-command-input');
+    input.value = cmd;
+    input.focus();
+  }
+
+  // Interactive command prompt handler
+  function handleCommand(e) {
+    e.preventDefault();
+    const input = document.getElementById('cli-command-input');
+    const cmd = input.value.trim();
+    if (!cmd) return;
+
+    const time = new Date().toISOString().substring(11, 23);
+
+    // Render user injected command
+    appendLog('USER', 'CLI', `$ ${cmd}`, 'text-primary');
+
+    // Simulate response based on command
+    setTimeout(() => {
+      if (cmd.startsWith('adb devices')) {
+        appendLog('INFO', 'ADB', 'List of devices attached:\n* SM-G991B\tdevice product:r9s model:SM_G991B device:o1s transport_id:1\n* GVU6C\tdevice product:cheetah model:Pixel_7_Pro transport_id:2', 'text-secondary');
+      } else if (cmd.includes('restart ollama') || cmd.includes('ollama')) {
+        appendLog('INFO', 'OLLAMA', 'Daemon signal sent. Reloading Ollama models into VRAM cache... (Status: 200 OK)', 'text-tertiary');
+      } else if (cmd.includes('kill')) {
+        appendLog('WARN', 'DAEMON', 'Kill signal received. Safely stopping processes and reclaiming pipe handles.', 'text-error');
+      } else {
+        appendLog('INFO', 'DAEMON', `Comando recibido y enviado a stdin: "${cmd}" &rarr; Code 0 OK`, 'text-secondary');
+      }
+    }, 180);
+
+    input.value = '';
+    scrollToBottom();
+  }
+
+  function appendLog(level, tag, message, colorClass) {
+    const terminal = document.getElementById('terminal-stream');
+    const cursor = document.getElementById('terminal-cursor');
+    const now = new Date();
+    const time = `[${now.toTimeString().split(' ')[0]}.${String(now.getMilliseconds()).padStart(3, '0')}]`;
+
+    const row = document.createElement('div');
+    row.className = 'log-entry flex items-start gap-2 hover:bg-surface-container-low/60 px-1 py-0.5 rounded transition-colors';
+    row.setAttribute('data-channel', tag.toLowerCase());
+    row.setAttribute('data-level', level.toLowerCase());
+
+    row.innerHTML = `
+      <span class="text-on-surface-variant select-none">${time}</span>
+      <span class="px-1.5 py-0.2 rounded bg-surface-container-high ${colorClass} font-semibold text-[10px]">${level}</span>
+      <span class="px-1.5 py-0.2 rounded bg-surface-container font-mono text-[10px]">[${tag}]</span>
+      <span class="text-on-surface whitespace-pre-wrap">${message}</span>
+    `;
+
+    terminal.insertBefore(row, cursor);
+    scrollToBottom();
+  }
+
+  // Quick debug tools execution simulator
+  function executeQuickDebug(action) {
+    if (action === 'restart-adb') {
+      appendLog('WARN', 'ADB-MUX', 'Reiniciando servidor ADB local (adb kill-server &amp;&amp; adb start-server)...', 'text-tertiary');
+      setTimeout(() => {
+        appendLog('SUCCESS', 'ADB-MUX', '* daemon started successfully on port 5037 * 4 devices enumerated.', 'text-secondary');
+      }, 700);
+    } else if (action === 'flush-cache') {
+      appendLog('INFO', 'SYS-GC', 'Invocando Garbage Collector & vaciando claves expiradas de Redis Task Queue...', 'text-primary');
+      setTimeout(() => {
+        appendLog('SUCCESS', 'SYS-GC', 'Memoria liberada: 384 MB recuperados. Buffer en 12.4 MB.', 'text-secondary');
+      }, 500);
+    } else if (action === 'resync-clock') {
+      appendLog('INFO', 'NTP', 'Sincronizando reloj de marco a dispositivos SM-G991B, GVU6C, 23028RN4DG, SM-S918B...', 'text-primary');
+      setTimeout(() => {
+        appendLog('SUCCESS', 'NTP', 'Offset corregido a &lt; 0.4ms en toda la flota.', 'text-secondary');
+      }, 400);
+    } else if (action === 'bug-report') {
+      appendLog('INFO', 'DIAG', 'Recolectando stacktrace, logs de socket, estado de GPU y volcando a /var/log/bugreport-latest.tar.gz', 'text-primary');
+      setTimeout(() => {
+        appendLog('SUCCESS', 'DIAG', 'Reporte listo: /tmp/daemon-diag-report-2025.tar.gz generado exitosamente.', 'text-secondary');
+      }, 900);
+    }
+  }
+
+  // Synthetic continuous live incoming logs loop (simulates WebSocket feed)
+  const syntheticEvents = [
+    { level: 'DEBUG', tag: 'ADB-PIPE', msg: 'Heartbeat ping: SM-G991B ack=12ms v_loss=0%', chan: 'adb', col: 'text-on-surface-variant' },
+    { level: 'INFO', tag: 'FLASK', msg: 'GET /api/v3/fleet_status &rarr; 200 OK (0.8ms latency)', chan: 'flask', col: 'text-primary' },
+    { level: 'INFO', tag: 'OLLAMA', msg: 'Context cache hit (hash: 8f9a2b). Re-inferring sentiment RoBERTa head: 0.96 safe', chan: 'ollama', col: 'text-tertiary' },
+    { level: 'SUCCESS', tag: 'BOT-QUEUE', msg: 'Task worker-02 completed sub-cycle: Reel scroll + 3.2s retention simulated', chan: 'bot', col: 'text-secondary' },
+    { level: 'DEBUG', tag: 'INPUT-EMUL', msg: 'Fling curve generated: Bezier control points [(120,450), (122,890), (119,1200)]', chan: 'adb', col: 'text-on-surface-variant' }
+  ];
+
+  let synthIndex = 0;
+  setInterval(() => {
+    if (!autoScrollEnabled) return;
+    const evt = syntheticEvents[synthIndex % syntheticEvents.length];
+    synthIndex++;
+    appendLog(evt.level, evt.tag, evt.msg, evt.col);
+  }, 4500);
+
+  // Initial scroll
+  scrollToBottom();
+</script></main><footer class="w-full bg-surface-container-lowest py-space-sm px-gutter-lg mt-auto shadow-[0_-1px_6px_rgba(0,0,0,0.25)]"><div class="w-full flex items-center justify-between text-on-surface-variant font-code-sm text-code-sm"><div><span>CORE ENGINE: FLASK REST DAEMON</span> • <span class="text-secondary">SCRCPY HIGH-THROUGHPUT FEED ON</span></div><div><span>MEM: 1.4GB / 32GB</span> • <span>GPU 34% (RTX 4090 LOCAL)</span> • <span>SENTIMENT MODEL: RO-BERTA LOCAL</span></div></div></footer></body></html>

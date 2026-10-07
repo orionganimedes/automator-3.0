@@ -1,0 +1,76 @@
+<!-- templates/tabs/tab_icons.html - Icon Matcher & OpenCV Module -->
+<div id="tabIconsContent" class="hidden space-y-4">
+
+  <!-- Module Banner Header -->
+  <div class="rounded-xl bg-surface-container-low border border-[#262a35] p-4 flex items-center justify-between shadow-lg">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-amber-600/10 border border-amber-500/20 flex items-center justify-center text-tertiary">
+        <span class="material-symbols-outlined text-[24px]">crop_free</span>
+      </div>
+      <div>
+        <div class="flex items-center gap-2">
+          <h2 class="font-bold text-sm text-on-surface">Gestor de Iconos & Reconocimiento Visual</h2>
+          <span class="badge-label px-2 py-0.5 rounded bg-tertiary/10 text-tertiary border border-tertiary/30">OPENCV 4 TEMPLATE MATCHING</span>
+        </div>
+        <p class="text-[11px] text-on-surface-variant font-mono">Detección sub-pixel de elementos gráficos en pantalla sin necesidad de coordenadas fijas.</p>
+      </div>
+    </div>
+    <span id="templatesCountBadge" class="text-xs font-mono text-on-surface-variant">0 plantillas</span>
+  </div>
+
+  <!-- Locate and Tap Tester & Upload -->
+  <div class="rounded-xl bg-surface-container-low border border-[#262a35] p-4 space-y-3.5 shadow-lg">
+    <div class="flex items-center justify-between border-b border-[#262a35] pb-2.5">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary text-[18px]">touch_app</span>
+        <h3 class="font-bold text-xs text-on-surface uppercase tracking-wider">Probar Reconocimiento & Toque Directo</h3>
+      </div>
+      <button onclick="toggleDebugMatchModal()" class="px-2.5 py-1 rounded bg-surface-container hover:bg-surface-container-high border border-[#262a35] text-primary text-[11px] font-mono flex items-center gap-1 transition">
+        <span class="material-symbols-outlined text-[14px]">image_search</span> Ver Depuración Heatmap
+      </button>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+      <!-- Target Selector -->
+      <div class="space-y-2">
+        <label class="block text-xs font-mono text-on-surface">Seleccionar Icono Objetivo:</label>
+        <div class="flex gap-2">
+          <select id="selectedIconTarget" class="flex-1 px-3 py-2 rounded-lg bg-surface-container border border-[#262a35] text-on-surface font-mono text-xs focus:border-primary focus:outline-none">
+            <option value="">Cargando iconos...</option>
+          </select>
+          <button onclick="runLocateAndTap()" class="px-4 py-2 rounded bg-primary text-on-primary hover:bg-primary-container text-xs font-mono font-bold transition flex items-center gap-1.5 shadow">
+            <span class="material-symbols-outlined text-[16px]">touch_app</span>
+            <span>Localizar & Tap</span>
+          </button>
+        </div>
+        <div id="locateTapStatus" class="text-xs font-mono text-on-surface-variant h-4"></div>
+      </div>
+
+      <!-- File Upload Card -->
+      <div class="p-3.5 rounded-lg bg-surface-container border border-[#262a35] space-y-2">
+        <span class="text-xs font-mono text-on-surface font-semibold block">Subir Nueva Plantilla de Icono:</span>
+        <label class="w-full py-2 px-3 rounded bg-surface-container-high hover:bg-surface-container-highest border border-dashed border-[#262a35] text-on-surface text-xs font-mono flex items-center justify-center gap-2 cursor-pointer transition">
+          <span class="material-symbols-outlined text-[16px] text-primary">upload</span>
+          <span>Seleccionar archivo (.png o .jpg)</span>
+          <input type="file" accept="image/png, image/jpeg" onchange="handleIconUpload(event)" class="hidden">
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Icon Gallery Grid -->
+  <div class="rounded-xl bg-surface-container-low border border-[#262a35] p-4 space-y-3.5 shadow-lg">
+    <div class="flex items-center justify-between border-b border-[#262a35] pb-2.5">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary text-[18px]">photo_library</span>
+        <h3 class="font-bold text-xs text-on-surface uppercase tracking-wider">Galería de Plantillas (icon_targets/)</h3>
+      </div>
+    </div>
+
+    <!-- Gallery Container -->
+    <div id="iconGalleryGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+      <!-- Injected by renderIconGallery() -->
+    </div>
+  </div>
+
+</div>

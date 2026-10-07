@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400..700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"outline":"#908fa0","tertiary-fixed":"#ffddb8","on-tertiary-container":"#3e2400","secondary":"#4edea3","error":"#ffb4ab","secondary-container":"#00a572","on-secondary":"#003824","on-tertiary":"#472a00","primary-fixed-dim":"#c0c1ff","on-primary":"#1000a9","tertiary-container":"#ca8100","outline-variant":"#464554","on-tertiary-fixed":"#2a1700","on-error":"#690005","on-tertiary-fixed-variant":"#653e00","surface-container-highest":"#313540","on-primary-fixed":"#07006c","surface-container-lowest":"#0a0e18","surface-container-low":"#171b26","secondary-fixed":"#6ffbbe","on-secondary-fixed":"#002113","tertiary-fixed-dim":"#ffb95f","tertiary":"#ffb95f","on-surface-variant":"#c7c4d7","error-container":"#93000a","primary-container":"#8083ff","surface-bright":"#353944","on-error-container":"#ffdad6","on-primary-fixed-variant":"#2f2ebe","surface-tint":"#c0c1ff","surface-container-high":"#262a35","on-surface":"#dfe2f1","primary":"#c0c1ff","on-primary-container":"#0d0096","secondary-fixed-dim":"#4edea3","inverse-on-surface":"#2c303b","inverse-primary":"#494bd6","on-background":"#dfe2f1","surface":"#0f131d","on-secondary-container":"#00311f","background":"#0f131d","surface-container":"#1c1f2a","inverse-surface":"#dfe2f1","surface-dim":"#0f131d","on-secondary-fixed-variant":"#005236","primary-fixed":"#e1e0ff","surface-variant":"#313540"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"space-xs":"0.25rem","space-md":"0.75rem","margin-lg":"2rem","space-xl":"1.5rem","space-lg":"1rem","space-sm":"0.5rem","gutter":"1rem","gutter-lg":"1.5rem","margin":"1.25rem"},"fontFamily":{"body-lg":["Geist"],"code-sm":["JetBrains Mono"],"headline-sm":["Geist"],"badge-label":["JetBrains Mono"],"headline-lg":["Geist"],"body-sm":["Geist"],"code-md":["JetBrains Mono"],"headline-md":["Geist"],"body-md":["Geist"]},"fontSize":{"body-lg":["1rem",{"lineHeight":"1.5rem","fontWeight":"400"}],"code-sm":["0.6875rem",{"lineHeight":"0.875rem","fontWeight":"500"}],"headline-sm":["1rem",{"lineHeight":"1.5rem","letterSpacing":"-0.01em","fontWeight":"600"}],"badge-label":["0.6875rem",{"lineHeight":"0.75rem","letterSpacing":"0.05em","fontWeight":"600"}],"headline-lg":["1.75rem",{"lineHeight":"2.25rem","letterSpacing":"-0.025em","fontWeight":"600"}],"body-sm":["0.75rem",{"lineHeight":"1rem","fontWeight":"400"}],"code-md":["0.8125rem",{"lineHeight":"1.25rem","fontWeight":"400"}],"headline-md":["1.25rem",{"lineHeight":"1.75rem","letterSpacing":"-0.015em","fontWeight":"600"}],"body-md":["0.875rem",{"lineHeight":"1.25rem","fontWeight":"400"}]}}}}</script></head><body class="bg-surface font-body-md text-on-surface antialiased min-h-screen flex flex-col"><header class="fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.35)]"><div class="h-28 w-full px-gutter-lg flex flex-col justify-between pt-space-sm pb-space-xs"><div class="flex items-center justify-between gap-space-lg"><div class="flex items-center gap-space-md"><div class="w-9 h-9 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary shadow-[0_0_15px_-3px_rgba(192,193,255,0.25)]"><span class="material-symbols-outlined text-[20px]">smart_toy</span></div><div><div class="flex items-center gap-space-sm"><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight">Android AI Automator</span><span class="font-badge-label text-badge-label px-space-xs py-0.5 rounded bg-surface-container text-primary font-code-sm">v3.4-CORE</span></div><p class="font-body-sm text-body-sm text-on-surface-variant">Local Vision &amp; Sentiment Pipeline</p></div></div><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-sm px-space-md py-1 rounded bg-surface-container-low"><span class="w-2 h-2 rounded-full bg-secondary shadow-[0_0_8px_rgba(78,222,163,0.5)]"></span><div class="flex flex-col"><div class="flex items-center gap-space-xs"><span class="font-badge-label text-badge-label text-secondary uppercase">ADB Connected</span><span class="font-code-sm text-code-sm text-on-surface">SM-S918B</span></div><span class="font-code-sm text-code-sm text-on-surface-variant">98% • 12ms</span></div></div><div class="flex items-center gap-space-sm px-space-md py-1 rounded bg-surface-container-low"><span class="w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_rgba(192,193,255,0.5)]"></span><div class="flex flex-col"><div class="flex items-center gap-space-xs"><span class="font-badge-label text-badge-label text-primary uppercase">Ollama Active</span><span class="font-code-sm text-code-sm text-on-surface-variant">11.4k t/s</span></div><span class="font-code-sm text-code-sm text-on-surface">Llama-3-Vision:8b</span></div></div><div class="flex items-center gap-space-sm px-space-md py-1 rounded bg-surface-container-low"><div class="flex flex-col"><span class="font-badge-label text-badge-label text-tertiary uppercase">Automation</span><span class="font-code-sm text-code-sm text-on-surface font-semibold">IDLE</span></div><button class="px-space-sm py-1 rounded bg-error-container text-on-error-container hover:bg-error hover:text-on-error transition-colors font-badge-label text-badge-label uppercase flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">cancel</span>Abort</button></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div><div class="flex items-center justify-between gap-space-md pt-space-xs"><nav class="flex items-center gap-space-xs bg-surface-container-lowest p-0.5 rounded" data-active-classes="bg-surface-container-high text-primary font-semibold shadow-[0_1px_4px_rgba(0,0,0,0.25)]"><a class="px-space-md py-1 rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" data-path="instagram-bot" href="#">Instagram Bot</a><a class="px-space-md py-1 rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" data-path="facebook" href="#">Facebook</a><a class="px-space-md py-1 rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" data-path="tiktok-reels" href="#">TikTok / Reels</a><a class="px-space-md py-1 rounded font-body-sm text-body-sm bg-surface-container-high text-primary font-semibold shadow-[0_1px_4px_rgba(0,0,0,0.25)] transition-colors" data-path="modelos-ia-ollama" href="#">Modelos IA (Ollama)</a><a class="px-space-md py-1 rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" data-path="terminal-logs" href="#">Terminal &amp; Logs</a><a class="px-space-md py-1 rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" data-path="multi-scrcpy-dispositivos" href="#">Multi-Scrcpy (Dispositivos)</a><a class="px-space-md py-1 rounded font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" data-path="configuracion" href="#">Configuración</a></nav><div class="flex items-center gap-space-xs"><button class="px-space-sm py-1 rounded bg-surface-container-high text-on-surface hover:bg-surface-container-highest hover:text-on-surface transition-colors font-code-sm text-code-sm flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">screenshot_region</span>Capturar Pantalla</button><button class="px-space-sm py-1 rounded bg-surface-container-high text-on-surface hover:bg-surface-container-highest hover:text-on-surface transition-colors font-code-sm text-code-sm flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">restart_alt</span>Reiniciar ADB</button><button class="px-space-sm py-1 rounded bg-surface-container-high text-on-surface hover:bg-surface-container-highest hover:text-on-surface transition-colors font-code-sm text-code-sm flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">memory</span>Liberar RAM</button></div></div></div></header><main class="w-full pt-28 bg-surface flex-1 px-gutter-lg"><div class="flex flex-col w-full pb-space-xl">
+<!-- ENCABEZADO DE SECCIÓN DEL MÓDULO -->
+<div class="w-full flex flex-col gap-space-md mb-space-lg">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md bg-surface-container-low p-space-md rounded-xl shadow-sm">
+<div class="flex flex-col gap-1">
+<div class="flex flex-wrap items-center gap-space-sm">
+<h1 class="font-headline-md text-headline-md text-on-surface">Motor de Inferencia Local Ollama &amp; Visión Computacional</h1>
+<div class="flex items-center gap-1.5 px-space-sm py-0.5 rounded bg-surface-container-highest text-primary font-badge-label text-badge-label">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary shadow-[0_0_6px_rgba(78,222,163,0.8)]"></span>
+            Ollama Daemon v0.5.8 Local
+          </div>
+<span class="font-code-sm text-code-sm text-on-surface-variant">:11434 REST API Conectado</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Gestión de pesos multimodales locales, enrutamiento semántico y pipeline visual zero-latency para Android ADB.</p>
+</div>
+<div class="flex flex-wrap items-center gap-space-sm">
+<!-- GPU Metric Card -->
+<div class="flex items-center gap-space-sm bg-surface-container px-space-md py-1.5 rounded-lg shadow-sm">
+<div class="flex flex-col">
+<div class="flex items-center justify-between gap-space-md">
+<span class="font-badge-label text-badge-label text-secondary uppercase tracking-wider">NVIDIA RTX 4090 (24GB)</span>
+<span class="font-code-sm text-code-sm text-on-surface font-semibold">5.8 GB / 24%</span>
+</div>
+<div class="w-36 h-1.5 bg-surface-container-highest rounded-full overflow-hidden mt-1">
+<div class="h-full bg-secondary rounded-full" style="width: 24.16%;"></div>
+</div>
+</div>
+</div>
+<button class="px-space-md py-2 rounded-lg bg-surface-container-high text-on-surface hover:bg-surface-container-highest transition-colors font-body-sm text-body-sm font-semibold flex items-center gap-1.5 shadow-sm" id="btn-test-daemon">
+<span class="material-symbols-outlined text-[16px] text-primary">sensors</span>
+          Probar Conexión
+        </button>
+<button class="px-space-md py-2 rounded-lg bg-primary-container text-on-primary-container hover:brightness-110 transition-all font-body-sm text-body-sm font-semibold flex items-center gap-1.5 shadow-sm" id="btn-pull-modal">
+<span class="material-symbols-outlined text-[16px]">cloud_download</span>
+          + Pull Nuevo Modelo
+        </button>
+</div>
+</div>
+<!-- Quick Category Filter Bar -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-xs bg-surface-container-lowest p-1 rounded-lg">
+<button class="px-space-md py-1 rounded bg-surface-container text-primary font-code-sm text-code-sm font-semibold shadow-sm">Todos los Modelos (6)</button>
+<button class="px-space-md py-1 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors font-code-sm text-code-sm">Visión Multimodal (3)</button>
+<button class="px-space-md py-1 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors font-code-sm text-code-sm">Generación de Texto (2)</button>
+<button class="px-space-md py-1 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors font-code-sm text-code-sm">Embeddings &amp; Clasificación (1)</button>
+</div>
+<div class="flex items-center gap-space-sm font-code-sm text-code-sm text-on-surface-variant">
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-secondary"></span> 2 Activos en VRAM</span>
+<span>•</span>
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-tertiary"></span> 1 En Espera</span>
+<span>•</span>
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-outline"></span> 3 en Disco</span>
+</div>
+</div>
+</div>
+<!-- DISTRIBUCIÓN EN 2 COLUMNAS (5/12 & 7/12) -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg w-full">
+<!-- COLUMNA IZQUIERDA (5/12): Catálogo Local y Enrutador -->
+<div class="xl:col-span-5 flex flex-col gap-space-lg">
+<!-- TARJETA 1: Catálogo de Modelos Descargados -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[20px]">layers</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Modelos en Almacenamiento Local</h2>
+</div>
+<span class="font-code-sm text-code-sm px-space-xs py-0.5 rounded bg-surface-container text-on-surface-variant">Ollama /models</span>
+</div>
+<!-- Lista de Modelos -->
+<div class="flex flex-col gap-space-sm">
+<!-- Modelo 1: llama3.2-vision:11b -->
+<div class="bg-surface-container p-space-md rounded-lg flex flex-col gap-space-sm shadow-sm relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-secondary"></div>
+<div class="flex items-start justify-between gap-space-sm">
+<div>
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-code-md text-code-md text-on-surface font-semibold">llama3.2-vision:11b</span>
+<span class="font-badge-label text-badge-label px-space-xs py-0.5 rounded bg-secondary-container/30 text-secondary uppercase">Activo VRAM</span>
+<span class="font-badge-label text-badge-label px-space-xs py-0.5 rounded bg-primary-container/20 text-primary uppercase">Predeterminado</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Asignado a: Instagram Bot &amp; TikTok Visual Scraper</p>
+</div>
+<div class="text-right">
+<span class="font-code-sm text-code-sm text-secondary font-semibold">11.4 t/s</span>
+<p class="font-code-sm text-code-sm text-on-surface-variant">VRAM: 5.8 GB</p>
+</div>
+</div>
+<div class="flex flex-wrap items-center gap-space-xs font-code-sm text-code-sm text-on-surface-variant">
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high text-on-surface">Multimodal OCR+Scene</span>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high">Q4_K_M</span>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high">7.9 GB</span>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high">Ctx: 8192</span>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<div class="flex items-center gap-1 text-secondary font-code-sm text-code-sm">
+<span class="material-symbols-outlined text-[15px]">check_circle</span>
+                Keep-alive persistente
+              </div>
+<div class="flex items-center gap-space-xs">
+<button class="px-space-sm py-1 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-code-sm text-code-sm transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">speed</span> Benchmark
+                </button>
+<button class="px-space-sm py-1 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-code-sm text-code-sm transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">edit_note</span> Prompt
+                </button>
+<button class="px-space-sm py-1 rounded bg-error-container/30 hover:bg-error-container text-on-error-container font-code-sm text-code-sm transition-colors" title="Descargar de memoria GPU">
+                  Descargar
+                </button>
+</div>
+</div>
+</div>
+<!-- Modelo 2: llava:13b-v1.6 -->
+<div class="bg-surface-container p-space-md rounded-lg flex flex-col gap-space-sm shadow-sm relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-outline-variant"></div>
+<div class="flex items-start justify-between gap-space-sm">
+<div>
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-code-md text-code-md text-on-surface font-semibold">llava:13b-v1.6</span>
+<span class="font-badge-label text-badge-label px-space-xs py-0.5 rounded bg-surface-container-highest text-on-surface-variant uppercase">Standby en Disco</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Asignado a: Auditoría de Baneo &amp; Detección de Captchas</p>
+</div>
+<div class="text-right">
+<span class="font-code-sm text-code-sm text-on-surface-variant font-semibold">-- t/s</span>
+<p class="font-code-sm text-code-sm text-on-surface-variant">Peso: 8.2 GB</p>
+</div>
+</div>
+<div class="flex flex-wrap items-center gap-space-xs font-code-sm text-code-sm text-on-surface-variant">
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high text-on-surface">Visión Detallada</span>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high">Q4_0</span>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high">8.2 GB</span>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high">Ctx: 4096</span>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="font-code-sm text-code-sm text-on-surface-variant">Carga bajo demanda en fallo</span>
+<div class="flex items-center gap-space-xs">
+<button class="px-space-sm py-1 rounded bg-primary-container text-on-primary-container hover:brightness-110 font-code-sm text-code-sm transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">bolt</span> Cargar VRAM
+                </button>
+<button class="px-space-sm py-1 rounded bg-surface-container-high hover:bg-error-container text-on-surface-variant hover:text-on-error-container font-code-sm text-code-sm transition-colors">
+                  Eliminar
+                </button>
+</div>
+</div>
+</div>
+<!-- Modelo 3: qwen2.5:7b-instruct -->
+<div class="bg-surface-container p-space-md rounded-lg flex flex-col gap-space-sm shadow-sm relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-secondary"></div>
+<div class="flex items-start justify-between gap-space-sm">
+<div>
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-code-md text-code-md text-on-surface font-semibold">qwen2.5:7b-instruct</span>
+<span class="font-badge-label text-badge-label px-space-xs py-0.5 rounded bg-secondary-container/30 text-secondary uppercase">Ejecución Paralela</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Asignado a: Facebook Marketplace DM Auto-Reply</p>
+</div>
+<div class="text-right">
+<span class="font-code-sm text-code-sm text-secondary font-semibold">28.5 t/s</span>
+<p class="font-code-sm text-code-sm text-on-surface-variant">VRAM: 4.2 GB</p>
+</div>
+</div>
+<div class="flex flex-wrap items-center gap-space-xs font-code-sm text-code-sm text-on-surface-variant">
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high text-on-surface">Jerga Local &amp; Empatía</span>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high">Q5_K_M</span>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high">4.7 GB</span>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high">Ctx: 16k</span>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="font-code-sm text-code-sm text-secondary flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Cola activa (2 hilos)
+              </span>
+<div class="flex items-center gap-space-xs">
+<button class="px-space-sm py-1 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-code-sm text-code-sm transition-colors">Ajustar Contexto</button>
+<button class="px-space-sm py-1 rounded bg-error-container/30 text-on-error-container font-code-sm text-code-sm hover:bg-error-container transition-colors">Pausar</button>
+</div>
+</div>
+</div>
+<!-- Modelo 4: roberta-sentiment-local -->
+<div class="bg-surface-container p-space-md rounded-lg flex flex-col gap-space-sm shadow-sm relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-primary"></div>
+<div class="flex items-start justify-between gap-space-sm">
+<div>
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-code-md text-code-md text-on-surface font-semibold">roberta-sentiment-local</span>
+<span class="font-badge-label text-badge-label px-space-xs py-0.5 rounded bg-primary-container/20 text-primary uppercase">Micro-Modelo ONNX</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Asignado a: Filtro Anti-Hate &amp; Detección de Sarcasmo</p>
+</div>
+<div class="text-right">
+<span class="font-code-sm text-code-sm text-primary font-semibold">3.1 ms / req</span>
+<p class="font-code-sm text-code-sm text-on-surface-variant">CPU Threaded</p>
+</div>
+</div>
+<div class="flex flex-wrap items-center gap-space-xs font-code-sm text-code-sm text-on-surface-variant">
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high text-on-surface">Latencia Ultra-Baja</span>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high">FP16</span>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high">480 MB</span>
+</div>
+</div>
+</div>
+</div>
+<!-- TARJETA 2: Mapeo de Pipeline por Automatización -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-secondary text-[20px]">alt_route</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Reglas de Enrutamiento (Pipelines)</h2>
+</div>
+<button class="font-code-sm text-code-sm text-primary hover:underline">+ Nueva Regla</button>
+</div>
+<div class="flex flex-col gap-space-sm">
+<!-- Flow 1 -->
+<div class="bg-surface-container p-space-md rounded-lg flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-body-md text-body-md font-semibold text-on-surface">Instagram Reels &amp; Post Interactor</span>
+<span class="font-badge-label text-badge-label px-space-xs py-0.5 rounded bg-secondary-container/20 text-secondary uppercase">Activo</span>
+</div>
+<!-- Step Flow Diagram -->
+<div class="flex flex-col gap-1.5 py-1">
+<div class="flex items-center gap-2 font-code-sm text-code-sm text-on-surface-variant">
+<span class="w-5 h-5 rounded-full bg-surface-container-high flex items-center justify-center text-primary font-bold">1</span>
+<span>Visión (Crop scrcpy):</span>
+<span class="text-on-surface font-semibold">llama3.2-vision:11b</span>
+</div>
+<div class="w-0.5 h-2 bg-surface-container-highest ml-2.5"></div>
+<div class="flex items-center gap-2 font-code-sm text-code-sm text-on-surface-variant">
+<span class="w-5 h-5 rounded-full bg-surface-container-high flex items-center justify-center text-primary font-bold">2</span>
+<span>Generación de Comentario:</span>
+<span class="text-on-surface font-semibold">qwen2.5:7b-instruct</span>
+</div>
+<div class="w-0.5 h-2 bg-surface-container-highest ml-2.5"></div>
+<div class="flex items-center gap-2 font-code-sm text-code-sm text-on-surface-variant">
+<span class="w-5 h-5 rounded-full bg-surface-container-high flex items-center justify-center text-primary font-bold">3</span>
+<span>Filtro de Seguridad Sentimental:</span>
+<span class="text-on-surface font-semibold">roberta-sentiment-local</span>
+</div>
+</div>
+</div>
+<!-- Flow 2: Exception handling -->
+<div class="bg-surface-container p-space-md rounded-lg flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-body-md text-body-md font-semibold text-on-surface">Android Captcha &amp; Dialog Fallback</span>
+<span class="font-badge-label text-badge-label px-space-xs py-0.5 rounded bg-tertiary-container/30 text-tertiary uppercase">Alerta Sonora</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Si la similitud visual del botón objetivo cae de &lt; 0.62 en pantalla completa, invoca <code class="text-primary font-code-sm">llava:13b-v1.6</code> para resolución de captcha OCR y envía ping a Telegram.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- COLUMNA DERECHA (7/12): Playground & Editor de System Prompts -->
+<div class="xl:col-span-7 flex flex-col gap-space-lg">
+<!-- TARJETA 3: Editor de Prompts y Temperatura con Ajuste Fino -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-sm flex flex-col gap-space-md">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[20px]">tune</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Editor de System Prompt &amp; Parámetros de Inferencia</h2>
+</div>
+<!-- Selector de Perfil -->
+<div class="flex items-center gap-1 bg-surface-container px-space-sm py-1 rounded-lg">
+<span class="font-code-sm text-code-sm text-on-surface-variant">Perfil:</span>
+<select class="bg-transparent font-code-sm text-code-sm text-primary font-semibold outline-none cursor-pointer" id="profile-select">
+<option class="bg-surface-container-high text-on-surface" value="ig">Comentarios Empáticos para Instagram</option>
+<option class="bg-surface-container-high text-on-surface" value="coord">Extractor Vision-to-Touch (Coordenadas)</option>
+<option class="bg-surface-container-high text-on-surface" value="reels">Clasificador de Sentimiento de Reels</option>
+<option class="bg-surface-container-high text-on-surface" value="ocr">Extractor OCR Fallback Puro</option>
+</select>
+</div>
+</div>
+<!-- Prompt Template Textarea -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<label class="font-code-sm text-code-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">code</span>
+              System Prompt (Variables dinámicas disponibles: <code class="text-tertiary">{bounding_box}</code>, <code class="text-tertiary">{user_bio}</code>, <code class="text-tertiary">{post_caption}</code>)
+            </label>
+<span class="font-code-sm text-code-sm text-on-surface-variant">248 caracteres</span>
+</div>
+<div class="bg-surface-container p-space-md rounded-lg flex flex-col gap-2">
+<textarea class="w-full bg-transparent font-code-md text-code-md text-on-surface resize-y outline-none leading-relaxed" id="system-prompt" rows="4">Eres un usuario entusiasta y técnico en Instagram. Analiza la imagen extraída por scrcpy en {bounding_box}. Responde en español informal, sin sonar como bot corporativo, máximo 15 palabras, mostrando curiosidad genuina por la tecnología mostrada.</textarea>
+<div class="flex items-center justify-between pt-1 border-t-0 font-code-sm text-code-sm text-on-surface-variant">
+<span class="text-secondary flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">verified</span> Sintaxis válida con Jinja2 Context</span>
+<button class="text-primary hover:underline flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[14px]">refresh</span> Restaurar default
+              </button>
+</div>
+</div>
+</div>
+<!-- Control de Parámetros de Inferencia (Sliders) -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-md bg-surface-container p-space-md rounded-lg">
+<!-- Slider 1: Temperatura -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<span class="font-code-sm text-code-sm text-on-surface">Temperatura</span>
+<span class="font-code-sm text-code-sm text-primary font-bold" id="temp-val">0.65</span>
+</div>
+<input class="w-full accent-primary h-1.5 bg-surface-container-highest rounded-lg cursor-pointer" id="temp-slider" max="1.5" min="0.0" step="0.05" type="range" value="0.65"/>
+<span class="font-code-sm text-code-sm text-on-surface-variant">Equilibrio creatividad</span>
+</div>
+<!-- Slider 2: Top_P -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<span class="font-code-sm text-code-sm text-on-surface">Top_P</span>
+<span class="font-code-sm text-code-sm text-primary font-bold" id="topp-val">0.90</span>
+</div>
+<input class="w-full accent-primary h-1.5 bg-surface-container-highest rounded-lg cursor-pointer" id="topp-slider" max="1.0" min="0.1" step="0.05" type="range" value="0.90"/>
+<span class="font-code-sm text-code-sm text-on-surface-variant">Núcleo de muestreo</span>
+</div>
+<!-- Slider 3: Repeat Penalty -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<span class="font-code-sm text-code-sm text-on-surface">Repeat Penalty</span>
+<span class="font-code-sm text-code-sm text-primary font-bold" id="rep-val">1.18</span>
+</div>
+<input class="w-full accent-primary h-1.5 bg-surface-container-highest rounded-lg cursor-pointer" id="rep-slider" max="2.0" min="1.0" step="0.02" type="range" value="1.18"/>
+<span class="font-code-sm text-code-sm text-on-surface-variant">Filtro de clichés</span>
+</div>
+<!-- Slider 4: Context Length -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<span class="font-code-sm text-code-sm text-on-surface">Num_Ctx</span>
+<span class="font-code-sm text-code-sm text-primary font-bold" id="ctx-val">4096</span>
+</div>
+<input class="w-full accent-primary h-1.5 bg-surface-container-highest rounded-lg cursor-pointer" id="ctx-slider" max="16384" min="1024" step="1024" type="range" value="4096"/>
+<span class="font-code-sm text-code-sm text-on-surface-variant">Ventana de tokens</span>
+</div>
+</div>
+<!-- Stop Sequences tags -->
+<div class="flex flex-wrap items-center gap-space-sm">
+<span class="font-code-sm text-code-sm text-on-surface-variant">Stop Sequences:</span>
+<div class="flex items-center gap-1.5">
+<span class="font-code-sm text-code-sm px-space-xs py-0.5 rounded bg-surface-container-highest text-on-surface">"\n\n"</span>
+<span class="font-code-sm text-code-sm px-space-xs py-0.5 rounded bg-surface-container-highest text-on-surface">"User:"</span>
+<span class="font-code-sm text-code-sm px-space-xs py-0.5 rounded bg-surface-container-highest text-on-surface">"Bot:"</span>
+<button class="font-code-sm text-code-sm text-primary hover:underline">+ Agregar</button>
+</div>
+</div>
+</div>
+<!-- TARJETA 4: Banco de Pruebas de Visión Multimodal en Vivo (Interactive Tester) -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-sm flex flex-col gap-space-md">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-secondary text-[20px]">science</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Banco de Pruebas de Visión Multimodal en Vivo</h2>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="px-space-sm py-1 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-code-sm text-code-sm flex items-center gap-1 transition-colors" id="btn-snap-frame">
+<span class="material-symbols-outlined text-[15px] text-secondary">phone_android</span>
+              Frame Scrcpy
+            </button>
+<button class="px-space-sm py-1 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-code-sm text-code-sm flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[15px]">upload_file</span>
+              Subir Captura
+            </button>
+</div>
+</div>
+<!-- Vision Testing Sandbox Grid -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-space-md">
+<!-- Preview Frame & Bounding Box (5 cols) -->
+<div class="md:col-span-5 flex flex-col gap-space-xs">
+<div class="relative w-full h-56 bg-surface-container-lowest rounded-lg overflow-hidden flex items-center justify-center shadow-inner group">
+<!-- Visual placeholder for phone capture -->
+<img class="w-full h-full object-cover opacity-85" data-alt="A smartphone screen captured via scrcpy showing an electronics lab workbench with a breadboard, microcontroller, colored jump wires, and clean maker setup under cool white lighting in high tech aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDY0VmCGQqi4FnsYVwkDb3C32XK8Ju6Tt9S9qKqt8IeDN0ksuBm24FkFjHPYvItS7bw3Hzu1Wmp5Zy_V3NjIv3JZXNVW7lqG5LGdlFLLTqb4hymsn-ziVmpZrs_nbcqyCgh-66FRTBTlFToUyuvpUBQpRTxiXDKWIOLdEGmfjblaffhf3AxyGt4Yu-RPZFA_xdF4Csc4phUcvAhsNMFeujpW7VKCoLTn-ZmXwap8Sz7UdPbX8Z9mMjK"/>
+<!-- Bounding Box Annotation Overlay -->
+<div class="absolute inset-x-8 inset-y-6 rounded shadow-[0_0_0_2px_rgba(78,222,163,0.9)] bg-secondary/10 flex flex-col justify-between p-1.5 pointer-events-none">
+<span class="font-code-sm text-code-sm px-1 rounded bg-secondary text-on-secondary font-bold self-start">Post Image: Target Area</span>
+<span class="font-code-sm text-code-sm text-secondary bg-surface/80 px-1 rounded self-end">Conf: 99.1%</span>
+</div>
+<!-- Metadata overlay badge -->
+<div class="absolute bottom-2 left-2 px-space-xs py-0.5 rounded bg-surface/90 text-on-surface font-code-sm text-code-sm backdrop-blur-md">
+                1080x2400 ADB Raw
+              </div>
+</div>
+<!-- Bounding Box Coordinates readout -->
+<div class="p-space-xs bg-surface-container rounded font-code-sm text-code-sm text-on-surface-variant flex items-center justify-between">
+<span>BBox: [ymin: 340, xmin: 120, ymax: 780, xmax: 960]</span>
+<span class="text-secondary font-semibold">Ready</span>
+</div>
+</div>
+<!-- Execution & Output Stream (7 cols) -->
+<div class="md:col-span-7 flex flex-col justify-between gap-space-sm bg-surface-container p-space-md rounded-lg">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-code-sm text-code-sm text-on-surface-variant uppercase tracking-wider">Salida de Inferencia (Streaming)</span>
+<div class="flex items-center gap-1 font-code-sm text-code-sm text-secondary">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+                  Llama-3.2-Vision:11b
+                </div>
+</div>
+<!-- Ingestion prompt preview -->
+<div class="p-2 rounded bg-surface-container-high font-code-sm text-code-sm text-on-surface-variant">
+<span class="text-outline font-semibold">User:</span> [Image Attached] Analiza el reel actual y formula el comentario conforme al System Prompt.
+              </div>
+<!-- Model Response Box -->
+<div class="p-space-md rounded bg-surface-container-lowest min-h-[96px] flex flex-col justify-center" id="infer-output">
+<p class="font-body-md text-body-md text-on-surface leading-relaxed">
+                  "¡Qué buen setup de hardware! ¿Ese microcontrolador es un ESP32 o una Raspberry Pi Pico? Se ve muy prolijo el cableado."
+                </p>
+</div>
+</div>
+<!-- Telemetry Metrics Bar -->
+<div class="grid grid-cols-4 gap-1 p-space-xs bg-surface-container-high rounded font-code-sm text-code-sm text-on-surface">
+<div class="flex flex-col">
+<span class="text-on-surface-variant">TTFT</span>
+<span class="font-semibold text-secondary">142 ms</span>
+</div>
+<div class="flex flex-col">
+<span class="text-on-surface-variant">Rendimiento</span>
+<span class="font-semibold text-secondary">12.1 t/s</span>
+</div>
+<div class="flex flex-col">
+<span class="text-on-surface-variant">Tokens Gen</span>
+<span class="font-semibold">26 tk</span>
+</div>
+<div class="flex flex-col">
+<span class="text-on-surface-variant">Coherencia</span>
+<span class="font-semibold text-primary">98.4%</span>
+</div>
+</div>
+<!-- Execute Trigger Button -->
+<button class="w-full py-2.5 rounded-lg bg-primary-container text-on-primary-container font-headline-sm text-headline-sm font-semibold flex items-center justify-center gap-2 hover:brightness-110 active:scale-[0.99] transition-all shadow-md" id="btn-run-inference">
+<span class="material-symbols-outlined text-[18px]">bolt</span>
+              ⚡ Ejecutar Inferencia de Prueba (F5)
+            </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- BARRA INFERIOR / STATUS DE HOST (Consistente con la suite de automatización) -->
+<div class="mt-space-lg w-full bg-surface-container-low p-space-md rounded-xl flex flex-col lg:flex-row items-center justify-between gap-space-md shadow-sm">
+<div class="flex flex-wrap items-center gap-space-md font-code-sm text-code-sm text-on-surface-variant">
+<div class="flex items-center gap-1.5 text-on-surface">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="text-secondary font-semibold">daemon://localhost:11434/api/generate</span>
+<span>• OK (Keep-Alive 30m)</span>
+</div>
+<span>|</span>
+<div class="flex items-center gap-space-sm">
+<span>VRAM TOTAL: <strong class="text-on-surface">5.8 / 24.0 GB</strong></span>
+<span>•</span>
+<span>RAM HOST: <strong class="text-on-surface">4.1 / 32 GB</strong></span>
+<span>•</span>
+<span>TEMP GPU: <strong class="text-secondary">46°C</strong></span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm flex-wrap">
+<button class="px-space-md py-1.5 rounded bg-surface-container text-on-surface hover:bg-surface-container-high transition-colors font-code-sm text-code-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px]">restart_alt</span>
+        Reiniciar Servicio Ollama
+      </button>
+<button class="px-space-md py-1.5 rounded bg-surface-container text-on-surface hover:bg-surface-container-high transition-colors font-code-sm text-code-sm">
+        Restablecer Valores
+      </button>
+<button class="px-space-md py-1.5 rounded bg-primary-container text-on-primary-container font-code-sm text-code-sm font-semibold hover:brightness-110 transition-all flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[15px]">save</span>
+        Guardar Configuración
+      </button>
+</div>
+</div>
+<!-- MODAL PULL MODELO (HIDDEN BY DEFAULT) -->
+<div class="fixed inset-0 z-50 bg-surface/80 backdrop-blur-md hidden items-center justify-center p-gutter" id="pull-modal">
+<div class="w-full max-w-lg bg-surface-container p-space-lg rounded-xl shadow-2xl flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[24px]">download</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Descargar Modelo desde Ollama Library</h3>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface" id="btn-close-modal">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-code-sm text-code-sm text-on-surface-variant">Nombre o Tag del Modelo</label>
+<input class="w-full bg-surface-container-highest px-space-md py-2 rounded-lg font-code-md text-code-md text-on-surface outline-none focus:ring-1 focus:ring-primary" id="model-tag-input" placeholder="ej. llama3.2:3b o llava-phi3" type="text"/>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Los pesos se transferirán mediante la API streaming a tu storage NVMe local.</p>
+</div>
+<div class="flex items-center justify-end gap-space-sm pt-space-xs">
+<button class="px-space-md py-1.5 rounded bg-surface-container-high text-on-surface font-body-sm text-body-sm" id="btn-cancel-modal">Cancelar</button>
+<button class="px-space-md py-1.5 rounded bg-primary-container text-on-primary-container font-body-sm text-body-sm font-semibold" id="btn-confirm-pull">Iniciar Descarga</button>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // Dynamic Slider Label Updates
+  const tempSlider = document.getElementById('temp-slider');
+  const tempVal = document.getElementById('temp-val');
+  if (tempSlider && tempVal) {
+    tempSlider.addEventListener('input', (e) => {
+      tempVal.textContent = parseFloat(e.target.value).toFixed(2);
+    });
+  }
+
+  const toppSlider = document.getElementById('topp-slider');
+  const toppVal = document.getElementById('topp-val');
+  if (toppSlider && toppVal) {
+    toppSlider.addEventListener('input', (e) => {
+      toppVal.textContent = parseFloat(e.target.value).toFixed(2);
+    });
+  }
+
+  const repSlider = document.getElementById('rep-slider');
+  const repVal = document.getElementById('rep-val');
+  if (repSlider && repVal) {
+    repSlider.addEventListener('input', (e) => {
+      repVal.textContent = parseFloat(e.target.value).toFixed(2);
+    });
+  }
+
+  const ctxSlider = document.getElementById('ctx-slider');
+  const ctxVal = document.getElementById('ctx-val');
+  if (ctxSlider && ctxVal) {
+    ctxSlider.addEventListener('input', (e) => {
+      ctxVal.textContent = e.target.value;
+    });
+  }
+
+  // Profile Prompt Presets
+  const promptArea = document.getElementById('system-prompt');
+  const profileSelect = document.getElementById('profile-select');
+  const presets = {
+    ig: "Eres un usuario entusiasta y técnico en Instagram. Analiza la imagen extraída por scrcpy en {bounding_box}. Responde en español informal, sin sonar como bot corporativo, máximo 15 palabras, mostrando curiosidad genuina por la tecnología mostrada.",
+    coord: "Modo Vision-to-Touch: Analiza la pantalla Android actual. Localiza el botón interactivo indicado por {post_caption} y devuelve estrictamente un array JSON [x, y] con las coordenadas de pulsación precisas.",
+    reels: "Clasifica el sentimiento y tema central del Reel en {bounding_box}. Salida requerida en un único JSON: {sentimiento: 'positivo'|'neutro'|'negativo', categoría: string, engagement_potencial: 1-10}.",
+    ocr: "Extrae todo el texto legible en el recuadro {bounding_box}. Corrige posibles artefactos de compresión y devuelve el texto plano sin explicaciones adicionales."
+  };
+
+  if (profileSelect && promptArea) {
+    profileSelect.addEventListener('change', (e) => {
+      if (presets[e.target.value]) {
+        promptArea.value = presets[e.target.value];
+      }
+    });
+  }
+
+  // Live Test Execution Micro-interaction
+  const runBtn = document.getElementById('btn-run-inference');
+  const inferOutput = document.getElementById('infer-output');
+  if (runBtn && inferOutput) {
+    runBtn.addEventListener('click', () => {
+      inferOutput.innerHTML = '<div class="flex items-center gap-2 text-primary font-code-sm text-code-sm"><span class="material-symbols-outlined animate-spin text-[16px]">sync</span> Ingestionando frame de scrcpy y generando tokens...</div>';
+      setTimeout(() => {
+        inferOutput.innerHTML = '<p class="font-body-md text-body-md text-on-surface leading-relaxed animate-fade-in">"¡Qué buen setup de hardware! ¿Ese microcontrolador es un ESP32 o una Raspberry Pi Pico? Se ve muy prolijo el cableado."</p>';
+      }, 750);
+    });
+  }
+
+  // Simple Pull Modal Toggling
+  const pullBtn = document.getElementById('btn-pull-modal');
+  const pullModal = document.getElementById('pull-modal');
+  const closeModal = document.getElementById('btn-close-modal');
+  const cancelModal = document.getElementById('btn-cancel-modal');
+
+  const toggleModal = (show) => {
+    if (pullModal) {
+      if (show) {
+        pullModal.classList.remove('hidden');
+        pullModal.classList.add('flex');
+      } else {
+        pullModal.classList.remove('flex');
+        pullModal.classList.add('hidden');
+      }
+    }
+  };
+
+  if (pullBtn) pullBtn.addEventListener('click', () => toggleModal(true));
+  if (closeModal) closeModal.addEventListener('click', () => toggleModal(false));
+  if (cancelModal) cancelModal.addEventListener('click', () => toggleModal(false));
+</script></main><footer class="w-full bg-surface-container-lowest py-space-sm px-gutter-lg mt-auto shadow-[0_-1px_6px_rgba(0,0,0,0.25)]"><div class="w-full flex items-center justify-between text-on-surface-variant font-code-sm text-code-sm"><div><span>CORE ENGINE: FLASK REST DAEMON</span> • <span class="text-secondary">SCRCPY HIGH-THROUGHPUT FEED ON</span></div><div><span>MEM: 1.4GB / 32GB</span> • <span>GPU 34% (RTX 4090 LOCAL)</span> • <span>SENTIMENT MODEL: RO-BERTA LOCAL</span></div></div></footer></body></html>

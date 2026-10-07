@@ -1,0 +1,520 @@
+<!-- templates/tabs/tab_facebook.html - Facebook Lite Bot Module -->
+{% from 'widgets/account_switcher.html' import account_switcher %}
+<div id="tabFacebookContent" class="hidden space-y-4">
+
+  <!-- Module Banner Header -->
+  <div class="rounded-xl bg-surface-container-low border border-[#262a35] p-4 flex items-center justify-between shadow-lg">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-blue-600/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
+        <span class="material-symbols-outlined text-[24px]">public</span>
+      </div>
+      <div>
+        <div class="flex items-center gap-2">
+          <h2 class="font-bold text-sm text-on-surface">Módulo: Facebook AI Orchestrator</h2>
+          <span class="badge-label px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 border border-blue-500/30">FB LITE ENGINE</span>
+        </div>
+        <p class="text-[11px] text-on-surface-variant font-mono">Automatización multi-cuenta en Facebook Lite, interacción con publicaciones y cambio rápido de perfiles.</p>
+      </div>
+    </div>
+    <span class="text-[11px] font-mono text-on-surface-variant">com.facebook.lite</span>
+  </div>
+
+  <!-- REQUERIMIENTO OBLIGATORIO: ESTADO DE REVISIÓN DE CUENTAS FB LITE -->
+  <div id="fbAccountsRequirementBanner" class="rounded-xl border p-3 flex flex-wrap sm:flex-nowrap items-center justify-between gap-3 shadow-md transition-all duration-300 bg-amber-500/10 border-amber-500/30 text-amber-300">
+    <div class="flex items-center gap-2.5">
+      <span id="fbRequirementIcon" class="material-symbols-outlined text-[22px] text-amber-400">warning</span>
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-bold font-mono uppercase tracking-wide">REQUERIMIENTO OBLIGATORIO: REVISIÓN DE CUENTAS</span>
+          <span id="fbRequirementBadge" class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-mono font-bold">PENDIENTE</span>
+        </div>
+        <p id="fbRequirementMsg" class="text-[11px] font-mono text-on-surface-variant">Requerimiento obligatorio: presiona "Revisar Cuentas FB" para revisar las cuentas antes de iniciar la automatización.</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-2 ml-auto sm:ml-0">
+      <button type="button" id="btnTriggerRequirementScan" onclick="triggerFacebookAccountsRequirementScan()" class="px-3 py-1.5 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-primary text-xs font-mono font-semibold flex items-center gap-1.5 transition border border-[#262a35]">
+        <span class="material-symbols-outlined text-[14px]">refresh</span>
+        <span>Revisar Cuentas FB</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Accounts Pool & Switcher -->
+  <div class="rounded-xl bg-surface-container-low border border-[#262a35] p-4 space-y-3 shadow-lg">
+    <div class="flex items-center justify-between border-b border-[#262a35] pb-2.5">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary text-[18px]">group</span>
+        <h3 class="font-bold text-xs text-on-surface uppercase tracking-wider">Pool de Cuentas Facebook en Dispositivo</h3>
+        <span id="fbAccountsBadge" class="text-[10px] px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/30 font-mono">0 Cuentas</span>
+      </div>
+      <button id="btnScanFbAccounts" onclick="scanFacebookLiteAccounts()" class="px-3 py-1 rounded bg-surface-container-high hover:bg-surface-container-highest text-primary text-xs font-mono font-semibold flex items-center gap-1.5 transition">
+        <span class="material-symbols-outlined text-[14px]">sync</span>
+        <span>Escanear Cuentas FB</span>
+      </button>
+    </div>
+
+    <!-- Quick Switch Dropdown -->
+    <div class="flex items-center gap-3">
+      <select id="fbSwitchAccountSelect" onchange="switchFacebookAccountFromSelect()" class="flex-1 px-3 py-2 rounded bg-surface-container border border-[#262a35] text-on-surface font-mono text-xs focus:border-primary focus:outline-none">
+        <option value="">-- Seleccionar cuenta para cambio directo --</option>
+      </select>
+    </div>
+
+    <!-- Widget reutilizable de cambio de cuenta -->
+    {{ account_switcher('facebook', 'Cambio Rápido de Cuenta (Widget)') }}
+
+    <!-- Accounts Counters & Scan Info -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1 border-t border-[#262a35] text-xs font-mono">
+      <div class="flex items-center justify-between bg-surface-container border border-[#262a35] rounded-xl px-3 py-2">
+        <span class="text-on-surface text-[11px] font-medium">Cuentas Facebook a usar:</span>
+        <div class="flex items-center gap-2">
+          <input type="number" id="fbAccountsToUseInput" min="1" max="100" value="1" oninput="syncAccountsInput(this.value)" class="w-16 bg-surface-container-lowest border border-blue-500/50 text-center text-xs text-blue-400 font-bold rounded-lg px-2 py-1 focus:outline-none">
+          <span class="text-[10px] text-on-surface-variant font-mono" id="fbAccountsLimitLabel">Total detectadas: 0</span>
+        </div>
+      </div>
+      <div class="flex items-center justify-between bg-surface-container border border-[#262a35] rounded-xl px-3 py-2">
+        <span class="text-on-surface text-[11px] font-medium">Detección global:</span>
+        <button type="button" onclick="scanDeviceAccounts()" class="px-2.5 py-1 rounded bg-surface-container-high hover:bg-surface-container-highest text-primary text-[11px] font-mono flex items-center gap-1 transition">
+          <span class="material-symbols-outlined text-[13px]">search</span>
+          <span>Detectar con ADB</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Accounts List Container -->
+    <div id="fbAccountsListContainer" class="space-y-1.5 max-h-48 overflow-y-auto pt-1">
+      <div class="p-3 text-center text-on-surface-variant text-xs font-mono">
+        Haz clic en "Escanear Cuentas FB" para indexar los perfiles disponibles en el teléfono.
+      </div>
+    </div>
+  </div>
+
+  <!-- MULTI-ACCOUNT ADVANCED ACTIONS: SEGUIR & COMPARTIR (DESPLEGABLE / SUB-PESTAÑAS) -->
+  <div id="fbMultiActionCard" class="rounded-xl bg-surface-container-low border border-[#262a35] shadow-lg overflow-hidden transition-all">
+    <!-- Header with Toggle Desplegable -->
+    <div class="p-4 flex items-center justify-between border-b border-[#262a35] cursor-pointer select-none bg-surface-container/40 hover:bg-surface-container/70 transition" onclick="toggleFbActionsCollapse()">
+      <div class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400">
+          <span class="material-symbols-outlined text-[20px]">hub</span>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h3 class="font-bold text-xs text-on-surface uppercase tracking-wider">Acciones Multi-Cuenta: Seguir & Compartir</h3>
+            <span class="badge-label px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 border border-blue-500/30 text-[9px] font-mono">CICLO AUTOMATIZADO</span>
+          </div>
+          <p class="text-[10px] text-on-surface-variant font-mono">Ejecuta rotación multi-cuenta en FB Lite para seguir páginas o compartir publicaciones en bloque.</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <span id="fbMultiActionStatusPill" class="text-[10px] font-mono px-2 py-0.5 rounded bg-surface-container-high text-on-surface-variant">Listo</span>
+        <button type="button" id="fbMultiActionCollapseBtn" class="p-1 rounded hover:bg-surface-container-highest text-on-surface-variant transition">
+          <span id="fbMultiActionCollapseIcon" class="material-symbols-outlined text-[18px] transition-transform duration-200">keyboard_arrow_down</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Collapsible Container Body -->
+    <div id="fbMultiActionContent" class="p-4 space-y-4">
+      <!-- Sub-Tab Switcher Pills -->
+      <div class="flex items-center justify-between border-b border-[#262a35] pb-3">
+        <div class="flex items-center gap-2 p-1 bg-surface-container-lowest rounded-xl border border-[#262a35]">
+          <button type="button" id="btnSubTabFbFollow" onclick="switchFbActionsSubTab('follow')" class="px-3.5 py-1.5 rounded-lg text-xs font-mono font-bold flex items-center gap-1.5 transition bg-blue-600 text-white shadow-sm">
+            <span class="material-symbols-outlined text-[15px]">person_add</span>
+            <span>1. SEGUIR PÁGINAS</span>
+          </button>
+          <button type="button" id="btnSubTabFbShare" onclick="switchFbActionsSubTab('share')" class="px-3.5 py-1.5 rounded-lg text-xs font-mono font-medium flex items-center gap-1.5 transition text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high">
+            <span class="material-symbols-outlined text-[15px]">share</span>
+            <span>2. COMPARTIR POSTS</span>
+          </button>
+        </div>
+        <span class="text-[11px] font-mono text-on-surface-variant hidden sm:inline-block">Itera todas las cuentas del pool</span>
+      </div>
+
+      <!-- SUB-TAB 1: SEGUIR PÁGINAS -->
+      <div id="fbSubTabFollowContent" class="space-y-3.5">
+        <div class="p-3 rounded-lg bg-blue-500/5 border border-blue-500/20 text-xs font-mono text-blue-300 flex items-start gap-2">
+          <span class="material-symbols-outlined text-[16px] mt-0.5 text-blue-400">info</span>
+          <div>
+            <span class="font-bold block">Función SEGUIR (Multi-Cuenta):</span>
+            <span class="text-on-surface-variant text-[11px]">Abre el perfil o página de Facebook indicada con cada cuenta del pool de FB Lite y pulsa el botón "Seguir" o "Me gusta" automáticamente.</span>
+          </div>
+        </div>
+
+        <div class="space-y-1.5">
+          <label class="text-[11px] font-mono text-on-surface font-medium flex items-center justify-between">
+            <span>Enlace de la Página o Perfil de Facebook a Seguir:</span>
+            <span class="text-[10px] text-on-surface-variant">URL de la fanpage o perfil</span>
+          </label>
+          <div class="flex gap-2">
+            <div class="relative flex-1">
+              <span class="material-symbols-outlined absolute left-3 top-2.5 text-[16px] text-on-surface-variant">person_search</span>
+              <input type="text" id="fbFollowPageUrlInput" placeholder="https://www.facebook.com/nombredelapagina..." class="w-full pl-9 pr-3 py-2 rounded bg-surface-container border border-[#262a35] text-on-surface font-mono text-xs focus:border-blue-400 focus:outline-none placeholder:text-on-surface-variant/40">
+            </div>
+            <button type="button" onclick="testOpenFbTargetUrl('fbFollowPageUrlInput')" class="px-3 py-2 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface text-xs font-mono font-semibold flex items-center gap-1 transition" title="Abre el enlace en el teléfono conectado para verificar">
+              <span class="material-symbols-outlined text-[14px]">launch</span>
+              <span>Probar Enlace</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Opciones del Ciclo Seguir -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 p-3 rounded-xl bg-surface-container border border-[#262a35] text-xs font-mono">
+          <div>
+            <label class="block text-[11px] text-on-surface-variant mb-1 font-medium">Cuentas a usar:</label>
+            <div class="flex items-center gap-2">
+              <input type="number" id="fbFollowAccountsToUseInput" min="1" max="100" value="5" class="w-20 bg-surface-container-lowest border border-blue-500/40 text-center text-xs text-blue-400 font-bold rounded-lg px-2 py-1.5 focus:outline-none">
+              <span class="text-[10px] text-on-surface-variant">cuentas del pool</span>
+            </div>
+            <div class="flex flex-wrap gap-1 mt-1.5">
+              <button type="button" onclick="setFbFollowAccountsCount(1)" class="px-1.5 py-0.5 rounded bg-surface-container-lowest hover:bg-blue-500/20 text-[10px] text-on-surface-variant hover:text-blue-300 border border-[#262a35] transition">1 vez</button>
+              <button type="button" onclick="setFbFollowAccountsCount(3)" class="px-1.5 py-0.5 rounded bg-surface-container-lowest hover:bg-blue-500/20 text-[10px] text-on-surface-variant hover:text-blue-300 border border-[#262a35] transition">3 veces</button>
+              <button type="button" onclick="setFbFollowAccountsCount(5)" class="px-1.5 py-0.5 rounded bg-surface-container-lowest hover:bg-blue-500/20 text-[10px] text-on-surface-variant hover:text-blue-300 border border-[#262a35] transition">5 veces</button>
+              <button type="button" onclick="setFbFollowAccountsCount('all')" class="px-1.5 py-0.5 rounded bg-surface-container-lowest hover:bg-blue-500/20 text-[10px] text-blue-400 font-semibold border border-blue-500/30 transition">Todas</button>
+            </div>
+          </div>
+          <div>
+            <label class="block text-[11px] text-on-surface-variant mb-1 font-medium">Espera entre cuentas:</label>
+            <div class="flex items-center gap-2">
+              <input type="number" id="fbFollowDelaySeconds" min="5" max="120" value="18" class="w-20 bg-surface-container-lowest border border-[#262a35] text-center text-xs text-on-surface font-bold rounded-lg px-2 py-1.5 focus:outline-none">
+              <span class="text-[10px] text-on-surface-variant">segundos</span>
+            </div>
+          </div>
+          <div class="space-y-1.5 flex flex-col justify-center">
+            <label class="flex items-center gap-1.5 cursor-pointer text-[11px]">
+              <input type="checkbox" id="fbFollowBtnCheck" checked class="rounded bg-surface-container-lowest border-[#262a35] text-blue-500 focus:ring-0">
+              <span class="text-on-surface font-medium">Pulsar botón "Seguir"</span>
+            </label>
+            <label class="flex items-center gap-1.5 cursor-pointer text-[11px]">
+              <input type="checkbox" id="fbFollowLikeCheck" class="rounded bg-surface-container-lowest border-[#262a35] text-blue-500 focus:ring-0">
+              <span class="text-on-surface-variant">Dar "Me gusta" a la página</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Botones y Estado Seguir -->
+        <div class="flex flex-wrap items-center justify-between gap-3 pt-1">
+          <div class="flex items-center gap-2 text-xs font-mono">
+            <span class="text-on-surface-variant text-[11px]">Estado:</span>
+            <span id="fbFollowStatusBadge" class="px-2.5 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/30 text-[10px] font-semibold">Listo para iniciar</span>
+            <span id="fbFollowProgressText" class="text-[10px] text-on-surface-variant">0 / 0 cuentas</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <button type="button" id="btnStopFbFollowCycle" onclick="stopFbFollowCycle()" class="hidden px-3.5 py-2 rounded-xl bg-error/10 hover:bg-error/20 text-error border border-error/30 text-xs font-mono font-bold flex items-center gap-1.5 transition">
+              <span class="material-symbols-outlined text-[15px]">stop</span>
+              <span>Detener</span>
+            </button>
+            <button type="button" id="btnStartFbFollowCycle" onclick="startFbFollowCycle()" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-mono font-bold flex items-center gap-1.5 transition shadow-md active:scale-95">
+              <span class="material-symbols-outlined text-[16px]">person_add</span>
+              <span>Iniciar Ciclo Seguir</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUB-TAB 2: COMPARTIR PUBLICACIONES -->
+      <div id="fbSubTabShareContent" class="hidden space-y-3.5">
+        <div class="p-3 rounded-lg bg-emerald-500/5 border border-emerald-500/20 text-xs font-mono text-emerald-300 flex items-start gap-2">
+          <span class="material-symbols-outlined text-[16px] mt-0.5 text-emerald-400">share</span>
+          <div>
+            <span class="font-bold block">Función COMPARTIR (Multi-Cuenta):</span>
+            <span class="text-on-surface-variant text-[11px]">Abre la publicación indicada con cada cuenta activa y la comparte orgánicamente en el feed público o con texto personalizado.</span>
+          </div>
+        </div>
+
+        <div class="space-y-1.5">
+          <label class="text-[11px] font-mono text-on-surface font-medium flex items-center justify-between">
+            <span>Enlace de la Publicación a Compartir:</span>
+            <span class="text-[10px] text-on-surface-variant">URL del post de Facebook</span>
+          </label>
+          <div class="flex gap-2">
+            <div class="relative flex-1">
+              <span class="material-symbols-outlined absolute left-3 top-2.5 text-[16px] text-on-surface-variant">link</span>
+              <input type="text" id="fbSharePostUrlInput" placeholder="https://www.facebook.com/... o m.facebook.com/..." class="w-full pl-9 pr-3 py-2 rounded bg-surface-container border border-[#262a35] text-on-surface font-mono text-xs focus:border-emerald-400 focus:outline-none placeholder:text-on-surface-variant/40">
+            </div>
+            <button type="button" onclick="testOpenFbTargetUrl('fbSharePostUrlInput')" class="px-3 py-2 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface text-xs font-mono font-semibold flex items-center gap-1 transition" title="Abre el enlace en el teléfono conectado para verificar">
+              <span class="material-symbols-outlined text-[14px]">launch</span>
+              <span>Abrir Post</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Configuración de Compartir -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 p-3 rounded-xl bg-surface-container border border-[#262a35] text-xs font-mono">
+          <div>
+            <label class="block text-[11px] text-on-surface-variant mb-1 font-medium">Modo al compartir:</label>
+            <select id="fbShareModeSelect" onchange="toggleFbShareCommentField(this.value)" class="w-full px-2.5 py-1.5 rounded bg-surface-container-lowest border border-[#262a35] text-on-surface text-xs font-mono focus:border-emerald-400 focus:outline-none">
+              <option value="share_now">Compartir ahora (Feed público)</option>
+              <option value="share_with_text">Compartir con texto/opinión</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-[11px] text-on-surface-variant mb-1 font-medium">Cuentas a usar:</label>
+            <div class="flex items-center gap-2">
+              <input type="number" id="fbShareAccountsToUseInput" min="1" max="100" value="5" class="w-20 bg-surface-container-lowest border border-emerald-500/40 text-center text-xs text-emerald-400 font-bold rounded-lg px-2 py-1.5 focus:outline-none">
+              <span class="text-[10px] text-on-surface-variant">cuentas</span>
+            </div>
+          </div>
+          <div class="space-y-1.5 flex flex-col justify-center">
+            <label class="flex items-center gap-1.5 cursor-pointer text-[11px]">
+              <input type="checkbox" id="fbShareDoLikeCheck" checked class="rounded bg-surface-container-lowest border-[#262a35] text-emerald-500 focus:ring-0">
+              <span class="text-on-surface font-medium">Dar Like antes de compartir</span>
+            </label>
+            <div class="flex items-center gap-2">
+              <span class="text-[10px] text-on-surface-variant">Pausa:</span>
+              <input type="number" id="fbShareDelaySeconds" min="5" max="120" value="20" class="w-16 bg-surface-container-lowest border border-[#262a35] text-center text-xs text-on-surface font-bold rounded px-1.5 py-1 focus:outline-none">
+              <span class="text-[10px] text-on-surface-variant">seg</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Texto opcional al compartir -->
+        <div id="fbShareCustomCommentContainer" class="hidden space-y-1.5">
+          <label class="text-[11px] font-mono text-on-surface font-medium flex items-center justify-between">
+            <span>Texto o Comentario que acompañará la publicación compartida:</span>
+            <span class="text-[10px] text-on-surface-variant">Opcional</span>
+          </label>
+          <textarea id="fbShareCustomCommentText" rows="2" placeholder="Escribe aquí el texto que se publicará al compartir..." class="w-full p-2.5 rounded bg-surface-container border border-[#262a35] text-on-surface font-mono text-xs focus:border-emerald-400 focus:outline-none placeholder:text-on-surface-variant/40 resize-none"></textarea>
+        </div>
+
+        <!-- Botones y Estado Compartir -->
+        <div class="flex flex-wrap items-center justify-between gap-3 pt-1">
+          <div class="flex items-center gap-2 text-xs font-mono">
+            <span class="text-on-surface-variant text-[11px]">Estado:</span>
+            <span id="fbShareStatusBadge" class="px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-[10px] font-semibold">Listo para iniciar</span>
+            <span id="fbShareProgressText" class="text-[10px] text-on-surface-variant">0 / 0 cuentas</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <button type="button" id="btnStopFbShareCycle" onclick="stopFbShareCycle()" class="hidden px-3.5 py-2 rounded-xl bg-error/10 hover:bg-error/20 text-error border border-error/30 text-xs font-mono font-bold flex items-center gap-1.5 transition">
+              <span class="material-symbols-outlined text-[15px]">stop</span>
+              <span>Detener</span>
+            </button>
+            <button type="button" id="btnStartFbShareCycle" onclick="startFbShareCycle()" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-mono font-bold flex items-center gap-1.5 transition shadow-md active:scale-95">
+              <span class="material-symbols-outlined text-[16px]">share</span>
+              <span>Iniciar Ciclo Compartir</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Post Target & Interactive Actions -->
+  <div class="rounded-xl bg-surface-container-low border border-[#262a35] p-4 space-y-3.5 shadow-lg">
+    <div class="flex items-center justify-between border-b border-[#262a35] pb-2.5">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary text-[18px]">link</span>
+        <h3 class="font-bold text-xs text-on-surface uppercase tracking-wider">Publicación Objetivo & Interacciones</h3>
+      </div>
+      <span class="badge-label text-[10px] text-on-surface-variant font-mono">Deep-linking Facebook</span>
+    </div>
+
+    <div class="space-y-2">
+      <div class="flex gap-2">
+        <div class="relative flex-1">
+          <span class="material-symbols-outlined absolute left-3 top-2.5 text-[16px] text-on-surface-variant">link</span>
+          <input type="text" id="fbUrlInput" placeholder="https://www.facebook.com/... o m.facebook.com/..." class="w-full pl-9 pr-3 py-2 rounded bg-surface-container border border-[#262a35] text-on-surface font-mono text-xs focus:border-primary focus:outline-none placeholder:text-on-surface-variant/50">
+        </div>
+        <button onclick="testOpenFacebookPost()" class="px-3.5 py-2 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface text-xs font-mono font-semibold flex items-center gap-1 transition">
+          <span class="material-symbols-outlined text-[14px]">launch</span>
+          <span>Abrir Post</span>
+        </button>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-between gap-3 pt-1">
+        <label class="flex items-center gap-2 cursor-pointer text-xs text-on-surface font-mono">
+          <input type="checkbox" id="fbUseCurrentScreen" class="rounded bg-surface-container border-[#262a35] text-primary focus:ring-0">
+          <span>Usar pantalla actual en el teléfono</span>
+        </label>
+        <div class="flex items-center gap-4 text-xs font-mono">
+          <label class="flex items-center gap-1.5 cursor-pointer">
+            <input type="checkbox" id="fbDoLike" checked class="rounded bg-surface-container border-[#262a35] text-primary focus:ring-0">
+            <span>Dar Like (👍)</span>
+          </label>
+          <label class="flex items-center gap-1.5 cursor-pointer">
+            <input type="checkbox" id="fbDoComment" checked class="rounded bg-surface-container border-[#262a35] text-primary focus:ring-0">
+            <span>Comentar Publicación</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hidden Mode Input Facebook (Locked to preset_list) -->
+    <input type="hidden" id="fbSelectedCommentMode" value="preset_list">
+
+    <!-- MODO BANCO ROTATIVO FB (ÚNICO MODO DE COMENTARIOS) -->
+    <div class="space-y-2.5 pt-1 border-t border-[#262a35]">
+      <div class="flex items-center justify-between text-xs font-mono">
+        <span class="text-on-surface font-semibold flex items-center gap-1.5">
+          <span class="material-symbols-outlined text-[16px] text-blue-400">playlist_add_check</span>
+          <span>Modo de Comentarios en Facebook:</span>
+        </span>
+        <span id="fbCurrentCommentModeBadge" class="text-[10px] px-2.5 py-0.5 rounded font-mono bg-blue-500/10 text-blue-400 border border-blue-500/20 font-bold">
+          📝 Banco Rotativo FB (Secuencial)
+        </span>
+      </div>
+
+      <!-- Banner Informativo de Operación -->
+      <div class="p-3 rounded-xl border border-blue-500/30 bg-blue-500/5 space-y-1.5 text-xs font-mono">
+        <div class="flex items-center justify-between">
+          <span class="font-bold text-blue-400 flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-[15px]">rotate_right</span>
+            <span>Rotación Secuencial Cuenta por Cuenta</span>
+          </span>
+          <span class="text-[9px] px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 font-mono">Auto-Detección Reel / Post</span>
+        </div>
+        <p class="text-[11px] text-on-surface-variant leading-relaxed">
+          Cada cuenta activa de Facebook Lite tomará un comentario en orden. El sistema detecta automáticamente si el enlace es un <strong class="text-white">Reel</strong> o una <strong class="text-white">Publicación Estándar</strong>, espera <strong class="text-blue-300">30s de carga</strong>, reacciona con Like 👍, comenta 💬 con la flecha azul ➤, libera RAM y aplica <strong class="text-blue-300">30s de enfriamiento antibloqueo</strong> antes de cambiar de cuenta.
+        </p>
+      </div>
+
+      <!-- Configuración del Ciclo de Interacción -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 p-3 rounded-xl bg-surface-container border border-[#262a35] text-xs font-mono">
+        <div>
+          <label class="block text-[11px] text-on-surface-variant mb-1 font-medium">Cuentas a usar en el ciclo:</label>
+          <div class="flex items-center gap-2">
+            <input type="number" id="fbPostEngageAccountsCount" min="1" max="100" value="5" class="w-24 bg-surface-container-lowest border border-blue-500/40 text-center text-xs text-blue-400 font-bold rounded-lg px-2.5 py-1.5 focus:outline-none">
+            <span class="text-[10px] text-on-surface-variant">cuentas (o según comentarios)</span>
+          </div>
+        </div>
+        <div>
+          <label class="block text-[11px] text-on-surface-variant mb-1 font-medium">Pausa antibloqueo & RAM limpia:</label>
+          <div class="flex items-center gap-2">
+            <input type="number" id="fbPostEngageDelaySeconds" min="10" max="120" value="30" class="w-20 bg-surface-container-lowest border border-[#262a35] text-center text-xs text-on-surface font-bold rounded-lg px-2 py-1.5 focus:outline-none">
+            <span class="text-[10px] text-on-surface-variant">segundos (enfriamiento)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- TEXTAREA BANCO ROTATIVO FB -->
+      <div id="fbPastedCommentsContainer" class="p-3 rounded-lg bg-surface-container border border-[#262a35] space-y-2">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-mono font-medium text-on-surface flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-[15px] text-secondary">playlist_add_check</span>
+            <span>Banco de Comentarios FB (1 por línea):</span>
+          </span>
+          <div class="flex items-center gap-2">
+            <span id="fbPastedCommentsBadge" class="text-[10px] px-2 py-0.5 rounded-full font-mono bg-surface-container-high text-secondary border border-secondary/30">
+              0 comentarios
+            </span>
+            <button type="button" onclick="importInstagramCommentsToFb()" class="px-2 py-0.5 rounded bg-surface-container-high hover:bg-surface-container-highest text-primary text-[10px] font-mono transition cursor-pointer" title="Copiar lista desde Instagram">
+              Importar de IG
+            </button>
+            <button type="button" onclick="loadSampleFacebookComments()" class="px-2 py-0.5 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface text-[10px] font-mono transition cursor-pointer">
+              Muestras
+            </button>
+            <button type="button" onclick="clearFacebookComments()" class="px-2 py-0.5 rounded bg-surface-container-high hover:bg-error hover:text-on-error text-error text-[10px] font-mono transition cursor-pointer">
+              Limpiar
+            </button>
+          </div>
+        </div>
+        <textarea id="fbPastedCommentsTextarea" rows="3" oninput="updateFbPastedCommentsCount()" placeholder="Pega comentarios para Facebook, uno por línea:&#10;Comentario 1 para cuenta Facebook 1&#10;Comentario 2 para cuenta Facebook 2" class="w-full p-2.5 rounded bg-surface-container-lowest border border-[#262a35] text-on-surface font-mono text-xs focus:border-primary focus:outline-none placeholder:text-on-surface-variant/40 leading-relaxed"></textarea>
+      </div>
+    </div>
+
+    <!-- UI Scanner & Navigation Helpers -->
+    <div class="p-3 rounded-lg bg-surface-container border border-[#262a35] space-y-2">
+      <div class="flex items-center justify-between">
+        <span class="text-xs font-mono text-on-surface-variant font-semibold">Herramientas de Visión & Feed FB:</span>
+        <div class="flex items-center gap-2">
+          <button onclick="fbManualGentleScroll()" class="px-2.5 py-1 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface text-[11px] font-mono flex items-center gap-1 transition">
+            <span class="material-symbols-outlined text-[13px]">arrow_downward</span> Scroll
+          </button>
+          <button id="btnScanFbUI" onclick="scanFacebookUI()" class="px-2.5 py-1 rounded bg-surface-container-high hover:bg-surface-container-highest text-primary text-[11px] font-mono flex items-center gap-1 transition">
+            <span class="material-symbols-outlined text-[13px]">document_scanner</span> Escanear UI
+          </button>
+          <button onclick="testFacebookFeedTransition()" class="px-2.5 py-1 rounded bg-surface-container-high hover:bg-surface-container-highest text-secondary text-[11px] font-mono flex items-center gap-1 transition">
+            <span>Ir a Feed</span>
+          </button>
+          <button onclick="testFacebookReturnFeed()" class="px-2.5 py-1 rounded bg-surface-container-high hover:bg-surface-container-highest text-tertiary text-[11px] font-mono flex items-center gap-1 transition">
+            <span>Retornar Feed</span>
+          </button>
+        </div>
+      </div>
+      <div id="fbDetectedElementsContainer" class="space-y-1 max-h-32 overflow-y-auto"></div>
+    </div>
+
+    <!-- Progress & Execution Controls -->
+    <div class="pt-2 border-t border-[#262a35] space-y-3">
+      <!-- Status & Progress Indicator -->
+      <div class="flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
+        <div class="flex items-center gap-2">
+          <span class="text-on-surface-variant text-[11px]">Estado:</span>
+          <span id="fbPostEngageStatusBadge" class="px-2.5 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/30 text-[10px] font-semibold">Listo para iniciar</span>
+          <span id="fbPostEngageProgressText" class="text-[10px] text-on-surface-variant">0 / 0 cuentas</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <button type="button" id="btnStopFbPostEngage" onclick="stopFbPostEngagementCycle()" class="hidden px-3.5 py-2 rounded-xl bg-error/10 hover:bg-error/20 text-error border border-error/30 text-xs font-mono font-bold flex items-center gap-1.5 transition">
+            <span class="material-symbols-outlined text-[15px]">stop</span>
+            <span>Detener</span>
+          </button>
+          <button type="button" id="btnRunSingleFbEngage" onclick="runFacebookEngagement()" class="px-3.5 py-2 rounded-xl bg-surface-container-high hover:bg-surface-container-highest text-on-surface text-xs font-mono font-bold flex items-center gap-1.5 transition">
+            <span class="material-symbols-outlined text-[15px]">touch_app</span>
+            <span>Interacción Simple</span>
+          </button>
+          <button type="button" id="btnStartFbPostEngage" onclick="startFbPostEngagementCycle()" class="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-mono font-bold flex items-center gap-2 transition shadow-md active:scale-95">
+            <span class="material-symbols-outlined text-[17px]">play_arrow</span>
+            <span>Iniciar Ciclo Interacción FB</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Live Progress Bar -->
+      <div id="fbPostEngageProgressBarContainer" class="hidden space-y-1">
+        <div class="w-full bg-[#0a0e18] h-2 rounded-full overflow-hidden border border-[#262a35]">
+          <div id="fbPostEngageProgressBar" class="bg-gradient-to-r from-blue-500 to-primary h-full transition-all duration-300 w-0"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Master Multi-Account Facebook Cycle -->
+  <div class="rounded-xl bg-surface-container-low border border-[#262a35] p-4 space-y-3.5 shadow-lg">
+    <div class="flex items-center justify-between border-b border-[#262a35] pb-2.5">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary text-[18px]">cached</span>
+        <h3 class="font-bold text-xs text-on-surface uppercase tracking-wider">Ciclo Multi-Cuenta Maestro de Facebook</h3>
+      </div>
+      <span class="badge-label text-[10px] text-secondary font-mono">AUTOMATIZACIÓN EN SEGUNDO PLANO</span>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+      <div>
+        <label class="block text-[11px] text-on-surface-variant font-mono mb-1">Perfil objetivo:</label>
+        <input type="text" id="autoReportProfileUrlInput" placeholder="URL del perfil FB..." class="w-full px-3 py-1.5 rounded bg-surface-container border border-[#262a35] text-on-surface font-mono text-xs focus:border-primary focus:outline-none">
+      </div>
+      <div>
+        <label class="block text-[11px] text-on-surface-variant font-mono mb-1">Límite de cuentas:</label>
+        <select id="fbAccountsLimitMode" onchange="toggleFbAccountsLimitInput(this.value)" class="w-full px-3 py-1.5 rounded bg-surface-container border border-[#262a35] text-on-surface font-mono text-xs focus:border-primary focus:outline-none">
+          <option value="all">Todas las cuentas disponibles</option>
+          <option value="custom">Personalizado (ingresar número)</option>
+        </select>
+        <input type="number" id="fbAccountsCustomLimit" value="5" min="1" class="hidden mt-1.5 w-full px-3 py-1.5 rounded bg-surface-container border border-[#262a35] text-on-surface font-mono text-xs focus:border-primary focus:outline-none">
+      </div>
+      <div>
+        <label class="block text-[11px] text-on-surface-variant font-mono mb-1">Navegación previa en feed (seg):</label>
+        <input type="number" id="fbFeedBrowseSlider" value="45" min="5" max="300" class="w-full px-3 py-1.5 rounded bg-surface-container border border-[#262a35] text-on-surface font-mono text-xs focus:border-primary focus:outline-none">
+      </div>
+    </div>
+
+    <!-- Progress bar -->
+    <div id="fbCycleProgressBarContainer" class="hidden space-y-1.5 pt-2">
+      <div class="flex items-center justify-between text-xs font-mono">
+        <span id="fbCycleProgressLabel" class="text-on-surface">Procesando ciclo multi-cuenta...</span>
+      </div>
+      <div class="w-full bg-[#0a0e18] h-2 rounded-full overflow-hidden border border-[#262a35]">
+        <div id="fbCycleProgressBar" class="bg-gradient-to-r from-blue-500 to-primary h-full transition-all duration-300 w-0"></div>
+      </div>
+    </div>
+
+    <!-- Cycle buttons -->
+    <div class="flex items-center justify-end gap-3 pt-2">
+      <button id="btnStopFbMultiAccountCycle" onclick="stopFacebookMultiAccountCycle()" disabled class="px-4 py-2 rounded bg-surface-container-high text-error border border-error/30 opacity-50 cursor-not-allowed text-xs font-mono font-bold flex items-center gap-1.5 transition">
+        <span class="material-symbols-outlined text-[16px]">stop</span> Detener
+      </button>
+      <button id="btnStartFbMultiAccountCycle" onclick="startFacebookMultiAccountCycle()" class="px-6 py-2.5 rounded bg-primary text-on-primary hover:bg-primary-container text-xs font-bold font-mono shadow flex items-center gap-2 transition cursor-pointer">
+        <span class="material-symbols-outlined text-[18px]">play_arrow</span> Iniciar Ciclo Facebook
+      </button>
+    </div>
+  </div>
+
+</div>

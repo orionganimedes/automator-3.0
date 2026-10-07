@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Top Navigation Header -->
+{% include 'components/navbar.html' %}
+
+<!-- Main Shell -->
+<main class="w-full pt-32 px-4 lg:px-8 pb-14 flex-1 max-w-[1780px] mx-auto">
+  
+  <!-- Breadcrumb & Context Telemetry -->
+  <div class="w-full flex items-center justify-between py-1.5 mb-3 text-xs font-mono text-on-surface-variant border-b border-[#262a35]/40">
+    <div class="flex items-center gap-2">
+      <span class="material-symbols-outlined text-[15px] text-primary">terminal</span>
+      <span class="text-on-surface font-semibold">DAEMON://localhost:5000</span>
+      <span>/</span>
+      <span class="text-on-surface-variant">pipeline.vision_core</span>
+    </div>
+    <div class="flex items-center gap-4">
+      <div class="flex items-center gap-1.5">
+        <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+        <span class="text-secondary font-semibold">ADB PIPE STABLE</span>
+      </div>
+      <div class="text-[11px] text-on-surface-variant">
+        BUFFER: <span class="text-primary font-bold">1080x2400 RGB</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Primary Asymmetric Grid Layout (Left: Device Mirror 40%, Right: Orchestrator 60%) -->
+  <div class="grid grid-cols-12 gap-6 items-start">
+    
+    <!-- Left Column: Scrcpy Device Mirror & Device Fleet -->
+    {% include 'components/device_panel.html' %}
+
+    <!-- Right Column: Modular Automation Engine Tabs (~60%) -->
+    <div class="col-span-12 lg:col-span-7 flex flex-col gap-4">
+      
+      <!-- Tab 1: Instagram Bot -->
+      {% include 'tabs/tab_instagram.html' %}
+
+      <!-- Tab 2: Facebook Bot -->
+      {% include 'tabs/tab_facebook.html' %}
+
+      <!-- Tab 3: Hate & Auto-Denuncias -->
+      {% include 'tabs/tab_hate_report.html' %}
+
+      <!-- Tab 3.5: Generador & Simulador de Comentarios IA -->
+      {% include 'tabs/tab_comments.html' %}
+
+      <!-- Tab 4: Modelos IA (Ollama) -->
+      {% include 'tabs/tab_models.html' %}
+
+      <!-- Tab 5: Gestor de Iconos -->
+      {% include 'tabs/tab_icons.html' %}
+
+      <!-- Tab 6: Terminal & Live Logs -->
+      {% include 'tabs/tab_terminal.html' %}
+
+      <!-- Tab 7: Multi-Scrcpy Device Farm -->
+      {% include 'tabs/tab_multi_scrcpy.html' %}
+
+    </div>
+
+  </div>
+
+</main>
+
+<!-- Bottom System Bar -->
+<footer class="w-full bg-[#0a0e18] border-t border-[#262a35] px-6 py-2 flex items-center justify-between text-[11px] font-mono text-on-surface-variant">
+  <div class="flex items-center gap-3">
+    <span class="flex items-center gap-1.5">
+      <span class="w-2 h-2 rounded-full bg-secondary"></span>
+      <strong class="text-on-surface">AUTOMATOR 2.0</strong>
+    </span>
+    <span>•</span>
+    <span>CORE: FLASK REST + ADB MULTIPLEXER</span>
+    <span>•</span>
+    <span class="text-secondary font-semibold">SCRCPY HIGH-THROUGHPUT FEED</span>
+  </div>
+  <div class="flex items-center gap-4">
+    <span>SENTIMENT: <strong class="text-primary">ROBERTA / OLLAMA</strong></span>
+    <span>•</span>
+    <span>ESTADO: <strong class="text-secondary">LISTO</strong></span>
+  </div>
+</footer>
+{% endblock %}

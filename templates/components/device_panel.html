@@ -1,0 +1,167 @@
+<!-- templates/components/device_panel.html - Scrcpy Viewport & Hardware Controller -->
+<div class="col-span-12 lg:col-span-5 flex flex-col gap-4 lg:sticky lg:top-32">
+  
+  <!-- Device Screen Viewport Card -->
+  <div class="rounded-xl bg-surface-container-low border border-[#262a35] shadow-2xl overflow-hidden flex flex-col">
+    
+    <!-- Viewport Topbar -->
+    <div class="px-4 py-2.5 bg-surface-container border-b border-[#262a35] flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary text-[18px]">smartphone</span>
+        <span class="font-bold text-xs text-on-surface">Device Screen</span>
+        <span class="font-mono text-[10px] text-on-surface-variant">(scrcpy feed)</span>
+      </div>
+
+      <div class="flex items-center gap-2.5">
+        <!-- Live stream toggle -->
+        <label class="flex items-center gap-1.5 cursor-pointer text-xs font-mono" title="Alternar entre streaming en vivo y capturas bajo demanda">
+          <input type="checkbox" id="autoRefreshToggle" checked class="rounded bg-[#0a0e18] border-[#262a35] text-secondary focus:ring-0">
+          <span class="text-secondary text-[11px] font-semibold">Stream en Vivo</span>
+        </label>
+
+        <!-- Live badge -->
+        <span id="liveStreamBadge" class="flex items-center gap-1 px-1.5 py-0.5 rounded bg-secondary/10 text-secondary badge-label text-[9px]">
+          <span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+          <span>EN VIVO</span>
+        </span>
+
+        <button onclick="refreshScreen(true)" class="p-1 rounded hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition" title="Recargar imagen">
+          <span class="material-symbols-outlined text-[16px]">refresh</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Phone Shell Viewport Container -->
+    <div class="p-4 bg-[#0a0e18] flex justify-center items-center relative">
+      <div class="w-full max-w-[320px] aspect-[9/19] phone-mockup-body p-2 relative flex flex-col overflow-hidden">
+        
+        <!-- Screen Area -->
+        <div class="w-full h-full phone-screen-inner relative flex flex-col select-none">
+          
+          <!-- Simulated Android Status Bar -->
+          <div class="w-full h-5 px-3 pt-1 flex items-center justify-between text-[9px] font-mono text-on-surface-variant/80 z-20 bg-black/40">
+            <span id="screenClock">12:00</span>
+            <div class="w-10 h-2.5 rounded-full bg-[#1c1f2a] mx-auto"></div>
+            <div class="flex items-center gap-1">
+              <span class="material-symbols-outlined text-[10px]">wifi</span>
+              <span class="material-symbols-outlined text-[10px]">signal_cellular_4_bar</span>
+              <span>98%</span>
+            </div>
+          </div>
+
+          <!-- Video Stream / Image -->
+          <div class="flex-1 relative flex items-center justify-center overflow-hidden bg-[#000000]">
+            <img id="deviceScreen" src="/api/device/stream" alt="Device Screen Stream"
+                 class="w-full h-full object-contain cursor-crosshair transition duration-200"
+                 onerror="onScreenLoadError(this)" onload="onScreenLoadSuccess(this)">
+
+            <!-- Click Ripple Indicator -->
+            <div id="screenTapRipple" class="hidden absolute w-8 h-8 rounded-full border-2 border-secondary bg-secondary/30 pointer-events-none -translate-x-1/2 -translate-y-1/2 z-30"></div>
+
+            <!-- Placeholder if screen fails to connect -->
+            <div id="screenPlaceholder" class="hidden absolute inset-0 flex flex-col items-center justify-center text-center p-4 bg-surface-container-low text-on-surface-variant z-10">
+              <span class="material-symbols-outlined text-[36px] text-tertiary mb-2">phonelink_off</span>
+              <p class="text-xs font-semibold text-on-surface">Esperando conexión ADB...</p>
+              <p class="text-[10px] font-mono mt-1">Conecta tu teléfono con depuración USB habilitada y presiona "Capturar".</p>
+              <button onclick="takeManualCapture()" class="mt-3 px-3 py-1.5 rounded bg-primary text-on-primary font-mono text-xs font-bold">
+                Reintentar
+              </button>
+            </div>
+
+            <!-- Spinner Overlay -->
+            <div id="screenSpinner" class="hidden absolute inset-0 bg-black/50 backdrop-blur-xs flex items-center justify-center z-20">
+              <span class="material-symbols-outlined text-[28px] text-primary animate-spin">progress_activity</span>
+            </div>
+          </div>
+
+          <!-- Android Bottom Soft Navigation Bar -->
+          <div class="h-5 bg-black/70 flex items-center justify-around text-on-surface-variant/70 text-[12px] z-20">
+            <button onclick="manualScroll('up')" class="hover:text-on-surface" title="Subir / Atrás">
+              <span class="material-symbols-outlined text-[13px]">arrow_back</span>
+            </button>
+            <button onclick="manualScroll('down')" class="hover:text-on-surface" title="Bajar">
+              <span class="material-symbols-outlined text-[13px]">radio_button_unchecked</span>
+            </button>
+            <button onclick="clearDeviceRecentApps()" class="hover:text-on-surface" title="Recientes">
+              <span class="material-symbols-outlined text-[13px]">crop_square</span>
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Hardware & Screen Actions -->
+    <div class="p-3 bg-surface-container border-t border-[#262a35] grid grid-cols-4 gap-2">
+      <button onclick="takeManualCapture()" class="py-1.5 px-2 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface text-xs font-mono font-medium flex items-center justify-center gap-1 transition">
+        <span class="material-symbols-outlined text-[14px] text-primary">camera</span>
+        <span>Captura</span>
+      </button>
+
+      <button onclick="clearScreenshots()" id="btnClearScreenshots" class="py-1.5 px-2 rounded bg-surface-container-high hover:bg-error hover:text-on-error text-error text-xs font-mono font-medium flex items-center justify-center gap-1 transition">
+        <span class="material-symbols-outlined text-[14px]">delete</span>
+        <span id="clearText">Limpiar</span>
+      </button>
+
+      <button onclick="clearDeviceRecentApps()" id="btnClearRecentsBtn" class="py-1.5 px-2 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface text-xs font-mono font-medium flex items-center justify-center gap-1 transition">
+        <span class="material-symbols-outlined text-[14px] text-tertiary">memory</span>
+        <span>RAM</span>
+      </button>
+
+      <button onclick="takeManualCapture()" class="py-1.5 px-2 rounded bg-surface-container-high hover:bg-secondary hover:text-on-secondary text-secondary text-xs font-mono font-medium flex items-center justify-center gap-1 transition">
+        <span class="material-symbols-outlined text-[14px]">check_circle</span>
+        <span>Test</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Active Device Card -->
+  <div class="rounded-xl bg-surface-container-low border border-[#262a35] p-3 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="w-8 h-8 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary">
+        <span class="material-symbols-outlined text-[18px]">smartphone</span>
+      </div>
+      <div>
+        <div class="flex items-center gap-2">
+          <span id="leftDeviceModel" class="font-bold text-xs text-on-surface">Android Phone</span>
+          <span class="badge-label px-1.5 py-0.2 rounded bg-surface-container text-primary text-[9px]">USB / ADB</span>
+        </div>
+        <p class="text-[10px] text-on-surface-variant font-mono">Control táctil directo y captura</p>
+      </div>
+    </div>
+    <span id="leftDeviceStatusPill" class="text-[10px] px-2 py-0.5 rounded bg-secondary/10 text-secondary border border-secondary/30 font-mono flex items-center gap-1">
+      <span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+      <span>ACTIVO</span>
+    </span>
+  </div>
+
+  <!-- Multi-Account Cycle Live Progress Widget -->
+  <div id="cycleStatusWidget" class="hidden rounded-xl bg-surface-container-low border border-[#262a35] p-3.5 space-y-2.5">
+    <div class="flex items-center justify-between text-xs">
+      <span id="cycleAccountBadge" class="px-2 py-0.5 rounded bg-primary/20 text-primary border border-primary/30 font-mono text-[10px] font-bold">
+        Iniciando...
+      </span>
+      <span id="cycleStepNum" class="text-on-surface-variant text-[11px] font-mono">Paso 1</span>
+    </div>
+    <div class="text-xs text-on-surface flex items-start gap-2">
+      <span id="cycleSpinner" class="material-symbols-outlined text-[16px] text-tertiary animate-spin shrink-0">sync</span>
+      <span id="cycleStepMsg" class="text-[11px] leading-snug font-mono">Preparando secuencia ADB...</span>
+    </div>
+    <div class="w-full bg-[#0a0e18] h-1.5 rounded-full overflow-hidden border border-[#262a35]">
+      <div id="cycleProgressBar" class="bg-gradient-to-r from-primary to-secondary h-full transition-all duration-300 w-0"></div>
+    </div>
+
+    <!-- Current Generated Comment Preview -->
+    <div id="cycleCommentBox" class="hidden rounded-lg bg-surface-container border border-[#262a35] p-2.5 space-y-1">
+      <div class="flex items-center justify-between text-[10px]">
+        <span id="cycleCommentArchLabel" class="text-tertiary font-semibold font-mono flex items-center gap-1">
+          <span class="material-symbols-outlined text-[13px]">auto_awesome</span>
+          <span>Comentario Activo</span>
+        </span>
+        <span id="cycleCommentOriginBadge" class="badge-label px-1 py-0.2 rounded bg-secondary/10 text-secondary border border-secondary/30 text-[9px]">ORIGEN</span>
+      </div>
+      <p id="cycleCommentContent" class="text-[11px] text-on-surface italic leading-snug font-mono bg-surface-container-low p-2 rounded border border-[#262a35]"></p>
+    </div>
+  </div>
+
+</div>

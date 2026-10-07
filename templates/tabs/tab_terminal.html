@@ -1,0 +1,74 @@
+<!-- templates/tabs/tab_terminal.html - Terminal & Live Event Streams Module -->
+<div id="tabTerminalContent" class="hidden space-y-4">
+
+  <!-- Module Banner Header -->
+  <div class="rounded-xl bg-surface-container-low border border-[#262a35] p-4 flex items-center justify-between shadow-lg">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-surface-container-highest flex items-center justify-center text-primary">
+        <span class="material-symbols-outlined text-[24px]">terminal</span>
+      </div>
+      <div>
+        <div class="flex items-center gap-2">
+          <h2 class="font-bold text-sm text-on-surface">Terminal & Live Daemon Streams</h2>
+          <span class="badge-label px-2 py-0.5 rounded bg-secondary/10 text-secondary border border-secondary/30 flex items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+            <span>SSE CONECTADO</span>
+          </span>
+        </div>
+        <p class="text-[11px] text-on-surface-variant font-mono">Monitoreo en tiempo real de llamadas REST, transacciones ADB, inferencias de Ollama y workers en segundo plano.</p>
+      </div>
+    </div>
+
+    <!-- Quick Tools -->
+    <div class="flex items-center gap-2">
+      <button id="btnToggleAutoScroll" onclick="toggleAutoScroll(!terminalAutoScroll)" class="px-2.5 py-1 rounded bg-secondary/10 text-secondary border border-secondary/30 text-xs font-mono font-semibold flex items-center gap-1 transition">
+        <span class="material-symbols-outlined text-[14px]">vertical_align_bottom</span>
+        <span>Auto-scroll</span>
+      </button>
+      <button onclick="clearTerminal()" class="px-2.5 py-1 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface text-xs font-mono flex items-center gap-1 transition">
+        <span class="material-symbols-outlined text-[14px]">cleaning_services</span>
+        <span>Limpiar</span>
+      </button>
+      <button onclick="exportLogs()" class="px-2.5 py-1 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface text-xs font-mono flex items-center gap-1 transition">
+        <span class="material-symbols-outlined text-[14px]">download</span>
+        <span>Exportar</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Terminal Stream Console -->
+  <div class="rounded-xl bg-[#0a0e18] border border-[#262a35] shadow-2xl overflow-hidden flex flex-col">
+    
+    <!-- Filter Bar -->
+    <div class="px-4 py-2.5 bg-surface-container-low border-b border-[#262a35] flex items-center justify-between gap-3 flex-wrap">
+      <div class="flex items-center gap-1.5 text-xs font-mono">
+        <span class="text-on-surface-variant mr-1">Filtro:</span>
+        <button onclick="filterLogs('ALL')" data-level="ALL" class="log-filter-btn px-2.5 py-1 rounded bg-primary text-on-primary font-mono text-xs font-semibold shadow">TODOS</button>
+        <button onclick="filterLogs('INFO')" data-level="INFO" class="log-filter-btn px-2.5 py-1 rounded bg-surface-container text-on-surface-variant hover:text-on-surface font-mono text-xs transition">INFO</button>
+        <button onclick="filterLogs('DEBUG')" data-level="DEBUG" class="log-filter-btn px-2.5 py-1 rounded bg-surface-container text-on-surface-variant hover:text-on-surface font-mono text-xs transition">DEBUG</button>
+        <button onclick="filterLogs('WARN')" data-level="WARN" class="log-filter-btn px-2.5 py-1 rounded bg-surface-container text-on-surface-variant hover:text-on-surface font-mono text-xs transition">WARN</button>
+        <button onclick="filterLogs('ERROR')" data-level="ERROR" class="log-filter-btn px-2.5 py-1 rounded bg-surface-container text-on-surface-variant hover:text-on-surface font-mono text-xs transition">ERROR</button>
+      </div>
+      <div class="text-[11px] text-on-surface-variant font-mono">
+        daemon://localhost:5000/api/logs/stream
+      </div>
+    </div>
+
+    <!-- Output Box -->
+    <div id="terminalContainer" class="p-4 h-[420px] overflow-y-auto space-y-1 font-mono text-xs select-text bg-[#070b12]">
+      <div class="text-on-surface-variant">// Consola iniciada. Escuchando eventos del daemon...</div>
+    </div>
+
+    <!-- Terminal Quick Commands Bar -->
+    <div class="px-4 py-2.5 bg-surface-container-low border-t border-[#262a35] flex items-center justify-between gap-2">
+      <div class="flex items-center gap-1.5 text-[11px] font-mono text-on-surface-variant">
+        <span>Acciones rápidas:</span>
+        <button onclick="clearDeviceRecentApps()" class="px-2 py-0.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface border border-[#262a35]">Liberar RAM</button>
+        <button onclick="takeManualCapture()" class="px-2 py-0.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface border border-[#262a35]">Forzar Captura</button>
+        <button onclick="pollStatus()" class="px-2 py-0.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface border border-[#262a35]">Re-sondear Estado</button>
+      </div>
+    </div>
+
+  </div>
+
+</div>
