@@ -59,8 +59,51 @@
 - Auditar todos los métodos táctiles (`tap_*`, `swipe_*`, `long_press_*`).
 - Garantizar que cada uno retorne `dict` con claves: `x`, `y`, `method`, `success`, `stabilize_ms`.
 
+**OPT-ADB-06 (RIESGO-VIS-01): Corregir `find_icon_on_screen()` inexistente**
+- Reportado por Worker Visión/IA tras completar FASE 3.
+- Archivo: `core/adb/controller.py` líneas 2252 y 2616.
+- El método `matcher.find_icon_on_screen(...)` no existe en `IconMatcher`; el `AttributeError` está silenciado por `try/except`, provocando fallos silenciosos de detección.
+- Verificar cuál es el método correcto (`locate_icon()` o `find_template()`), reemplazar las 2 llamadas y eliminar el `try/except` que oculta el error.
+
+**OPT-ADB-07 (RIESGO-VIS-02): Normalizar timeouts de Ollama**
+- Reportado por Worker Visión/IA tras completar FASE 3.
+- Timeouts actuales inconsistentes: `agent.py` 90s, `icon_matcher.py` 25s, `facebook_engagement.py` 20s, `detect_reel_icons.py` 45s.
+- Agregar en `config.py`:
+  ```python
+  OLLAMA_TIMEOUT_VISION: int = 60   # inferencias con imagen
+  OLLAMA_TIMEOUT_TEXT: int = 30     # inferencias solo texto
+  ```
+- Reemplazar todos los timeouts inline por estas constantes.
+
+### Orden de ejecución
+
+Ejecutar en este orden; no avanzar sin `STATUS: APPROVED` del Auditor en cada tarea:
+
+1. OPT-ADB-01 (F1-01)
+2. OPT-ADB-06 (RIESGO-VIS-01)
+3. OPT-ADB-02 (F1-03)
+4. OPT-ADB-07 (RIESGO-VIS-02)
+5. OPT-ADB-03 (F2-01)
+6. OPT-ADB-04 (F2-02)
+7. OPT-ADB-05 (F2-03)
+
+### Protocolo de entrega por tarea
+
+Al completar cada tarea:
+
+1. Actualizar `.orchestrator/state/workers/adb/status.md`:
+   - Cambiar el estado de la fila a `COMPLETADO`.
+   - Escribir en "Notas del Worker" las decisiones de implementación relevantes.
+2. Guardar el diff en `.orchestrator/state/diffs/`:
+   ```bash
+   git diff HEAD -- <archivos_modificados> > .orchestrator/state/diffs/<ID>_adb_<YYYY-MM-DD>.diff
+   ```
+3. Notificar al Auditor con: ID de tarea, archivos modificados y ruta al diff.
+4. Esperar `STATUS: APPROVED` antes de cerrar la tarea y avanzar a la siguiente.
+
 ### Restricciones de Entrega
 
 - Cero imports circulares tras el refactor.
 - `python3 -m py_compile core/adb/controller.py` debe pasar sin errores.
 - Ningún `subprocess.run` sin `timeout`.
+- Cero `AttributeError` silenciados por `try/except` en llamadas a `IconMatcher`.
